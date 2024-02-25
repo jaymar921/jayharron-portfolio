@@ -71,7 +71,7 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
   return (
     <div
       className={`ease-in-out duration-1000 absolute top-[40%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20 items-center justify-center grid grid-rows-2 ${
-        worldMoving ? "opacity-0 top-[-30%]" : "opacity-100"
+        worldMoving ? "opacity-0 top-[-20%]" : "opacity-100"
       }`}
     >
       <div>
