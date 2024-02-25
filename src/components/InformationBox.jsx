@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ImageMapTemplate } from "../assets/images";
 import { DownArrow } from "../assets/vectors";
+import { Link } from "react-router-dom";
 
 const Content = {
   "-1": {
@@ -71,7 +72,7 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
   return (
     <div
       className={`ease-in-out duration-1000 absolute top-[40%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20 items-center justify-center grid grid-rows-2 ${
-        worldMoving ? "opacity-0 top-[-20%]" : "opacity-100"
+        worldMoving ? "opacity-0 top-[0px]" : "opacity-100"
       }`}
     >
       <div>
@@ -97,14 +98,12 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
               <div className="relative border-black border-2 w-[50%] my-auto mx-auto bg-gray-500 hover:bg-gray-400  overflow-hidden rounded-sm mb-2">
                 <div className="absolute z-1 w-[100%] border-2 border-gray-700 hover:border-gray-500 bottom-0" />
                 <div className="absolute z-1 w-[100%] h-[100%] border-2 border-gray-700 hover:border-gray-500 bottom-0" />
-                <button
-                  onClick={() => {
-                    location.href = Information.link;
-                  }}
-                  className="relative text-center w-full z-2 text-white hover:text-gray-200"
+                <Link
+                  to={Information.link}
+                  className="relative text-center w-full z-2 text-white hover:text-gray-200 "
                 >
-                  {Information.button_text}
-                </button>
+                  <p className="w-full">{Information.button_text}</p>
+                </Link>
               </div>
             )}
           </div>
