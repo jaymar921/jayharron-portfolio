@@ -77,7 +77,7 @@ const About = () => {
                     {experience.title}
                   </h3>
                   <p
-                    className="text-black-500 font-medium font-base"
+                    className="text-white font-medium font-base"
                     style={{ margin: 0 }}
                   >
                     {experience.company_name}
@@ -86,7 +86,7 @@ const About = () => {
                 <ul className="my-5 list-disc ml-5 space-y-2">
                   {experience.points.map((point, index) => (
                     <li
-                      className="text-black-500/50 font-normal pl-1 text-sm"
+                      className="text-white font-normal pl-1 text-sm"
                       key={index}
                     >
                       {point}
