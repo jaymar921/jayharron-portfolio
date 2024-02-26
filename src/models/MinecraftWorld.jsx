@@ -23,10 +23,14 @@ const MinecraftWorld = ({
   const [worldRotation, setWorldRotation] = useState([0, 0, 0]);
   const [tempStage, setTempStage] = useState(-1);
 
-  useFrame(() => {
-    WorldRef.current.position.x = worldPosition[0];
-    WorldRef.current.position.y = worldPosition[1];
-    WorldRef.current.position.z = worldPosition[2];
+  useFrame(({ clock }) => {
+    const time = clock.elapsedTime; // Get the elapsed time
+    const oscX = Math.sin(time * 0.5) * 0.05; // Adjust frequency and amplitude for X-axis oscillation
+    const oscY = Math.cos(time * 0.4) * 0.05; // Adjust frequency and amplitude for Y-axis oscillation
+    const oscZ = Math.sin(time * 0.3) * 0.03; // Adjust frequency and amplitude for Z-axis oscillation
+    WorldRef.current.position.x = worldPosition[0] + oscX;
+    WorldRef.current.position.y = worldPosition[1] + oscY;
+    WorldRef.current.position.z = worldPosition[2] + oscZ;
     WorldRef.current.rotation.x = worldRotation[0];
     WorldRef.current.rotation.y = worldRotation[1];
     WorldRef.current.rotation.z = worldRotation[2];
@@ -93,7 +97,6 @@ const MinecraftWorld = ({
       }
 
       if (values >= 1 && tempStage !== currentStage) {
-        console.log("RESET");
         setValues(0);
       } else {
         if (values <= 1 && currentStage === tempStage) {
@@ -102,10 +105,9 @@ const MinecraftWorld = ({
             setWorldPosition(newPosition);
             setWorldRotation(newRotation);
           }
-          console.log("Animating");
+
           setWorldMoving(true);
         } else {
-          console.log("stop");
           setWorldMoving(false);
         }
       }

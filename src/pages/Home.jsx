@@ -2,11 +2,11 @@ import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useState } from "react";
 import Loader from "../components/Loader";
 import MinecraftWorld from "../models/MinecraftWorld";
-import { ImageMapTemplate } from "../assets/images";
 import InformationBox from "../components/InformationBox";
 import Bee from "../models/Bee";
 import { AnimalPositions } from "../constants";
 import Allay from "../models/Allay";
+import AmbientScene from "../models/AmbientScene";
 
 const Home = () => {
   const [currentStage, setCurrentStage] = useState(-1);
@@ -18,7 +18,6 @@ const Home = () => {
     if (s++ >= 3) setCurrentStage(0);
     else setCurrentStage(s++);
   };
-
   return (
     <section className="w-full h-screen relative">
       <InformationBox
@@ -106,6 +105,7 @@ const Home = () => {
             worldPosRot={worldPosRot}
             BeePosition={AnimalPositions[7]}
           />
+          <AmbientScene />
           <MinecraftWorld
             receiveShadow
             currentStage={currentStage}

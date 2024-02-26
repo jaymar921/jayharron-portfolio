@@ -12,7 +12,8 @@ const Content = {
     ),
     more_info: (
       <p>
-        A <a className="text-orange-500">Software Developer</a> specialized in{" "}
+        I'm a <a className="text-orange-500">Software Developer</a> specialized
+        in building high quality applications with{" "}
         <a className="text-blue-300">.NET</a>,{" "}
         <a className="text-blue-300">Flask</a> and{" "}
         <a className="text-blue-300">NextJS</a> from the Philippines.
@@ -23,14 +24,14 @@ const Content = {
   0: {
     text: <p>About me</p>,
     more_info:
-      "💼 My journey is paved with collaboration, skill-building, and enriching experiences from working with top-notch companies and brilliant minds.",
+      "💼 On my coding journey, I've thrived through collaboration, honing skills, and gaining insights from top companies and visionary minds.",
     link: "/about",
     button_text: "Learn more...",
   },
   1: {
     text: <p>My Projects</p>,
     more_info:
-      "🚀 Unlocking success one project at a time! Ready to discover the transformative power? ",
+      "🚀 I've led multiple awesome projects to success! Are you curious about my creations?",
     link: "/projects",
     button_text: "View projects",
   },
@@ -51,8 +52,15 @@ const Content = {
         Hi, I'm <a className="text-green-700">Jayharron Abejar</a>
       </p>
     ),
-    more_info:
-      "A Software Developer specialized in .NET, and React.JS from the Philippines.",
+    more_info: (
+      <p>
+        I'm a <a className="text-orange-500">Software Developer</a> specialized
+        in building high quality applications with{" "}
+        <a className="text-blue-300">.NET</a>,{" "}
+        <a className="text-blue-300">Flask</a> and{" "}
+        <a className="text-blue-300">NextJS</a> from the Philippines.
+      </p>
+    ),
     link: "",
   },
 };
@@ -79,7 +87,7 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
         <div className="w-[350px] fit-content overflow-hidden font-minecraft">
           <img className="top-0 w-[350px]" src={ImageMapTemplate} />
           <div className="absolute top-0 flex text-center justify-center w-[350px] h-full text-[#825419]">
-            <p className="relative w-full font-sm text-[22px] p-8">
+            <div className="relative w-full font-sm text-[22px] p-8">
               {Information.text}
               <button
                 className="z-20 text-[#634013] leading-none"
@@ -88,12 +96,12 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
               >
                 <img className="w-8 h-8" src={DownArrow} />
               </button>
-            </p>
+            </div>
           </div>
         </div>
         {Information.more_info !== "" && (
           <div className="absolute rounded-md mt-8 w-[350px] bg-[rgba(128,82,24,0.5)] border-2 border-[rgba(87,56,17,0.92)] text-[18px] font-minecraft text-white">
-            <p className="p-2 text-justify">{Information.more_info}</p>
+            <div className="p-2 text-justify">{Information.more_info}</div>
             {Information.link !== "" && (
               <div className="relative border-black border-2 w-[50%] my-auto mx-auto bg-gray-500 hover:bg-gray-400  overflow-hidden rounded-sm mb-2">
                 <div className="absolute z-1 w-[100%] border-2 border-gray-700 hover:border-gray-500 bottom-0" />
