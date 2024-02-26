@@ -21,9 +21,9 @@ const AmbientScene = () => {
     if (totalWidth > 520) {
       if (DoF_Ref.current) {
         DoF_Ref.current.target.set(
-          0,
+          3,
           1 + ((totalHeight - mouseY) * 0.02) / 2 - 3,
-          0
+          -1
         );
         DoF_Ref.current.bokehScale = (mouseY / totalHeight) * 2 + 2;
       }
@@ -40,7 +40,7 @@ const AmbientScene = () => {
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []); // Empty dependency array means this effect runs only once after mounting
+  }, []);
 
   return (
     <EffectComposer>
@@ -49,7 +49,7 @@ const AmbientScene = () => {
         target={[0, 5, 0]}
         focusDistance={1}
         bokehScale={1}
-        height={512}
+        height={totalWidth > 520 ? 512 : 256}
       />
       <Vignette darkness={0.6} />
     </EffectComposer>
