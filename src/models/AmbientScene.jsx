@@ -6,7 +6,7 @@ import {
 } from "@react-three/postprocessing";
 import React, { useEffect, useRef, useState } from "react";
 
-const AmbientScene = () => {
+const AmbientScene = ({ enableDoF }) => {
   const [mouseY, setMouseY] = useState(500);
   const totalHeight = Math.max(
     document.documentElement.scrollHeight,
@@ -25,7 +25,7 @@ const AmbientScene = () => {
           1 + ((totalHeight - mouseY) * 0.02) / 2 - 3,
           -1
         );
-        DoF_Ref.current.bokehScale = (mouseY / totalHeight) * 2 + 2;
+        DoF_Ref.current.bokehScale = 2 - (mouseY / totalHeight) * 2;
       }
     }
   });
@@ -44,13 +44,16 @@ const AmbientScene = () => {
 
   return (
     <EffectComposer>
-      <DepthOfField
-        ref={DoF_Ref}
-        target={[0, 5, 0]}
-        focusDistance={1}
-        bokehScale={1}
-        height={totalWidth > 520 ? 512 : 256}
-      />
+      {enableDoF && (
+        <DepthOfField
+          ref={DoF_Ref}
+          target={[0, 5, 0]}
+          focusDistance={1}
+          bokehScale={1}
+          height={520}
+        />
+      )}
+
       <Vignette darkness={0.6} />
     </EffectComposer>
   );

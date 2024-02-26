@@ -9,14 +9,23 @@ import Allay from "../models/Allay";
 import AmbientScene from "../models/AmbientScene";
 
 const Home = () => {
+  const totalWidth = Math.max(
+    document.documentElement.scrollWidth,
+    window.innerWidth
+  );
   const [currentStage, setCurrentStage] = useState(-1);
   const [worldMoving, setWorldMoving] = useState(true);
   const [worldPosRot, setWorldPosRot] = useState(undefined);
+  const [DOFEnabled, enableDOF] = useState(totalWidth > 520 ? true : false);
 
   const handleNext = () => {
     let s = currentStage;
     if (s++ >= 3) setCurrentStage(0);
     else setCurrentStage(s++);
+  };
+
+  const handleEnableDOF = () => {
+    enableDOF(!DOFEnabled);
   };
   return (
     <section className="w-full h-screen relative">
@@ -105,7 +114,7 @@ const Home = () => {
             worldPosRot={worldPosRot}
             BeePosition={AnimalPositions[7]}
           />
-          <AmbientScene />
+          <AmbientScene enableDoF={DOFEnabled} />
           <MinecraftWorld
             receiveShadow
             currentStage={currentStage}
@@ -114,6 +123,12 @@ const Home = () => {
           />
         </Suspense>
       </Canvas>
+      <button
+        className="absolute bottom-2 left-2 font-minecraft text-slate-300 border-2 border-slate-500 px-2 text-[15px]"
+        onClick={handleEnableDOF}
+      >
+        {DOFEnabled ? "Disable DOF" : "Enable DOF"}
+      </button>
     </section>
   );
 };
