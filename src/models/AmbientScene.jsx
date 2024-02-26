@@ -12,15 +12,21 @@ const AmbientScene = () => {
     document.documentElement.scrollHeight,
     window.innerHeight
   );
+  const totalWidth = Math.max(
+    document.documentElement.scrollWidth,
+    window.innerWidth
+  );
   const DoF_Ref = useRef();
   useFrame(() => {
-    if (DoF_Ref.current) {
-      DoF_Ref.current.target.set(
-        0,
-        1 + ((totalHeight - mouseY) * 0.02) / 2 - 3,
-        0
-      );
-      DoF_Ref.current.bokehScale = (mouseY / totalHeight) * 2 + 2;
+    if (totalWidth > 520) {
+      if (DoF_Ref.current) {
+        DoF_Ref.current.target.set(
+          0,
+          1 + ((totalHeight - mouseY) * 0.02) / 2 - 3,
+          0
+        );
+        DoF_Ref.current.bokehScale = (mouseY / totalHeight) * 2 + 2;
+      }
     }
   });
 
