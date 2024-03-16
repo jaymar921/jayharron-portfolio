@@ -28,108 +28,110 @@ const Home = () => {
     enableDOF(!DOFEnabled);
   };
   return (
-    <section className="w-full h-screen relative">
-      <InformationBox
-        handleNext={handleNext}
-        worldMoving={worldMoving}
-        currentStage={currentStage}
-      />
-      <Canvas
-        className="w-full h-full bg-transparent"
-        camera={{ near: 0.1, far: 20, fov: 80, focus: 200 }}
-        style={{ backgroundColor: "#171B21" }}
-      >
-        <Suspense fallback={<Loader />}>
-          <directionalLight
-            position={[-5, 2, 1]}
-            color={"#D2D4A1"}
-            intensity={3}
-            castShadow
-            shadow-mapSize-height={512}
-            shadow-mapSize-width={512}
-            shadow-mapSize={[1024, 1024]}
-          />
-          <fog attach="fog" args={["#171B21", 5, 15]} />
-          <ambientLight intensity={0.5} />
-          <hemisphereLight
-            skyColor="#B1E1FF"
-            groundColor="#212567"
-            intensity={0.5}
-          />
+    <>
+      <section className="w-full h-screen relative z-0">
+        <InformationBox
+          handleNext={handleNext}
+          worldMoving={worldMoving}
+          currentStage={currentStage}
+        />
+        <Canvas
+          className="w-full h-full bg-transparent"
+          camera={{ near: 0.1, far: 20, fov: 80, focus: 200 }}
+          style={{ backgroundColor: "#171B21" }}
+        >
+          <Suspense fallback={<Loader />}>
+            <directionalLight
+              position={[-5, 2, 1]}
+              color={"#D2D4A1"}
+              intensity={3}
+              castShadow
+              shadow-mapSize-height={512}
+              shadow-mapSize-width={512}
+              shadow-mapSize={[1024, 1024]}
+            />
+            <fog attach="fog" args={["#171B21", 5, 15]} />
+            <ambientLight intensity={0.5} />
+            <hemisphereLight
+              skyColor="#B1E1FF"
+              groundColor="#212567"
+              intensity={0.5}
+            />
 
-          <Bee
-            receiveShadow
-            currentStage={currentStage}
-            setWorldMoving={setWorldMoving}
-            worldPosRot={worldPosRot}
-            BeePosition={AnimalPositions[0]}
-          />
-          <Bee
-            receiveShadow
-            currentStage={currentStage}
-            setWorldMoving={setWorldMoving}
-            worldPosRot={worldPosRot}
-            BeePosition={AnimalPositions[1]}
-          />
-          <Bee
-            receiveShadow
-            currentStage={currentStage}
-            setWorldMoving={setWorldMoving}
-            worldPosRot={worldPosRot}
-            BeePosition={AnimalPositions[2]}
-          />
-          <Bee
-            receiveShadow
-            currentStage={currentStage}
-            setWorldMoving={setWorldMoving}
-            worldPosRot={worldPosRot}
-            BeePosition={AnimalPositions[3]}
-          />
-          <Allay
-            receiveShadow
-            currentStage={currentStage}
-            setWorldMoving={setWorldMoving}
-            worldPosRot={worldPosRot}
-            BeePosition={AnimalPositions[4]}
-          />
-          <Allay
-            receiveShadow
-            currentStage={currentStage}
-            setWorldMoving={setWorldMoving}
-            worldPosRot={worldPosRot}
-            BeePosition={AnimalPositions[5]}
-          />
-          <Allay
-            receiveShadow
-            currentStage={currentStage}
-            setWorldMoving={setWorldMoving}
-            worldPosRot={worldPosRot}
-            BeePosition={AnimalPositions[6]}
-          />
+            <Bee
+              receiveShadow
+              currentStage={currentStage}
+              setWorldMoving={setWorldMoving}
+              worldPosRot={worldPosRot}
+              BeePosition={AnimalPositions[0]}
+            />
+            <Bee
+              receiveShadow
+              currentStage={currentStage}
+              setWorldMoving={setWorldMoving}
+              worldPosRot={worldPosRot}
+              BeePosition={AnimalPositions[1]}
+            />
+            <Bee
+              receiveShadow
+              currentStage={currentStage}
+              setWorldMoving={setWorldMoving}
+              worldPosRot={worldPosRot}
+              BeePosition={AnimalPositions[2]}
+            />
+            <Bee
+              receiveShadow
+              currentStage={currentStage}
+              setWorldMoving={setWorldMoving}
+              worldPosRot={worldPosRot}
+              BeePosition={AnimalPositions[3]}
+            />
+            <Allay
+              receiveShadow
+              currentStage={currentStage}
+              setWorldMoving={setWorldMoving}
+              worldPosRot={worldPosRot}
+              BeePosition={AnimalPositions[4]}
+            />
+            <Allay
+              receiveShadow
+              currentStage={currentStage}
+              setWorldMoving={setWorldMoving}
+              worldPosRot={worldPosRot}
+              BeePosition={AnimalPositions[5]}
+            />
+            <Allay
+              receiveShadow
+              currentStage={currentStage}
+              setWorldMoving={setWorldMoving}
+              worldPosRot={worldPosRot}
+              BeePosition={AnimalPositions[6]}
+            />
 
-          <Allay
-            receiveShadow
-            currentStage={currentStage}
-            setWorldMoving={setWorldMoving}
-            worldPosRot={worldPosRot}
-            BeePosition={AnimalPositions[7]}
-          />
-          <AmbientScene enableDoF={DOFEnabled} />
-          <MinecraftWorld
-            receiveShadow
-            currentStage={currentStage}
-            setWorldMoving={setWorldMoving}
-            setWorldPosRot={setWorldPosRot}
-          />
-        </Suspense>
-      </Canvas>
-      <button
-        className="absolute bottom-2 left-2 font-minecraft text-slate-300 border-2 border-slate-500 px-2 text-[15px]"
-        onClick={handleEnableDOF}
-      >
-        {DOFEnabled ? "Disable DOF" : "Enable DOF"}
-      </button>
-    </section>
+            <Allay
+              receiveShadow
+              currentStage={currentStage}
+              setWorldMoving={setWorldMoving}
+              worldPosRot={worldPosRot}
+              BeePosition={AnimalPositions[7]}
+            />
+            <AmbientScene enableDoF={DOFEnabled} />
+            <MinecraftWorld
+              receiveShadow
+              currentStage={currentStage}
+              setWorldMoving={setWorldMoving}
+              setWorldPosRot={setWorldPosRot}
+            />
+          </Suspense>
+        </Canvas>
+        <button
+          className="absolute bottom-2 left-2 font-minecraft text-slate-300 border-2 border-slate-500 px-2 text-[15px]"
+          onClick={handleEnableDOF}
+        >
+          {DOFEnabled ? "Disable DOF" : "Enable DOF"}
+        </button>
+      </section>
+    </>
   );
 };
 

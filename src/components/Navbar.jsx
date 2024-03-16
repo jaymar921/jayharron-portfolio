@@ -1,14 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { jhlogo } from "../assets/icons";
 
 const Navbar = () => {
   return (
-    <header className="header">
+    <header className="header z-100">
       <NavLink
         to="/"
-        className="w-10 h-10 bg-white items-center justify-center flex-bold shadow-md"
+        className="w-12 h-12 bg-transparent flex items-center justify-center flex-bold shadow-md border-[1px] p-1 rounded-lg border-cyan-500"
       >
-        <img src="https://avatars.githubusercontent.com/u/72720429?v=4" />
+        <img src={jhlogo}  />
       </NavLink>
       <nav className="flex text-lg gap-7 font-medium">
         <NavLink

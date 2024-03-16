@@ -17,7 +17,7 @@ const Bee = ({ worldPosRot, BeePosition, ...props }) => {
   const { nodes, materials, animations } = useGLTF(MinecraftBee);
   const { actions } = useAnimations(animations, BeeRef);
 
-  useFrame(() => {
+  useFrame(({ clock }) => {
     actions["Animation"].play();
     if (worldPosRot) {
       // Adjusting the x and z positions
@@ -35,6 +35,14 @@ const Bee = ({ worldPosRot, BeePosition, ...props }) => {
       BeeRef.current.rotation.x = BeePosition.rotation[0];
       BeeRef.current.rotation.y = BeePosition.rotation[1];
       BeeRef.current.rotation.z = BeePosition.rotation[2];
+    }else if(!BeePosition){
+      const time = clock.elapsedTime; // Get the elapsed time
+      const oscX = Math.sin(time * 0.5) * 0.1; // Adjust frequency and amplitude for X-axis oscillation
+      const oscY = Math.cos(time * 0.4) * 0.1; // Adjust frequency and amplitude for Y-axis oscillation
+      const oscZ = Math.sin(time * 0.3) * 0.05; // Adjust frequency and amplitude for Z-axis oscillation
+      BeeRef.current.position.x = props.position[0] + oscX;
+      BeeRef.current.position.y = props.position[1] + oscY;
+      BeeRef.current.position.z = props.position[2] + oscZ;
     }
   });
   return (

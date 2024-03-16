@@ -5,6 +5,8 @@ import Fox from "../models/Fox";
 import Loader from "../components/Loader";
 import useAlert from "../hooks/useAlert";
 import Alert from "../components/Alert";
+import Bee from "../models/Bee";
+import WhiteFlower from "../models/WhiteFlower";
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -131,14 +133,16 @@ const Contact = () => {
       <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
         <Canvas camera={{ position: [0, 0, 5], fov: 75, near: 0.1, far: 1000 }}>
           <Suspense fallback={<Loader />}>
-            <directionalLight intensity={2.5} position={[0, 0, 1]} />
-            <ambientLight intensity={0.5} />
-            <Fox
+            <directionalLight intensity={2.2} position={[-0.2, 1, 5]} />
+            <ambientLight intensity={0.2} />
+            {/* <Fox
               position={[0.5, 0.35, 0]}
               rotation={[12.6, -0.6, 0]}
               scale={[0.5, 0.5, 0.5]}
               currentAnimation={currentAnimation}
-            />
+            /> */}
+            <Bee position={[0.5,0.5,2]} rotation={[0.2,2.5,-0.2]} />
+            <WhiteFlower scale={[0.007,0.007, 0.007]} position={[0,-0.3,4]} rotation={[0,-1,0]}/>
           </Suspense>
         </Canvas>
       </div>

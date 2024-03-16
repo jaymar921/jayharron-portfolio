@@ -7,7 +7,7 @@ const Content = {
   "-1": {
     text: (
       <p className="leading-none pb-2">
-        Hi, I'm <a className="text-green-700">Jayharron Abejar</a>
+        Hi, I'm <br /><a className="text-green-700">Jayharron Abejar</a>
       </p>
     ),
     more_info: (
@@ -49,7 +49,7 @@ const Content = {
   3: {
     text: (
       <p className="leading-none pb-2">
-        Hi, I'm <a className="text-green-700">Jayharron Abejar</a>
+        Hi, I'm <br /><a className="text-green-700">Jayharron Abejar</a>
       </p>
     ),
     more_info: (
@@ -84,10 +84,10 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
       }`}
     >
       <div>
-        <div className="w-[350px] fit-content overflow-hidden font-minecraft">
-          <img className="top-0 w-[350px]" src={ImageMapTemplate} />
-          <div className="absolute top-0 flex text-center justify-center w-[350px] h-full text-[#825419]">
-            <div className="relative w-full font-sm text-[22px] p-8">
+        <div className="w-[350px] md:w-[500px] fit-content overflow-hidden font-minecraft">
+          <img className="top-0 w-[350px] md:w-[500px]" src={ImageMapTemplate} />
+          <div className="absolute top-0 flex text-center justify-center w-[350px] md:w-[500px] h-full text-[#825419]">
+            <div className="relative w-full font-sm text-[22px] md:text-[35px] p-8 md:p-10">
               {Information.text}
               <button
                 className="z-20 text-[#634013] leading-none"
@@ -100,7 +100,7 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
           </div>
         </div>
         {Information.more_info !== "" && (
-          <div className="absolute rounded-md mt-8 w-[350px] bg-[rgba(128,82,24,0.5)] border-2 border-[rgba(87,56,17,0.92)] text-[18px] font-minecraft text-white">
+          <div className="absolute rounded-md mt-8 w-[350px] md:w-[500px] bg-[rgba(128,82,24,0.5)] border-2 border-[rgba(87,56,17,0.92)] text-[18px] md:text-[25px] font-minecraft text-white">
             <div className="p-2 text-justify">{Information.more_info}</div>
             {Information.link !== "" && (
               <div className="relative border-black border-2 w-[50%] my-auto mx-auto bg-gray-500 hover:bg-gray-400  overflow-hidden rounded-sm mb-2">
