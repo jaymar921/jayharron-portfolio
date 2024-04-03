@@ -321,6 +321,15 @@ export const projects = [
       "The plugin is so called an advanced because it has a built in Custom Enchantments, Skilling System, Player Classifications, CE Currencies/Quests and an RPG feels in the game.",
     link: "https://www.spigotmc.org/resources/%E2%9C%AF-custom-enchantments-3-rpg-%E2%9C%AF-1-16-1-20-all-in-one-pugin.102275/",
   },
+  {
+    iconUrl:
+      "http://localhost:5173/src/assets/icons/jh-logo.svg",
+    theme: "btn-back bg-slate-800",
+    name: "JHC Blockchain",
+    description:
+      "JHCoin. A simple blockchain demonstration, how transaction works in a blockchain, how blocks are being mined.",
+    link: "https://jhc-blockchain.vercel.app/",
+  },
   // {
   //   iconUrl: threads,
   //   theme: "btn-back-green",

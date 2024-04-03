@@ -1,4 +1,3 @@
-import React from "react";
 import { projects } from "../constants";
 import { Link } from "react-router-dom";
 import { arrow } from "../assets/icons";
@@ -15,8 +14,8 @@ const Projects = () => {
       </h1>
       <div className="mt-5 flex flex-col gap-3 text-slate-500">
         <p>
-          I've created a lot of projects which I'm greatly proud of. Many of
-          them are open source, if you're interested to contribute, your
+          I&quot;ve created a lot of projects which I&quot;m greatly proud of. Many of
+          them are open source, if you&quot;re interested to contribute, your
           collaboration is highly valued!
         </p>
       </div>
