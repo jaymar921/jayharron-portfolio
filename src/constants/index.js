@@ -323,7 +323,7 @@ export const projects = [
   },
   {
     iconUrl:
-      "http://localhost:5173/src/assets/icons/jh-logo.svg",
+      "https://raw.githubusercontent.com/jaymar921/jayharron-portfolio/471644d9ca5a7a8fd0ffa968fa638e41edb0c173/src/assets/icons/jh-logo.svg",
     theme: "btn-back bg-slate-800",
     name: "JHC Blockchain",
     description:
