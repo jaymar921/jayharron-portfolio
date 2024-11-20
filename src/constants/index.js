@@ -212,6 +212,18 @@ export const skills = [
 
 export const experiences = [
   {
+    title: "Software Engineer II (Contract)",
+    company_name: "Forrest T Jones (FTJ)",
+    icon: "https://th.bing.com/th/id/OIP.Z6mFUf0I5KcWgOPnksW8SwAAAA?rs=1&pid=ImgDetMain",
+    iconBg: "#FFFFFF",
+    date: "March 10, 2024 - Present",
+    points: [
+      "Developing and maintaining web applications using .NET, React.js, NextJS and other related technologies.",
+      "Experienced xUnit, Jest testing tools",
+      "Has background in deploying application with Microsoft Azure, DevOps"
+    ],
+  },
+  {
     title: "Software Developer",
     company_name: "FullScale",
     icon: "https://jaymar921.github.io/jayharronabejar/assets/images/fullScale.png",
@@ -251,7 +263,7 @@ export const experiences = [
     company_name: "SpigotMC.org",
     icon: "https://static.spigotmc.org/img/spigot.png",
     iconBg: "#FFD3BB",
-    date: "Sep 10, 2020 - present",
+    date: "Sep 10, 2020 - Dec 31, 2023",
     points: [
       "Experienced building awesome game plugin specific for Minecraft Servers.",
       "Enhanced game development experience.",
