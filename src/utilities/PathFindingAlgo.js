@@ -160,9 +160,9 @@ export class Square {
     context.fillStyle = this.color;
     context.fillRect(this.position.x, this.position.y, this.width, this.height);
     
-	// context.fillStyle = 'black';
-	// context.font = '7px Arial';
-	// context.fillText(this.name, this.position.x+this.center()/2, this.position.y+this.center(), this.width);
+    // context.fillStyle = 'black';
+    // context.font = '7px Arial';
+    // context.fillText(this.name, this.position.x+this.center()/2, this.position.y+this.center(), this.width);
 		
   }
 
@@ -509,21 +509,34 @@ export const IsPathBlocked = (pathName) => {
 
     
     for(let x = 57; x <= 75; x++){
-        if(x != 72)
+        if(x != 72 && x != 62)
             blockedPaths.push(x);
     }
 
     for(let x = 171; x <= 189; x++){
-        if(x != 180)
+        if( x != 186 && x != 174)
             blockedPaths.push(x);
     }
 
     
     for(let x = 266; x <= 284; x++){
-        if(x != 270)
+        if(x != 269 && x != 275)
             blockedPaths.push(x);
     }
 
+    blockedPaths.push(129);
+    blockedPaths.push(117);
+    
+    blockedPaths.push(343);
+    blockedPaths.push(324);
+    blockedPaths.push(307);
+    blockedPaths.push(319);
+    blockedPaths.push(326);
+    
+    blockedPaths.push(345);
+    
+    blockedPaths.push(72);
+    blockedPaths.push(119);
 
     return blockedPaths.filter(x => x === pathName).length > 0;
 }
