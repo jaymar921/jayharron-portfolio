@@ -27,8 +27,8 @@ export const loadCanvas = () => {
     context = canvas.getContext("2d");
     output = document.querySelector("#output-text");
 
-    canvas.width = xSize * 16;
-    canvas.height = ySize * 16;
+    canvas.width = xSize * 16 + 2;
+    canvas.height = ySize * 16 + 2;
 }
 
 let text_type = "Path Finding Algorithms";
@@ -181,6 +181,9 @@ export class Vertex extends Square {
     this.h = 0;
     this.g = 0;
     this.f = 0;
+
+    if(name === 18) super.color = startingColor
+    if(name === 342) super.color = "orange"
   }
 }
 
@@ -293,12 +296,13 @@ export const loadVertex = async () => {
 	 visit the node
 	 expand the node (neighbors)
 */
-export const DFS = async (vertex_name, goalVertex) => {
+export const DFS = async (vertex_name, goalVertex, setNofVisitedNodes = () => {}) => {
   loadVertex();
   text_type = "Depth-First-Search";
   let output_string = `OUTPUT<br>Starting Postion: ${vertex_name}`;
   const starting = VERTICES.filter((v) => v.name === vertex_name)[0];
   const goal = VERTICES.filter((v) => v.name === goalVertex)[0];
+  let totalVisit = 0;
 
   goal.color = "orange";
   const queue = new Array();
@@ -308,7 +312,7 @@ export const DFS = async (vertex_name, goalVertex) => {
   starting.color = startingColor;
   starting.draw();
   while (queue.length != 0) {
-    await sleep(1);
+    await sleep(20);
     // pop
     const v = queue.pop();
     if (visited.includes(v.name)) {
@@ -323,6 +327,8 @@ export const DFS = async (vertex_name, goalVertex) => {
     visited.push(v.name);
     v.color = visitedColor;
     v.connectionColor = visitedConnectionColor;
+    totalVisit++;
+    setNofVisitedNodes(totalVisit);
     for (let n of v.neighbors) {
       if (visited.includes(n.name)) {
         continue;
@@ -337,12 +343,13 @@ export const DFS = async (vertex_name, goalVertex) => {
   output_string += `<br>Graph Traversed`;
   output.innerHTML = output_string;
 };
-export const BFS = async (vertex_name, goalVertex) => {
+export const BFS = async (vertex_name, goalVertex, setNofVisitedNodes = () => {}) => {
   loadVertex();
   text_type = "Breadth-First-Search";
   let output_string = `OUTPUT<br>Starting Postion: ${vertex_name}`;
   const starting = VERTICES.filter((v) => v.name === vertex_name)[0];
   const goal = VERTICES.filter((v) => v.name === goalVertex)[0];
+  let totalVisit = 0;
 
   goal.color = "orange";
   const queue = new Array();
@@ -367,6 +374,8 @@ export const BFS = async (vertex_name, goalVertex) => {
     visited.push(v.name);
     v.color = visitedColor;
     v.connectionColor = visitedConnectionColor;
+    totalVisit++;
+    setNofVisitedNodes(totalVisit);
     for (let n of v.neighbors) {
       if (visited.includes(n.name)) {
         continue;
@@ -382,7 +391,7 @@ export const BFS = async (vertex_name, goalVertex) => {
   output.innerHTML = output_string;
 };
 
-export const Astar = async (vertex_name, goalVertex) => {
+export const Astar = async (vertex_name, goalVertex, setNofVisitedNodes = () => {}) => {
   loadVertex();
   text_type = "A* Algorithm";
   let output_string = `OUTPUT<br>Starting Postion: ${vertex_name}`;
@@ -392,6 +401,7 @@ export const Astar = async (vertex_name, goalVertex) => {
   goal.color = "orange";
   const queue = new PriorityQueue();
   const visited = new Array();
+  let totalVisit = 0;
 
   starting.f = starting.g + starting.h;
   //console.log(starting);
@@ -401,7 +411,7 @@ export const Astar = async (vertex_name, goalVertex) => {
   starting.draw();
 
   while (queue.items.length > 0) {
-    await sleep(10);
+    await sleep(20);
     // dequeue
     const v = getLowestFScore(queue.getItems());
 
@@ -416,6 +426,8 @@ export const Astar = async (vertex_name, goalVertex) => {
 
     v.color = visitedColor;
     v.connectionColor = visitedConnectionColor;
+    totalVisit++;
+    setNofVisitedNodes(totalVisit);
 
     for (let n of v.neighbors) {
       let gtotal = v.g + 0;

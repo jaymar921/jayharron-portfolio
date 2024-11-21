@@ -383,3 +383,75 @@ export const projects = [
   //   link: "https://github.com/adrianhajdin/project_ai_summarizer",
   // },
 ];
+
+export const PathFindingAlgoritms = {
+  bfs: {
+    description: "Breadth First Search (BFS) is used to search a Graph Data Structure for a node that meets a set of criteria. It starts at the root of the graph and visits all nodes at the current depth level before moving to the nodes at the next depth level.",
+    initialization: "Enqueue the given source vertex into a queue and mark it as visited.",
+    operations: [
+      "Visit the adjacent unvisited node. Mark it as visited. Insert it into the queue.",
+      "If no adjacent vertex/node is found, remove the first node from the queue.",
+      "Repeat the 2 operations above until the queue is empty."
+    ],
+    complexity: "O(V + E) where V is the number of vertices and E is the number of edges.",
+    advantages: [
+      "Guarantees the shortest path in an unweighted graph.",
+      "It explores all nodes at the current depth level before moving deeper, ensuring completeness."
+    ],
+    disadvantages: [
+      "Can be inefficient for large graphs as it needs to visit all nodes at each depth level.",
+      "Requires more memory to store all visited nodes in the queue, which can be a limitation for large graphs."
+    ],
+    exampleScenario: [
+      "Social Network Connectivity: Finding the shortest path between two people in a social network by exploring each person's direct connections before moving to deeper connections.",
+      "Web Crawlers: A web crawler that visits all pages at a certain depth level before moving to pages at deeper levels on a website."
+    ]
+  },
+  
+  dfs: {
+    description: "Depth First Search (DFS) explores a graph by starting at the root (or an arbitrary node) and exploring as far as possible along each branch before backtracking.",
+    initialization: "Push the source vertex onto a stack and mark it as visited.",
+    operations: [
+      "Visit the adjacent unvisited node. Mark it as visited and push it onto the stack.",
+      "If no adjacent vertex/node is found, pop a node from the stack.",
+      "Repeat the above operations until the stack is empty."
+    ],
+    complexity: "O(V + E) where V is the number of vertices and E is the number of edges.",
+    advantages: [
+      "Requires less memory than BFS as it uses a stack (in-place traversal).",
+      "Can be useful for exploring deeply nested structures and for algorithms like topological sorting."
+    ],
+    disadvantages: [
+      "Does not guarantee the shortest path (can get stuck in deep branches).",
+      "Can be inefficient in terms of time if the graph has many branches and deep paths."
+    ],
+    exampleScenario: [
+      "Maze Solving: Finding a path in a maze by exploring deep into one branch before backtracking when hitting dead ends.",
+      "Topological Sorting: Sorting tasks that have dependencies, where DFS is used to determine the order in which tasks must be completed."
+    ]
+  },
+
+  astar: {
+    description: "A* (A-star) is a popular pathfinding and graph traversal algorithm used for finding the shortest path from a start node to a goal node. It uses heuristics to improve performance by estimating the cost to reach the goal.",
+    initialization: "Initialize an open list with the start node and a closed list as empty. Each node is assigned a cost based on distance from the start node and heuristic (estimated cost to goal).",
+    operations: [
+      "Pick the node with the lowest f-cost (g-cost + h-cost) from the open list.",
+      "Check if the current node is the goal. If yes, return the path.",
+      "For each adjacent node, calculate the tentative g-cost. If the new path is better, update the node's values and add it to the open list.",
+      "Move the current node to the closed list and repeat until the goal is found or open list is empty."
+    ],
+    complexity: "O(E log V) where E is the number of edges and V is the number of vertices (due to the priority queue).",
+    advantages: [
+      "Finds the shortest path efficiently in a weighted graph.",
+      "Can be optimized with different heuristics to improve performance based on the problem domain."
+    ],
+    disadvantages: [
+      "Heavily dependent on the heuristic function; a poor heuristic can make the algorithm slower.",
+      "Requires more memory than BFS and DFS due to storing additional information for each node (f, g, h values)."
+    ],
+    exampleScenario: [
+      "GPS Navigation: Finding the shortest route from one location to another, considering both distance and real-time traffic data.",
+      "Game Development: Pathfinding in video games for non-player characters (NPCs) to find the shortest route in a map with obstacles."
+    ]
+  }
+};
