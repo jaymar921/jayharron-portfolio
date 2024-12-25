@@ -94,7 +94,7 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
                 onClick={handleNext}
                 disabled={worldMoving}
               >
-                <img className="w-8 h-8" src={DownArrow} />
+                <img className="w-8 h-8 animate-bounce" src={DownArrow} />
               </button>
             </div>
           </div>
