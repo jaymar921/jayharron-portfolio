@@ -214,18 +214,21 @@ export const experiences = [
   {
     title: "Software Engineer II (Contract)",
     company_name: "Forrest T Jones (FTJ)",
+    job_type: "Full-Time | Remote",
     icon: "https://th.bing.com/th/id/OIP.Z6mFUf0I5KcWgOPnksW8SwAAAA?rs=1&pid=ImgDetMain",
     iconBg: "#FFFFFF",
     date: "March 10, 2024 - Present",
     points: [
       "Developing and maintaining web applications using .NET, React.js, NextJS and other related technologies.",
       "Experienced xUnit, Jest testing tools",
-      "Has background in deploying application with Microsoft Azure, DevOps"
+      "Has background in deploying application with Microsoft Azure, DevOps",
+      "Experienced reverse engineering old .NET applications and rewriting them on latest technology possible"
     ],
   },
   {
     title: "Software Developer",
     company_name: "FullScale",
+    job_type: "Full-Time | Remote",
     icon: "https://jaymar921.github.io/jayharronabejar/assets/images/fullScale.png",
     iconBg: "#BDFFD1",
     date: "May 22, 2023 - Present",
@@ -239,6 +242,7 @@ export const experiences = [
   {
     title: "FullStack Developer",
     company_name: "PSITS UC MAIN",
+    job_type: "Part-Time | On site",
     icon: "https://jaymar921.github.io/jayharronabejar/assets/images/PSITS_LOGO.png",
     iconBg: "#4CA0C2",
     date: "Sep 12, 2022 - May 22, 2023",
@@ -250,6 +254,7 @@ export const experiences = [
   {
     title: "Developer Intern",
     company_name: "FullScale",
+    job_type: "Part-Time | Remote",
     icon: "https://jaymar921.github.io/jayharronabejar/assets/images/fullScale.png",
     iconBg: "#BDFFD1",
     date: "Sep 6, 2022 - Jan 16, 2023",
@@ -261,6 +266,7 @@ export const experiences = [
   {
     title: "Game Developer | Freelance",
     company_name: "SpigotMC.org",
+    job_type: "Part-Time | Remote",
     icon: "https://static.spigotmc.org/img/spigot.png",
     iconBg: "#FFD3BB",
     date: "Sep 10, 2020 - Dec 31, 2023",

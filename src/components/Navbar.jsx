@@ -9,13 +9,13 @@ const Navbar = () => {
         to="/"
         className="w-12 h-12 bg-transparent flex items-center justify-center flex-bold shadow-md border-[1px] p-1 rounded-lg border-cyan-500"
       >
-        <img src={jhlogo}  />
+        <img src={jhlogo} />
       </NavLink>
       <nav className="flex text-lg gap-7 font-medium">
         <NavLink
           to="/about"
           className={({ isActive }) =>
-            isActive ? "text-green-500" : "text-white"
+            isActive ? "text-green-500" : "text-slate-200"
           }
         >
           About
@@ -23,7 +23,7 @@ const Navbar = () => {
         <NavLink
           to="/projects"
           className={({ isActive }) =>
-            isActive ? "text-green-500" : "text-white"
+            isActive ? "text-green-500" : "text-slate-200"
           }
         >
           Projects

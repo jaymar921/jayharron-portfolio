@@ -12,10 +12,11 @@ const Projects = () => {
           Projects
         </span>
       </h1>
+
       <div className="mt-5 flex flex-col gap-3 text-slate-500">
         <p>
-          I&quot;ve created a lot of projects which I&quot;m greatly proud of. Many of
-          them are open source, if you&quot;re interested to contribute, your
+          I've created a lot of projects which I&quot;m greatly proud of. Many
+          of them are open source, if you&quot;re interested to contribute, your
           collaboration is highly valued!
         </p>
       </div>
@@ -55,6 +56,10 @@ const Projects = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="pb-9">
+        <img src="https://jh-github-profiler.vercel.app/jaymar/profile-body" />
       </div>
 
       <hr className="border-slate-200" />

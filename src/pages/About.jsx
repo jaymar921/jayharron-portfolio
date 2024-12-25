@@ -73,14 +73,25 @@ const About = () => {
                 }}
               >
                 <div>
-                  <h3 className="text-white text-xl font-poppins font-semibold">
+                  <h3
+                    className="text-white text-xl font-poppins font-semibold"
+                    title="Job title"
+                  >
                     {experience.title}
                   </h3>
                   <p
                     className="text-white font-medium font-base"
                     style={{ margin: 0 }}
+                    title={`Company '${experience.company_name}'`}
                   >
                     {experience.company_name}
+                  </p>
+                  <p
+                    className="text-red-300"
+                    style={{ margin: 0, fontSize: 12 }}
+                    title="Job type"
+                  >
+                    {experience.job_type}
                   </p>
                 </div>
                 <ul className="my-5 list-disc ml-5 space-y-2">

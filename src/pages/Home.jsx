@@ -16,7 +16,9 @@ const Home = () => {
   const [currentStage, setCurrentStage] = useState(-1);
   const [worldMoving, setWorldMoving] = useState(true);
   const [worldPosRot, setWorldPosRot] = useState(undefined);
-  const [DOFEnabled, enableDOF] = useState(/*totalWidth > 520 ? true : false*/ false);
+  const [DOFEnabled, enableDOF] = useState(
+    /*totalWidth > 520 ? true : false*/ false
+  );
 
   const handleNext = () => {
     let s = currentStage;
@@ -37,25 +39,25 @@ const Home = () => {
         />
         <Canvas
           className="w-full h-full bg-transparent"
-          camera={{ near: 0.2, far: 20, fov: 80, focus: 200 }}
-          style={{ backgroundColor: "#a8e2f8" }}
+          camera={{ near: 0.1, far: 20, fov: 80, focus: 200 }}
+          style={{ backgroundColor: "#171B21" }}
         >
           <Suspense fallback={<Loader />}>
             <directionalLight
               position={[-5, 2, 1]}
-              color={"#FFFFFF"}
+              color={"#D2D4A1"}
               intensity={3}
               castShadow
-              shadow-mapSize-height={256}
-              shadow-mapSize-width={256}
+              shadow-mapSize-height={512}
+              shadow-mapSize-width={512}
               shadow-mapSize={[1024, 1024]}
             />
-            <fog attach="fog" args={["#83cde9", 10, 30]} />
-            <ambientLight intensity={0.3} />
+            <fog attach="fog" args={["#171B21", 5, 15]} />
+            <ambientLight intensity={0.5} />
             <hemisphereLight
               skyColor="#B1E1FF"
               groundColor="#212567"
-              intensity={0.3}
+              intensity={0.5}
             />
 
             <Bee
