@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { useCanvas } from "../hooks/useCanvas";
-import TilemapLevelGenerator from "../handlers/TilemapLevelGenerator";
-import { convertSingleArrayMapTo2DArray } from "../utilities/TilemapUtility";
-import { Map1Colliders } from "../constants";
-import Map1ImageSource from "../assets/pixelarts/map-1.png";
-import PlayerHandler from "../handlers/PlayerHandler";
+import { useCanvas } from "../../hooks/useCanvas";
+import TilemapLevelGenerator from "../../handlers/TilemapLevelGenerator";
+import { convertSingleArrayMapTo2DArray } from "../../utilities/TilemapUtility";
+import { Map1Colliders } from "../../constants";
+import Map1ImageSource from "../../assets/pixelarts/map-1.png";
+import PlayerHandler from "../../handlers/PlayerHandler";
 
-function HomeV2() {
+function Graphic2D() {
   const canvasScreen = useCanvas(
     "canvas-screen",
     window.innerWidth,
@@ -54,4 +54,4 @@ function HomeV2() {
   );
 }
 
-export default HomeV2;
+export default Graphic2D;

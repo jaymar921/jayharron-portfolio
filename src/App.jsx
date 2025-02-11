@@ -2,7 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { Home, About, Projects, Contact } from "./pages";
 import PathFindingAlgorithmsPage from "./pages/Project/PathFindingAlgorithmsPage";
-import HomeV2 from "./pages/HomeV2";
+import Graphic2D from "./pages/Graphic2D/Graphic2D";
 
 const App = () => {
   return (
@@ -11,7 +11,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/v2" element={<HomeV2 />} />
+          <Route path="/graphic2d" element={<Graphic2D />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
