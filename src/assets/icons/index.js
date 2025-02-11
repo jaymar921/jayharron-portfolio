@@ -27,6 +27,7 @@ import contact from './contact.svg'
 import soundon from './soundon.png'
 import soundoff from './soundoff.png'
 import jhlogo from './jh-logo.svg'
+import githubmarkWhite from "./github-mark-white.svg"
 
 export {
     css,
@@ -57,5 +58,6 @@ export {
     contact,
     soundon,
     soundoff,
-    jhlogo
+    jhlogo,
+    githubmarkWhite
 }
