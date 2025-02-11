@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import { Home, About, Projects, Contact } from "./pages";
 import PathFindingAlgorithmsPage from "./pages/Project/PathFindingAlgorithmsPage";
 import Graphic2D from "./pages/Graphic2D/Graphic2D";
+import Home_V2 from "./pages/Home_V2";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/graphic2d" element={<Graphic2D />} />
+          <Route path="/v2" element={<Home_V2 />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
