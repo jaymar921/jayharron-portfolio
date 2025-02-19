@@ -28,6 +28,10 @@ import soundon from './soundon.png'
 import soundoff from './soundoff.png'
 import jhlogo from './jh-logo.svg'
 import githubmarkWhite from "./github-mark-white.svg"
+import ftjLogo from "./ftjLogo.jpeg"
+import fullScaleLogo from "./fullScale.png"
+import PSITS_LOGO from "./PSITS_LOGO.png"
+import spigotLogo from "./spigot.png"
 
 export {
     css,
@@ -59,5 +63,9 @@ export {
     soundon,
     soundoff,
     jhlogo,
-    githubmarkWhite
+    githubmarkWhite,
+    ftjLogo,
+    fullScaleLogo,
+    PSITS_LOGO,
+    spigotLogo
 }
