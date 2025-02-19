@@ -5,6 +5,8 @@ import {
   css,
   estate,
   express,
+  ftjLogo,
+  fullScaleLogo,
   git,
   github,
   html,
@@ -16,10 +18,12 @@ import {
   nextjs,
   nodejs,
   pricewise,
+  PSITS_LOGO,
   react,
   redux,
   sass,
   snapgram,
+  spigotLogo,
   summiz,
   tailwindcss,
   threads,
@@ -175,12 +179,6 @@ export const skills = [
   },
   {
     imageUrl:
-      "https://cdn-images-1.medium.com/max/1200/1*M7czUa8kD4sY6IATtiXGuw.png",
-    name: "gRPC",
-    type: "MessageBus",
-  },
-  {
-    imageUrl:
       "https://th.bing.com/th/id/OIP.xT82C8aQ9vnAyGbemBkCcgHaH1?rs=1&pid=ImgDetMain",
     name: "RabbitMq",
     type: "MessageBus",
@@ -190,11 +188,6 @@ export const skills = [
       "https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/267_Python_logo-512.png",
     name: "Python",
     type: "Backend",
-  },
-  {
-    imageUrl: "https://flask-training-courses.uk/images/flask-logo.png",
-    name: "Flask",
-    type: "Framework",
   },
   {
     imageUrl:
@@ -215,7 +208,7 @@ export const experiences = [
     title: "Software Engineer II (Contract)",
     company_name: "Forrest T Jones (FTJ)",
     job_type: "Full-Time | Remote",
-    icon: "https://th.bing.com/th/id/OIP.Z6mFUf0I5KcWgOPnksW8SwAAAA?rs=1&pid=ImgDetMain",
+    icon: ftjLogo,
     iconBg: "#FFFFFF",
     date: "March 10, 2024 - Present",
     points: [
@@ -229,7 +222,7 @@ export const experiences = [
     title: "Software Developer",
     company_name: "FullScale",
     job_type: "Full-Time | Remote",
-    icon: "https://jaymar921.github.io/jayharronabejar/assets/images/fullScale.png",
+    icon: fullScaleLogo,
     iconBg: "#BDFFD1",
     date: "May 22, 2023 - Present",
     points: [
@@ -243,7 +236,7 @@ export const experiences = [
     title: "FullStack Developer",
     company_name: "PSITS UC MAIN",
     job_type: "Part-Time | On site",
-    icon: "https://jaymar921.github.io/jayharronabejar/assets/images/PSITS_LOGO.png",
+    icon: PSITS_LOGO,
     iconBg: "#4CA0C2",
     date: "Sep 12, 2022 - May 22, 2023",
     points: [
@@ -255,7 +248,7 @@ export const experiences = [
     title: "Developer Intern",
     company_name: "FullScale",
     job_type: "Part-Time | Remote",
-    icon: "https://jaymar921.github.io/jayharronabejar/assets/images/fullScale.png",
+    icon: fullScaleLogo,
     iconBg: "#BDFFD1",
     date: "Sep 6, 2022 - Jan 16, 2023",
     points: [
@@ -267,7 +260,7 @@ export const experiences = [
     title: "Game Developer | Freelance",
     company_name: "SpigotMC.org",
     job_type: "Part-Time | Remote",
-    icon: "https://static.spigotmc.org/img/spigot.png",
+    icon: spigotLogo,
     iconBg: "#FFD3BB",
     date: "Sep 10, 2020 - Dec 31, 2023",
     points: [
@@ -348,46 +341,6 @@ export const projects = [
       "JHCoin. A simple blockchain demonstration, how transaction works in a blockchain, how blocks are being mined.",
     link: "https://jhc-blockchain.vercel.app/",
   },
-  // {
-  //   iconUrl: threads,
-  //   theme: "btn-back-green",
-  //   name: "Full Stack Threads Clone",
-  //   description:
-  //     'Created a full-stack replica of the popular discussion platform "Threads," enabling users to post and engage in threaded conversations.',
-  //   link: "https://github.com/adrianhajdin/threads",
-  // },
-  // {
-  //   iconUrl: car,
-  //   theme: "btn-back-blue",
-  //   name: "Car Finding App",
-  //   description:
-  //     "Designed and built a mobile app for finding and comparing cars on the market, streamlining the car-buying process.",
-  //   link: "https://github.com/adrianhajdin/project_next13_car_showcase",
-  // },
-  // {
-  //   iconUrl: snapgram,
-  //   theme: "btn-back-pink",
-  //   name: "Full Stack Instagram Clone",
-  //   description:
-  //     "Built a complete clone of Instagram, allowing users to share photos and connect with friends in a familiar social media environment.",
-  //   link: "https://github.com/adrianhajdin/social_media_app",
-  // },
-  // {
-  //   iconUrl: estate,
-  //   theme: "btn-back-black",
-  //   name: "Real-Estate Application",
-  //   description:
-  //     "Developed a web application for real estate listings, facilitating property searches and connecting buyers with sellers.",
-  //   link: "https://github.com/adrianhajdin/projects_realestate",
-  // },
-  // {
-  //   iconUrl: summiz,
-  //   theme: "btn-back-yellow",
-  //   name: "AI Summarizer Application",
-  //   description:
-  //     "App that leverages AI to automatically generate concise & informative summaries from lengthy text content, or blogs.",
-  //   link: "https://github.com/adrianhajdin/project_ai_summarizer",
-  // },
 ];
 
 export const PathFindingAlgoritms = {
