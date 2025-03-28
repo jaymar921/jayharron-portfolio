@@ -7,6 +7,7 @@ import Bee from "../models/Bee";
 import { AnimalPositions } from "../constants";
 import Allay from "../models/Allay";
 import AmbientScene from "../models/AmbientScene";
+import ProfileCard from "../components/ProfileCard";
 
 const Home = () => {
   const totalWidth = Math.max(
