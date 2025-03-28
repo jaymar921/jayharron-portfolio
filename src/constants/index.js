@@ -215,7 +215,7 @@ export const experiences = [
       "Developing and maintaining web applications using .NET, React.js, NextJS and other related technologies.",
       "Experienced xUnit, Jest testing tools",
       "Has background in deploying application with Microsoft Azure, DevOps",
-      "Experienced reverse engineering old .NET applications and rewriting them on latest technology possible"
+      "Experienced reverse engineering old .NET applications and rewriting them on latest technology possible",
     ],
   },
   {
@@ -262,10 +262,11 @@ export const experiences = [
     job_type: "Part-Time | Remote",
     icon: spigotLogo,
     iconBg: "#FFD3BB",
-    date: "Sep 10, 2020 - Dec 31, 2023",
+    date: "Sep 10, 2020 - present",
     points: [
       "Experienced building awesome game plugin specific for Minecraft Servers.",
       "Enhanced game development experience.",
+      "Gained more experience to Advanced Java Programming",
     ],
   },
 ];
@@ -296,7 +297,7 @@ export const projects = [
     name: "PSITS Website",
     description:
       "PSITS web application allows PSITS officers to manage announcements, selling tickets/t-shirts, and create events! UC Main CCS students can create an account for reservation/order of event merch purpose. ",
-    link: "https://github.com/PSITS-UC-MAIN/PSITS-WEB",
+    link: "https://github.com/PSITS-UC-MAIN",
   },
   {
     iconUrl:
@@ -313,7 +314,7 @@ export const projects = [
     name: "QuizMaster",
     description:
       "To ignite the spirit of friendly competition, knowledge exploration, and personal growth through the Quiz Bee Competition Web and Mobile Application, creating a community of lifelong learners and champions.",
-    link: null,
+    link: "https://github.com/full-scale-teams/rocks-quizmaster",
   },
   {
     iconUrl: "https://avatars.githubusercontent.com/u/148028870?s=48&v=4",
@@ -330,7 +331,7 @@ export const projects = [
     name: "Custom Enchantments 3",
     description:
       "The plugin is so called an advanced because it has a built in Custom Enchantments, Skilling System, Player Classifications, CE Currencies/Quests and an RPG feels in the game.",
-    link: "https://www.spigotmc.org/resources/%E2%9C%AF-custom-enchantments-3-rpg-%E2%9C%AF-1-16-1-20-all-in-one-pugin.102275/",
+    link: "https://jhprojects.vercel.app/ce3",
   },
   {
     iconUrl:
@@ -345,93 +346,109 @@ export const projects = [
 
 export const PathFindingAlgoritms = {
   bfs: {
-    description: "Breadth First Search (BFS) is used to search a Graph Data Structure for a node that meets a set of criteria. It starts at the root of the graph and visits all nodes at the current depth level before moving to the nodes at the next depth level.",
-    initialization: "Enqueue the given source vertex into a queue and mark it as visited.",
+    description:
+      "Breadth First Search (BFS) is used to search a Graph Data Structure for a node that meets a set of criteria. It starts at the root of the graph and visits all nodes at the current depth level before moving to the nodes at the next depth level.",
+    initialization:
+      "Enqueue the given source vertex into a queue and mark it as visited.",
     operations: [
       "Visit the adjacent unvisited node. Mark it as visited. Insert it into the queue.",
       "If no adjacent vertex/node is found, remove the first node from the queue.",
-      "Repeat the 2 operations above until the queue is empty."
+      "Repeat the 2 operations above until the queue is empty.",
     ],
-    complexity: "O(V + E) where V is the number of vertices and E is the number of edges.",
+    complexity:
+      "O(V + E) where V is the number of vertices and E is the number of edges.",
     advantages: [
       "Guarantees the shortest path in an unweighted graph.",
-      "It explores all nodes at the current depth level before moving deeper, ensuring completeness."
+      "It explores all nodes at the current depth level before moving deeper, ensuring completeness.",
     ],
     disadvantages: [
       "Can be inefficient for large graphs as it needs to visit all nodes at each depth level.",
-      "Requires more memory to store all visited nodes in the queue, which can be a limitation for large graphs."
+      "Requires more memory to store all visited nodes in the queue, which can be a limitation for large graphs.",
     ],
     exampleScenario: [
       "Social Network Connectivity: Finding the shortest path between two people in a social network by exploring each person's direct connections before moving to deeper connections.",
-      "Web Crawlers: A web crawler that visits all pages at a certain depth level before moving to pages at deeper levels on a website."
-    ]
+      "Web Crawlers: A web crawler that visits all pages at a certain depth level before moving to pages at deeper levels on a website.",
+    ],
   },
-  
+
   dfs: {
-    description: "Depth First Search (DFS) explores a graph by starting at the root (or an arbitrary node) and exploring as far as possible along each branch before backtracking.",
-    initialization: "Push the source vertex onto a stack and mark it as visited.",
+    description:
+      "Depth First Search (DFS) explores a graph by starting at the root (or an arbitrary node) and exploring as far as possible along each branch before backtracking.",
+    initialization:
+      "Push the source vertex onto a stack and mark it as visited.",
     operations: [
       "Visit the adjacent unvisited node. Mark it as visited and push it onto the stack.",
       "If no adjacent vertex/node is found, pop a node from the stack.",
-      "Repeat the above operations until the stack is empty."
+      "Repeat the above operations until the stack is empty.",
     ],
-    complexity: "O(V + E) where V is the number of vertices and E is the number of edges.",
+    complexity:
+      "O(V + E) where V is the number of vertices and E is the number of edges.",
     advantages: [
       "Requires less memory than BFS as it uses a stack (in-place traversal).",
-      "Can be useful for exploring deeply nested structures and for algorithms like topological sorting."
+      "Can be useful for exploring deeply nested structures and for algorithms like topological sorting.",
     ],
     disadvantages: [
       "Does not guarantee the shortest path (can get stuck in deep branches).",
-      "Can be inefficient in terms of time if the graph has many branches and deep paths."
+      "Can be inefficient in terms of time if the graph has many branches and deep paths.",
     ],
     exampleScenario: [
       "Maze Solving: Finding a path in a maze by exploring deep into one branch before backtracking when hitting dead ends.",
-      "Topological Sorting: Sorting tasks that have dependencies, where DFS is used to determine the order in which tasks must be completed."
-    ]
+      "Topological Sorting: Sorting tasks that have dependencies, where DFS is used to determine the order in which tasks must be completed.",
+    ],
   },
 
   astar: {
-    description: "A* (A-star) is a popular pathfinding and graph traversal algorithm used for finding the shortest path from a start node to a goal node. It uses heuristics to improve performance by estimating the cost to reach the goal.",
-    initialization: "Initialize an open list with the start node and a closed list as empty. Each node is assigned a cost based on distance from the start node and heuristic (estimated cost to goal).",
+    description:
+      "A* (A-star) is a popular pathfinding and graph traversal algorithm used for finding the shortest path from a start node to a goal node. It uses heuristics to improve performance by estimating the cost to reach the goal.",
+    initialization:
+      "Initialize an open list with the start node and a closed list as empty. Each node is assigned a cost based on distance from the start node and heuristic (estimated cost to goal).",
     operations: [
       "Pick the node with the lowest f-cost (g-cost + h-cost) from the open list.",
       "Check if the current node is the goal. If yes, return the path.",
       "For each adjacent node, calculate the tentative g-cost. If the new path is better, update the node's values and add it to the open list.",
-      "Move the current node to the closed list and repeat until the goal is found or open list is empty."
+      "Move the current node to the closed list and repeat until the goal is found or open list is empty.",
     ],
-    complexity: "O(E log V) where E is the number of edges and V is the number of vertices (due to the priority queue).",
+    complexity:
+      "O(E log V) where E is the number of edges and V is the number of vertices (due to the priority queue).",
     advantages: [
       "Finds the shortest path efficiently in a weighted graph.",
-      "Can be optimized with different heuristics to improve performance based on the problem domain."
+      "Can be optimized with different heuristics to improve performance based on the problem domain.",
     ],
     disadvantages: [
       "Heavily dependent on the heuristic function; a poor heuristic can make the algorithm slower.",
-      "Requires more memory than BFS and DFS due to storing additional information for each node (f, g, h values)."
+      "Requires more memory than BFS and DFS due to storing additional information for each node (f, g, h values).",
     ],
     exampleScenario: [
       "GPS Navigation: Finding the shortest route from one location to another, considering both distance and real-time traffic data.",
-      "Game Development: Pathfinding in video games for non-player characters (NPCs) to find the shortest route in a map with obstacles."
-    ]
-  }
+      "Game Development: Pathfinding in video games for non-player characters (NPCs) to find the shortest route in a map with obstacles.",
+    ],
+  },
 };
 
-export const Map1Colliders = [0, 0, 0, 3, 4, 4, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                              0, 0, 3, 13, 0, 0, 0, 14, 5, 0, 3, 4, 4, 4, 4, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                              0, 3, 13, 0, 0, 0, 0, 0, 9, 3, 13, 0, 0, 0, 0, 0, 14, 4, 4, 5, 3, 4, 4, 5, 0, 0, 0, 0, 0, 0,
-                              0, 6, 0, 0, 0, 0, 0, 0, 14, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 13, 0, 0, 14, 5, 0, 0, 0, 0, 0,
-                              0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 5, 0, 0, 0, 0,
-                              0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0,
-                              0, 8, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 7, 0, 0, 0, 0,
-                              0, 0, 8, 10, 10, 10, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 10, 10, 10, 7, 0, 0, 0, 0, 0,
-                              0, 0, 0, 0, 0, 0, 3, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 4, 4, 4, 4, 4, 5, 0, 0, 0,
-                              0, 0, 0, 3, 4, 4, 13, 0, 0, 0, 0, 12, 10, 10, 10, 10, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 14, 5, 0, 0,
-                              0, 0, 3, 13, 0, 0, 0, 0, 0, 0, 12, 7, 0, 0, 0, 3, 4, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0,
-                              0, 3, 13, 0, 0, 0, 0, 0, 0, 12, 7, 0, 0, 0, 3, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0,
-                              0, 6, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 3, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0,
-                              0, 6, 0, 0, 12, 11, 0, 0, 0, 9, 0, 0, 3, 13, 0, 0, 0, 12, 11, 0, 0, 0, 0, 0, 0, 0, 12, 7, 0, 0,
-                              0, 6, 0, 0, 9, 6, 0, 0, 0, 14, 5, 0, 6, 0, 0, 0, 0, 9, 8, 11, 0, 0, 0, 0, 0, 12, 7, 1, 0, 0,
-                              0, 6, 0, 0, 14, 5, 11, 0, 0, 0, 14, 5, 6, 0, 0, 0, 0, 14, 5, 8, 10, 10, 10, 10, 10, 7, 3, 4, 5, 1,
-                              0, 6, 0, 0, 0, 14, 13, 0, 0, 0, 0, 9, 6, 0, 0, 0, 0, 0, 14, 4, 4, 4, 4, 4, 4, 4, 13, 0, 14, 5,
-                              0, 8, 11, 0, 0, 0, 0, 0, 0, 0, 0, 9, 8, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
-                              0, 0, 8, 11, 0, 0, 0, 0, 0, 0, 12, 7, 0, 8, 10, 10, 10, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 7,
-                              0, 0, 0, 8, 10, 10, 10, 10, 10, 10, 7, 0, 0, 0, 0, 0, 0, 0, 8, 10, 10, 10, 10, 10, 10, 10, 10, 10, 7, 0]
+export const Map1Colliders = [
+  0, 0, 0, 3, 4, 4, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 3, 13, 0, 0, 0, 14, 5, 0, 3, 4, 4, 4, 4, 4, 5, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 13, 0, 0, 0, 0, 0, 9, 3, 13, 0, 0, 0, 0, 0,
+  14, 4, 4, 5, 3, 4, 4, 5, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 14, 13, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 14, 13, 0, 0, 14, 5, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 5, 0, 0, 0, 0, 0, 6,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0,
+  0, 0, 0, 8, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  12, 7, 0, 0, 0, 0, 0, 0, 8, 10, 10, 10, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 12, 10, 10, 10, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 13, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 14, 4, 4, 4, 4, 4, 5, 0, 0, 0, 0, 0, 0, 3, 4, 4, 13,
+  0, 0, 0, 0, 12, 10, 10, 10, 10, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 14, 5, 0, 0,
+  0, 0, 3, 13, 0, 0, 0, 0, 0, 0, 12, 7, 0, 0, 0, 3, 4, 13, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 9, 0, 0, 0, 3, 13, 0, 0, 0, 0, 0, 0, 12, 7, 0, 0, 0, 3, 13, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 3, 13, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 6, 0, 0, 12, 11, 0, 0, 0, 9, 0,
+  0, 3, 13, 0, 0, 0, 12, 11, 0, 0, 0, 0, 0, 0, 0, 12, 7, 0, 0, 0, 6, 0, 0, 9, 6,
+  0, 0, 0, 14, 5, 0, 6, 0, 0, 0, 0, 9, 8, 11, 0, 0, 0, 0, 0, 12, 7, 1, 0, 0, 0,
+  6, 0, 0, 14, 5, 11, 0, 0, 0, 14, 5, 6, 0, 0, 0, 0, 14, 5, 8, 10, 10, 10, 10,
+  10, 7, 3, 4, 5, 1, 0, 6, 0, 0, 0, 14, 13, 0, 0, 0, 0, 9, 6, 0, 0, 0, 0, 0, 14,
+  4, 4, 4, 4, 4, 4, 4, 13, 0, 14, 5, 0, 8, 11, 0, 0, 0, 0, 0, 0, 0, 0, 9, 8, 11,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 8, 11, 0, 0, 0, 0, 0, 0,
+  12, 7, 0, 8, 10, 10, 10, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 7, 0, 0, 0, 8,
+  10, 10, 10, 10, 10, 10, 7, 0, 0, 0, 0, 0, 0, 0, 8, 10, 10, 10, 10, 10, 10, 10,
+  10, 10, 7, 0,
+];
