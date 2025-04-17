@@ -1,9 +1,7 @@
-import { meta, shopify, starbucks, tesla } from "../assets/images";
 import {
   car,
   contact,
   css,
-  estate,
   express,
   ftjLogo,
   fullScaleLogo,
@@ -13,15 +11,13 @@ import {
   javascript,
   linkedin,
   mongodb,
-  motion,
-  mui,
   nextjs,
   nodejs,
   pricewise,
   PSITS_LOGO,
   react,
-  redux,
-  sass,
+  school_stscho,
+  school_ucmain,
   snapgram,
   spigotLogo,
   summiz,
@@ -268,6 +264,28 @@ export const experiences = [
       "Enhanced game development experience.",
       "Gained more experience to Advanced Java Programming",
     ],
+  },
+];
+
+export const educationalAttainment = [
+  {
+    school: "University of Cebu - Main Campus",
+    year: "2019-2023",
+    curriculum: "Course: Bachelor of Science in Information Technology (BSIT)",
+    logo: school_ucmain,
+  },
+  {
+    school: "St. Scholastica's Academy - Tabunok",
+    year: "2017-2019",
+    curriculum:
+      "Strand: Science, Technology, Engineering and Mathematics (STEM)",
+    logo: school_stscho,
+  },
+  {
+    school: "St. Scholastica's Academy - Tabunok",
+    year: "2013-2017",
+    curriculum: "Junior High School",
+    logo: school_stscho,
   },
 ];
 

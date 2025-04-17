@@ -1,27 +1,39 @@
 import React from "react";
-import { skills, experiences } from "../constants";
+import { skills, experiences, educationalAttainment } from "../constants";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import CTA from "../components/CTA";
+import { myselfPhoto } from "../assets/icons";
 
 const About = () => {
   return (
     <section className="max-container bg-slate-900 h-full text-white">
-      <h1 className="head-text">
-        Hello, I'm{" "}
-        <span className="green-gradient_text font-semibold drop-shadow">
-          Jayharron Mar Abejar
-        </span>
-      </h1>
-      <div className="mt-5 flex flex-col gap-3 text-slate-500">
-        <p>
-          Software Developer based in Cebu, Philippines, specializing in
-          building high quality web applications with .NET, Flask, and NextJS
-          frameworks.
-        </p>
+      <div className="md:flex block md:gap-4">
+        <div className="w-full h-[250px] md:h-[350px] l md:w-[550px] overflow-hidden">
+          <img
+            className="w-full h-[450px] md:h-full rounded-xl object-cover"
+            src={myselfPhoto}
+          />
+        </div>
+        <div>
+          <h1 className="head-text">
+            Hi, I'm{" "}
+            <span className="green-gradient_text font-semibold drop-shadow">
+              Jayharron Mar Abejar
+            </span>
+          </h1>
+          <div className="mt-5 flex flex-col gap-3 text-slate-500">
+            <p>
+              I'm a Software Developer based in Cebu, Philippines, specializing
+              in building high quality web applications with .NET, Flask, and
+              NextJS frameworks. On my fee time, I also spend some time on
+              working with my Indie Games and Minecraft Plugins/Addons.
+            </p>
+          </div>
+        </div>
       </div>
       <div className="py-10 flex flex-col">
         <h3 className="subhead-text">My Skills</h3>
@@ -71,6 +83,7 @@ const About = () => {
                   boxShadow: "none",
                   backgroundColor: "#141F38",
                 }}
+                className="px-4"
               >
                 <div>
                   <h3
@@ -108,6 +121,26 @@ const About = () => {
             ))}
           </VerticalTimeline>
         </div>
+      </div>
+      <div className="py-16">
+        <h3 className="subhead-text">Education</h3>
+        {/* <div className="mt-5 flex flex-col gap-3 text-slate-500">
+          <p> ... </p>
+        </div> */}
+        {educationalAttainment.map((school) => (
+          <div className="bg-[#141F38] p-4 rounded-md border-b-[6px] border-b-red-400 shadow-md my-4">
+            <div className="flex items-center gap-2">
+              <img className="w-10 rounded-full" src={school.logo} />
+              <h2 className="font-bold text-lg">{school.school}</h2>
+            </div>
+            <div className="px-4 pt-4">
+              <p className="py-1">{school.curriculum}</p>
+              <p>
+                Year: <span className="text-yellow-400">{school.year}</span>
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
       <hr className="border-slate-200" />
       <CTA />
