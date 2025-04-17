@@ -215,7 +215,7 @@ export const experiences = [
       "Developing and maintaining web applications using .NET, React.js, NextJS and other related technologies.",
       "Experienced xUnit, Jest testing tools",
       "Has background in deploying application with Microsoft Azure, DevOps",
-      "Experienced reverse engineering old .NET applications and rewriting them on latest technology possible",
+      "Experienced reverse engineering old .NET applications including old vbscripts and rewriting them on latest technology possible",
     ],
   },
   {
@@ -262,7 +262,7 @@ export const experiences = [
     job_type: "Part-Time | Remote",
     icon: spigotLogo,
     iconBg: "#FFD3BB",
-    date: "Sep 10, 2020 - present",
+    date: "Sep 10, 2020 - Present",
     points: [
       "Experienced building awesome game plugin specific for Minecraft Servers.",
       "Enhanced game development experience.",
