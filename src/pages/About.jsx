@@ -29,7 +29,7 @@ const About = () => {
             <p>
               I'm a Software Developer based in Cebu, Philippines, specializing
               in building high quality web applications with .NET, Flask, and
-              NextJS frameworks. On my fee time, I also spend some time on
+              NextJS frameworks. On my free time, I also spend some time on
               working with my Indie Games and Minecraft Plugins/Addons.
             </p>
           </div>
