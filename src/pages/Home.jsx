@@ -9,7 +9,7 @@ import Allay from "../models/Allay";
 import AmbientScene from "../models/AmbientScene";
 import ProfileCard from "../components/ProfileCard";
 import DragContainer from "../components/draggables/containers/DragContainer";
-import Taskbar from "../components/v2_components/taskbar";
+import Taskbar from "../components/v2_components/Taskbar";
 import DragWindow from "../components/draggables/components/DragWindow";
 import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWindow";
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
