@@ -5,7 +5,7 @@ import { exitIcon, jhlogo, resumeIcon } from "../../assets/icons";
 function Taskbar({
   className = "",
   personalInfoClicked = () => {},
-  resumeInfoClicked = () => {},
+  aboutInfoClicked = () => {},
 }) {
   return (
     <div className={className}>
@@ -16,6 +16,12 @@ function Taskbar({
             className="h-10 w-10 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] p-1 rounded-lg border-cyan-500"
           >
             <img src={jhlogo} />
+          </div>
+          <div
+            onClick={aboutInfoClicked}
+            className="h-10 w-10 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] rounded-lg"
+          >
+            <img src={resumeIcon} />
           </div>
           {/* <div
             onClick={resumeInfoClicked}

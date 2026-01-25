@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 
 function DragWindow({
+  id = "0",
   posX = 0,
   posY = 0,
+  width = "fit",
+  height = "fit",
+  overflow = "hidden",
+  background = null,
   icon = null,
   title = "Drag Window",
   show = true,
   setShow = () => {},
   content = null,
+  active = false,
+  activeTrigger = (e) => {},
 }) {
   const [position, setPosition] = useState({ x: posX, y: posY });
   const [isDragging, setIsDragging] = useState(false);
@@ -19,6 +26,7 @@ function DragWindow({
       x: e.clientX - position.x,
       y: e.clientY - position.y,
     });
+    activeTrigger(id);
   };
 
   const handleMouseMove = (e) => {
@@ -46,7 +54,7 @@ function DragWindow({
 
   return (
     <div
-      className={`absolute w-fit rounded-2xl overflow-hidden shadow-2xlbg-transparent ${
+      className={`${active && "z-[999999]"} absolute rounded-2xl overflow-hidden shadow-2xl bg-transparent ${
         show ? "block" : "hidden"
       }`}
       style={{ left: position.x, top: position.y }}
@@ -65,7 +73,9 @@ function DragWindow({
           x
         </button>
       </div>
-      <div className="p-4 bg-white bg-opacity-10 backdrop-blur-lg drop-shadow-lg">
+      <div
+        className={`p-4 ${background ? background : "bg-white bg-opacity-10 backdrop-blur-lg"} w-${width} h-${height} overflow-${overflow} drop-shadow-lg`}
+      >
         {content ? content : <p>This is the content area of the window.</p>}
       </div>
     </div>

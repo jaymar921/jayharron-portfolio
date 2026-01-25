@@ -14,6 +14,7 @@ import DragWindow from "../components/draggables/components/DragWindow";
 import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWindow";
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
 import { resumeIcon } from "../assets/icons";
+import About from "./About";
 
 // Function to check if the browser is in fullscreen mode
 function isFullscreen() {
@@ -46,6 +47,7 @@ const Home = () => {
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
   const [showResume, setShowResume] = useState(false);
   const [fullScreen, setFullScreen] = useState(isFullscreen());
+  const [activeTrigger, setActiveTrigger] = useState("");
 
   const handleNext = () => {
     let s = currentStage;
@@ -59,10 +61,12 @@ const Home = () => {
 
   const personalInfoClicked = () => {
     setShowPersonalInfo(!showPersonalInfo);
+    setActiveTrigger("social-window");
   };
 
   const resumeInfoClicked = () => {
     setShowResume(!showResume);
+    setActiveTrigger("about-window");
   };
 
   const enterFullSceen = () => {
@@ -109,6 +113,7 @@ const Home = () => {
         />
         <DragContainer>
           <DragWindow
+            id="social-window"
             posX={getScreenCenter(175, 260).x}
             posY={getScreenCenter(175, 260).y}
             show={showPersonalInfo}
@@ -116,15 +121,30 @@ const Home = () => {
             icon={"📚"}
             title="Short Info"
             content={<SocialInfoWindow />}
+            activeTrigger={setActiveTrigger}
+            active={activeTrigger === "social-window"}
           />
           <DragWindow
-            posX={getScreenCenter(175, 260).x}
+            id="about-window"
+            posX={getScreenCenter(totalWidth > 520 ? 510 : 175, 260).x}
             posY={getScreenCenter(175, 260).y}
+            width={totalWidth > 520 ? "[510px]" : "[350px]"}
+            height="[450px]"
+            overflow="scroll"
+            background="bg-slate-800"
             show={showResume}
             setShow={setShowResume}
             icon={<img className="w-4" src={resumeIcon} />}
             title="Jayharron's Resume"
-            content={<ResumeWindow />}
+            activeTrigger={setActiveTrigger}
+            active={activeTrigger === "about-window"}
+            content={
+              <>
+                <div>
+                  <About />
+                </div>
+              </>
+            }
           />
         </DragContainer>
         <Canvas
@@ -216,15 +236,18 @@ const Home = () => {
             />
           </Suspense>
         </Canvas>
-        <button
-          className="z-[999999] absolute bottom-2 left-2 font-minecraft text-slate-300 border-2 border-slate-500 px-2 text-[15px]"
-          onClick={handleEnableDOF}
-        >
-          {DOFEnabled ? "Disable DOF" : "Enable DOF"}
-        </button>
+
+        {totalWidth > 520 && (
+          <button
+            className="z-[999999] absolute bottom-2 left-2 font-minecraft text-slate-300 border-2 border-slate-500 px-2 text-[15px]"
+            onClick={handleEnableDOF}
+          >
+            {DOFEnabled ? "Disable DOF" : "Enable DOF"}
+          </button>
+        )}
         <Taskbar
           personalInfoClicked={personalInfoClicked}
-          resumeInfoClicked={resumeInfoClicked}
+          aboutInfoClicked={resumeInfoClicked}
           className="absolute bottom-0 w-screen flex place-content-center"
         />
       </section>
