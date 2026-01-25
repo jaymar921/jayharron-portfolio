@@ -6,7 +6,7 @@ function DragWindow({
   posY = 0,
   width = "fit",
   height = "fit",
-  overflow = "hidden",
+  overflow = "overflow-hidden",
   background = null,
   icon = null,
   title = "Drag Window",
@@ -37,6 +37,30 @@ function DragWindow({
     });
   };
 
+  const handleTouchStart = (e) => {
+    const touch = e.touches[0];
+    setIsDragging(true);
+    setDragOffset({
+      x: touch.clientX - position.x,
+      y: touch.clientY - position.y,
+    });
+    activeTrigger(id);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    setPosition({
+      x: touch.clientX - dragOffset.x,
+      y: touch.clientY - dragOffset.y,
+    });
+    e.preventDefault();
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
   const handleMouseUp = () => {
     setIsDragging(false);
   };
@@ -45,10 +69,18 @@ function DragWindow({
     if (isDragging) {
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
+
+      document.addEventListener("touchmove", handleTouchMove, {
+        passive: false,
+      });
+      document.addEventListener("touchend", handleTouchEnd);
     }
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
+
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
     };
   }, [isDragging]);
 
@@ -58,9 +90,15 @@ function DragWindow({
         show ? "block" : "hidden"
       }`}
       style={{ left: position.x, top: position.y }}
-      onMouseDown={handleMouseDown}
+      onClick={() => {
+        activeTrigger(id);
+      }}
     >
-      <div className="bg-blue-400 bg-opacity-40 backdrop-blur-lg rounded-t-lg drop-shadow-lg p-2 flex items-center cursor-grabbing">
+      <div
+        onTouchStart={handleTouchStart}
+        onMouseDown={handleMouseDown}
+        className={`bg-blue-400 bg-opacity-40 backdrop-blur-lg rounded-t-lg drop-shadow-lg p-2 flex items-center ${isDragging ? "cursor-grabbing" : "cursor-pointer"}`}
+      >
         {icon && <span className="mr-2">{icon}</span>}
         <span>{title}</span>
         <button
@@ -74,7 +112,7 @@ function DragWindow({
         </button>
       </div>
       <div
-        className={`p-4 ${background ? background : "bg-white bg-opacity-10 backdrop-blur-lg"} w-${width} h-${height} overflow-${overflow} drop-shadow-lg`}
+        className={`p-4 ${background ? background : "bg-white bg-opacity-10 backdrop-blur-lg"} w-${width} h-${height} ${overflow} drop-shadow-lg`}
       >
         {content ? content : <p>This is the content area of the window.</p>}
       </div>

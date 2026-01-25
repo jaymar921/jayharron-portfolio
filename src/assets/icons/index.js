@@ -37,6 +37,8 @@ import school_stscho from "./stscho.png";
 import myselfPhoto from "./me.png";
 import resumeIcon from "./resume.png";
 import exitIcon from "./exitapp.png";
+import projectIcon from "./projecticon.png";
+import medalIcon from "./medal.webp";
 
 export {
   css,
@@ -78,4 +80,6 @@ export {
   myselfPhoto,
   resumeIcon,
   exitIcon,
+  projectIcon,
+  medalIcon,
 };

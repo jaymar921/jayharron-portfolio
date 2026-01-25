@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import MinecraftWorld from "../models/MinecraftWorld";
 import InformationBox from "../components/InformationBox";
@@ -13,8 +13,10 @@ import Taskbar from "../components/v2_components/Taskbar";
 import DragWindow from "../components/draggables/components/DragWindow";
 import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWindow";
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
-import { resumeIcon } from "../assets/icons";
+import { jhlogo, medalIcon, projectIcon } from "../assets/icons";
 import About from "./About";
+import Projects from "./Projects";
+import DragIcon from "../components/draggables/components/DragIcon";
 
 // Function to check if the browser is in fullscreen mode
 function isFullscreen() {
@@ -38,7 +40,7 @@ const Home = () => {
     return { x: centerX, y: centerY };
   };
 
-  const [currentStage, setCurrentStage] = useState(-2); // -1
+  const [currentStage, setCurrentStage] = useState(-1); // -1
   const [worldMoving, setWorldMoving] = useState(true);
   const [worldPosRot, setWorldPosRot] = useState(undefined);
   const [DOFEnabled, enableDOF] = useState(
@@ -46,6 +48,7 @@ const Home = () => {
   );
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
   const [showResume, setShowResume] = useState(false);
+  const [showProject, setShowProject] = useState(false);
   const [fullScreen, setFullScreen] = useState(isFullscreen());
   const [activeTrigger, setActiveTrigger] = useState("");
 
@@ -60,14 +63,25 @@ const Home = () => {
   };
 
   const personalInfoClicked = () => {
-    setShowPersonalInfo(!showPersonalInfo);
+    setShowPersonalInfo(true);
     setActiveTrigger("social-window");
   };
 
   const resumeInfoClicked = () => {
-    setShowResume(!showResume);
+    setShowResume(true);
     setActiveTrigger("about-window");
   };
+
+  const projectInfoClicked = () => {
+    setShowProject(true);
+    setActiveTrigger("project-window");
+  };
+
+  useEffect(() => {
+    setInterval(() => {
+      handleNext();
+    }, 20_000);
+  }, [currentStage]);
 
   const enterFullSceen = () => {
     if (!isFullscreen()) {
@@ -89,30 +103,43 @@ const Home = () => {
     setFullScreen(true);
   };
 
-  if (!fullScreen) {
-    return (
-      <>
-        <div className="w-full h-screen relative overflow-hidden z-[9999] bg-slate-900 flex items-center place-content-center">
-          <div className=" m-auto">
-            <button onClick={enterFullSceen} className="btn cursor-pointer">
-              Start Window
-            </button>
-          </div>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <section className="w-full h-screen relative z-0 overflow-hidden">
-        <InformationBox
+        {!fullScreen && (
+          <div className="w-full h-screen relative overflow-hidden z-[999999999] bg-[rgba(0,0,0,0.8)] flex items-center place-content-center">
+            <div className="text-white m-auto">
+              <p className="py-1">Hello there...</p>
+              <button onClick={enterFullSceen} className="btn cursor-pointer">
+                Start Window
+              </button>
+            </div>
+          </div>
+        )}
+        {/* <InformationBox
           handleNext={handleNext}
           worldMoving={worldMoving}
           currentStage={currentStage}
-        />
+        /> */}
         <DragContainer>
+          <DragIcon
+            key={"icon-1"}
+            posX={20}
+            posY={15}
+            icon={jhlogo}
+            title={"Info"}
+            onDoubleClick={setShowPersonalInfo}
+          />
+          <DragIcon
+            key={"icon-2"}
+            posX={10}
+            posY={85}
+            icon={medalIcon}
+            title={"About"}
+            onDoubleClick={setShowResume}
+          />
           <DragWindow
+            key={"window-1"}
             id="social-window"
             posX={getScreenCenter(175, 260).x}
             posY={getScreenCenter(175, 260).y}
@@ -125,23 +152,47 @@ const Home = () => {
             active={activeTrigger === "social-window"}
           />
           <DragWindow
+            key={"window-2"}
             id="about-window"
             posX={getScreenCenter(totalWidth > 520 ? 510 : 175, 260).x}
             posY={getScreenCenter(175, 260).y}
             width={totalWidth > 520 ? "[510px]" : "[350px]"}
             height="[450px]"
-            overflow="scroll"
+            overflow="overflow-y-scroll"
             background="bg-slate-800"
             show={showResume}
             setShow={setShowResume}
-            icon={<img className="w-4" src={resumeIcon} />}
-            title="Jayharron's Resume"
+            icon={<img className="w-4" src={medalIcon} />}
+            title="About Me"
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "about-window"}
             content={
               <>
                 <div>
                   <About />
+                </div>
+              </>
+            }
+          />
+          <DragWindow
+            key={"window-3"}
+            id="project-window"
+            posX={getScreenCenter(totalWidth > 520 ? 510 : 175, 260).x}
+            posY={getScreenCenter(175, 260).y}
+            width={totalWidth > 520 ? "[510px]" : "[350px]"}
+            height="[450px]"
+            overflow="overflow-y-scroll"
+            background="bg-slate-800"
+            show={showProject}
+            setShow={setShowProject}
+            icon={<img className="w-4" src={projectIcon} />}
+            title="My Projects"
+            activeTrigger={setActiveTrigger}
+            active={activeTrigger === "project-window"}
+            content={
+              <>
+                <div>
+                  <Projects />
                 </div>
               </>
             }
@@ -248,6 +299,7 @@ const Home = () => {
         <Taskbar
           personalInfoClicked={personalInfoClicked}
           aboutInfoClicked={resumeInfoClicked}
+          projectInfoClicked={projectInfoClicked}
           className="absolute bottom-0 w-screen flex place-content-center"
         />
       </section>

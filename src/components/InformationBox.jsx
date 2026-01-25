@@ -4,7 +4,7 @@ import { DownArrow } from "../assets/vectors";
 import { Link } from "react-router-dom";
 
 const Content = {
-  "-2": {},
+  "-2": { text: "", more_info: "", link: "" },
   "-1": {
     text: (
       <p className="leading-none pb-2">

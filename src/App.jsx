@@ -9,7 +9,7 @@ const App = () => {
   return (
     <main className="bg-slate-900 h-full">
       <Router>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/graphic2d" element={<Graphic2D />} />
