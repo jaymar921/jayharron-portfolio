@@ -1,6 +1,6 @@
 import React from "react";
 
-import { jhlogo, resumeIcon } from "../../assets/icons";
+import { exitIcon, jhlogo, resumeIcon } from "../../assets/icons";
 
 function Taskbar({
   className = "",

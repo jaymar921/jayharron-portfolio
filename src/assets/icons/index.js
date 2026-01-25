@@ -36,6 +36,7 @@ import school_ucmain from "./ucmain.jpeg";
 import school_stscho from "./stscho.png";
 import myselfPhoto from "./me.png";
 import resumeIcon from "./resume.png";
+import exitIcon from "./exitapp.png";
 
 export {
   css,
@@ -76,4 +77,5 @@ export {
   school_ucmain,
   myselfPhoto,
   resumeIcon,
+  exitIcon,
 };

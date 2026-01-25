@@ -15,6 +15,16 @@ import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWind
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
 import { resumeIcon } from "../assets/icons";
 
+// Function to check if the browser is in fullscreen mode
+function isFullscreen() {
+  return !!(
+    document.fullscreenElement || // Standard
+    document.webkitFullscreenElement || // Safari
+    document.mozFullScreenElement || // Firefox
+    document.msFullscreenElement // IE/Edge (old)
+  );
+}
+
 const Home = () => {
   const totalWidth = Math.max(
     document.documentElement.scrollWidth,
@@ -35,6 +45,7 @@ const Home = () => {
   );
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
   const [showResume, setShowResume] = useState(false);
+  const [fullScreen, setFullScreen] = useState(isFullscreen());
 
   const handleNext = () => {
     let s = currentStage;
@@ -54,6 +65,40 @@ const Home = () => {
     setShowResume(!showResume);
   };
 
+  const enterFullSceen = () => {
+    if (!isFullscreen()) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        // Safari
+        document.documentElement.webkitRequestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        // Firefox
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.msRequestFullscreen) {
+        // IE/Edge
+        document.documentElement.msRequestFullscreen();
+      } else {
+        console.warn("Fullscreen API is not supported by this browser.");
+      }
+    }
+    setFullScreen(true);
+  };
+
+  if (!fullScreen) {
+    return (
+      <>
+        <div className="w-full h-screen relative overflow-hidden z-[99999999] flex items-center place-content-center">
+          <div className=" m-auto">
+            <button onClick={enterFullSceen} className="btn cursor-pointer">
+              Start Window
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <section className="w-full h-screen relative z-0 overflow-hidden">
@@ -65,7 +110,7 @@ const Home = () => {
         <DragContainer>
           <DragWindow
             posX={getScreenCenter(175, 290).x}
-            posY={getScreenCenter(175, 290).y}
+            posY={getScreenCenter(175, 240).y}
             show={showPersonalInfo}
             setShow={setShowPersonalInfo}
             icon={"📚"}
@@ -74,7 +119,7 @@ const Home = () => {
           />
           <DragWindow
             posX={getScreenCenter(175, 290).x}
-            posY={getScreenCenter(175, 290).y}
+            posY={getScreenCenter(175, 240).y}
             show={showResume}
             setShow={setShowResume}
             icon={<img className="w-4" src={resumeIcon} />}
