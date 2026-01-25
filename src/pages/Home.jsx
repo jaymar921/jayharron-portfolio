@@ -88,7 +88,7 @@ const Home = () => {
   if (!fullScreen) {
     return (
       <>
-        <div className="w-full h-screen relative overflow-hidden z-[99999999] flex items-center place-content-center">
+        <div className="w-full h-screen relative overflow-hidden z-[9999] bg-slate-900 flex items-center place-content-center">
           <div className=" m-auto">
             <button onClick={enterFullSceen} className="btn cursor-pointer">
               Start Window
@@ -109,8 +109,8 @@ const Home = () => {
         />
         <DragContainer>
           <DragWindow
-            posX={getScreenCenter(175, 290).x}
-            posY={getScreenCenter(175, 240).y}
+            posX={getScreenCenter(175, 260).x}
+            posY={getScreenCenter(175, 260).y}
             show={showPersonalInfo}
             setShow={setShowPersonalInfo}
             icon={"📚"}
@@ -118,8 +118,8 @@ const Home = () => {
             content={<SocialInfoWindow />}
           />
           <DragWindow
-            posX={getScreenCenter(175, 290).x}
-            posY={getScreenCenter(175, 240).y}
+            posX={getScreenCenter(175, 260).x}
+            posY={getScreenCenter(175, 260).y}
             show={showResume}
             setShow={setShowResume}
             icon={<img className="w-4" src={resumeIcon} />}
