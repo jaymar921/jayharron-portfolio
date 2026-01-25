@@ -35,7 +35,7 @@ const Bee = ({ worldPosRot, BeePosition, ...props }) => {
       BeeRef.current.rotation.x = BeePosition.rotation[0];
       BeeRef.current.rotation.y = BeePosition.rotation[1];
       BeeRef.current.rotation.z = BeePosition.rotation[2];
-    }else if(!BeePosition){
+    } else if (!BeePosition) {
       const time = clock.elapsedTime; // Get the elapsed time
       const oscX = Math.sin(time * 0.5) * 0.1; // Adjust frequency and amplitude for X-axis oscillation
       const oscY = Math.cos(time * 0.4) * 0.1; // Adjust frequency and amplitude for Y-axis oscillation
