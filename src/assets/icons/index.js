@@ -35,6 +35,7 @@ import spigotLogo from "./spigot.png";
 import school_ucmain from "./ucmain.jpeg";
 import school_stscho from "./stscho.png";
 import myselfPhoto from "./me.png";
+import resumeIcon from "./resume.png";
 
 export {
   css,
@@ -74,4 +75,5 @@ export {
   school_stscho,
   school_ucmain,
   myselfPhoto,
+  resumeIcon,
 };

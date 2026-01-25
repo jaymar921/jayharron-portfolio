@@ -27,10 +27,13 @@ const About = () => {
           </h1>
           <div className="mt-5 flex flex-col gap-3 text-slate-500">
             <p>
-              I'm a Software Developer based in Cebu, Philippines, specializing
-              in building high quality web applications with .NET, Flask, and
-              NextJS frameworks. On my free time, I also spend some time on
-              working with my Indie Games and Minecraft Plugins/Addons.
+              I am a Software Developer based in Cebu, Philippines, with three
+              years of experience building high-quality web applications using
+              .NET, React.js, and Next.js. I also have solid experience working
+              with Microsoft Azure DevOps, including setting up CI/CD pipelines,
+              managing deployments, and configuring Key Vaults. I am open to
+              onsite opportunities and equally comfortable working in a remote
+              setup
             </p>
           </div>
         </div>

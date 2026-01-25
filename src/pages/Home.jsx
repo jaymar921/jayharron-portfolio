@@ -8,18 +8,33 @@ import { AnimalPositions } from "../constants";
 import Allay from "../models/Allay";
 import AmbientScene from "../models/AmbientScene";
 import ProfileCard from "../components/ProfileCard";
+import DragContainer from "../components/draggables/containers/DragContainer";
+import Taskbar from "../components/v2_components/taskbar";
+import DragWindow from "../components/draggables/components/DragWindow";
+import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWindow";
+import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
+import { resumeIcon } from "../assets/icons";
 
 const Home = () => {
   const totalWidth = Math.max(
     document.documentElement.scrollWidth,
-    window.innerWidth
+    window.innerWidth,
   );
-  const [currentStage, setCurrentStage] = useState(-1);
+
+  const getScreenCenter = (x = 200, y = 150) => {
+    const centerX = window.innerWidth / 2 - x;
+    const centerY = window.innerHeight / 2 - y;
+    return { x: centerX, y: centerY };
+  };
+
+  const [currentStage, setCurrentStage] = useState(-2); // -1
   const [worldMoving, setWorldMoving] = useState(true);
   const [worldPosRot, setWorldPosRot] = useState(undefined);
   const [DOFEnabled, enableDOF] = useState(
-    /*totalWidth > 520 ? true : false*/ false
+    /* totalWidth > 520 ? true :  false*/ false,
   );
+  const [showPersonalInfo, setShowPersonalInfo] = useState(false);
+  const [showResume, setShowResume] = useState(false);
 
   const handleNext = () => {
     let s = currentStage;
@@ -30,14 +45,43 @@ const Home = () => {
   const handleEnableDOF = () => {
     enableDOF(!DOFEnabled);
   };
+
+  const personalInfoClicked = () => {
+    setShowPersonalInfo(!showPersonalInfo);
+  };
+
+  const resumeInfoClicked = () => {
+    setShowResume(!showResume);
+  };
+
   return (
     <>
-      <section className="w-full h-screen relative z-0">
+      <section className="w-full h-screen relative z-0 overflow-hidden">
         <InformationBox
           handleNext={handleNext}
           worldMoving={worldMoving}
           currentStage={currentStage}
         />
+        <DragContainer>
+          <DragWindow
+            posX={getScreenCenter(175, 290).x}
+            posY={getScreenCenter(175, 290).y}
+            show={showPersonalInfo}
+            setShow={setShowPersonalInfo}
+            icon={"📚"}
+            title="Short Info"
+            content={<SocialInfoWindow />}
+          />
+          <DragWindow
+            posX={getScreenCenter(175, 290).x}
+            posY={getScreenCenter(175, 290).y}
+            show={showResume}
+            setShow={setShowResume}
+            icon={<img className="w-4" src={resumeIcon} />}
+            title="Jayharron's Resume"
+            content={<ResumeWindow />}
+          />
+        </DragContainer>
         <Canvas
           className="w-full h-full bg-transparent"
           camera={{ near: 0.1, far: 20, fov: 80, focus: 200 }}
@@ -128,11 +172,16 @@ const Home = () => {
           </Suspense>
         </Canvas>
         <button
-          className="absolute bottom-2 left-2 font-minecraft text-slate-300 border-2 border-slate-500 px-2 text-[15px]"
+          className="z-[999999] absolute bottom-2 left-2 font-minecraft text-slate-300 border-2 border-slate-500 px-2 text-[15px]"
           onClick={handleEnableDOF}
         >
           {DOFEnabled ? "Disable DOF" : "Enable DOF"}
         </button>
+        <Taskbar
+          personalInfoClicked={personalInfoClicked}
+          resumeInfoClicked={resumeInfoClicked}
+          className="absolute bottom-0 w-screen flex place-content-center"
+        />
       </section>
     </>
   );

@@ -50,7 +50,7 @@ const MinecraftWorld = ({
           positions[0].position,
           positions[4].rotation,
           positions[0].rotation,
-          EaseValue
+          EaseValue,
         );
         newPosition = position;
         newRotation = rotation;
@@ -60,7 +60,7 @@ const MinecraftWorld = ({
           positions[1].position,
           positions[0].rotation,
           positions[1].rotation,
-          EaseValue
+          EaseValue,
         );
         newPosition = position;
         newRotation = rotation;
@@ -70,7 +70,7 @@ const MinecraftWorld = ({
           positions[2].position,
           positions[1].rotation,
           positions[2].rotation,
-          EaseValue
+          EaseValue,
         );
         newPosition = position;
         newRotation = rotation;
@@ -80,7 +80,7 @@ const MinecraftWorld = ({
           positions[3].position,
           positions[2].rotation,
           positions[3].rotation,
-          EaseValue
+          EaseValue,
         );
         newPosition = position;
         newRotation = rotation;
@@ -90,7 +90,17 @@ const MinecraftWorld = ({
           positions[0].position,
           positions[3].rotation,
           positions[0].rotation,
-          EaseValue
+          EaseValue,
+        );
+        newPosition = position;
+        newRotation = rotation;
+      } else if (currentStage === -2) {
+        const { position, rotation } = smoothTransition(
+          positions[3].position,
+          positions[0].position,
+          positions[3].rotation,
+          positions[0].rotation,
+          EaseValue,
         );
         newPosition = position;
         newRotation = rotation;

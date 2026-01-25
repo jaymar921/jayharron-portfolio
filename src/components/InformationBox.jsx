@@ -4,10 +4,12 @@ import { DownArrow } from "../assets/vectors";
 import { Link } from "react-router-dom";
 
 const Content = {
+  "-2": {},
   "-1": {
     text: (
       <p className="leading-none pb-2">
-        Hi, I'm <br /><a className="text-green-700">Jayharron Abejar</a>
+        Hi, I'm <br />
+        <a className="text-green-700">Jayharron Abejar</a>
       </p>
     ),
     more_info: (
@@ -49,7 +51,8 @@ const Content = {
   3: {
     text: (
       <p className="leading-none pb-2">
-        Hi, I'm <br /><a className="text-green-700">Jayharron Abejar</a>
+        Hi, I'm <br />
+        <a className="text-green-700">Jayharron Abejar</a>
       </p>
     ),
     more_info: (
@@ -77,6 +80,9 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
       setInformation(Content[currentStage]);
     }, 1000);
   }, [currentStage]);
+  if (currentStage === -2) {
+    return <></>;
+  }
   return (
     <div
       className={`ease-in-out duration-1000 absolute top-[40%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20 items-center justify-center grid grid-rows-2 ${
@@ -85,7 +91,10 @@ const InformationBox = ({ currentStage, worldMoving, handleNext }) => {
     >
       <div>
         <div className="w-[350px] md:w-[500px] fit-content overflow-hidden font-minecraft">
-          <img className="top-0 w-[350px] md:w-[500px]" src={ImageMapTemplate} />
+          <img
+            className="top-0 w-[350px] md:w-[500px]"
+            src={ImageMapTemplate}
+          />
           <div className="absolute top-0 flex text-center justify-center w-[350px] md:w-[500px] h-full text-[#825419]">
             <div className="relative w-full font-sm text-[22px] md:text-[35px] p-8 md:p-10">
               {Information.text}

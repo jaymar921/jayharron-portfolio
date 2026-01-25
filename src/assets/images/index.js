@@ -6,6 +6,7 @@ import shopify from "./shopify.png";
 import starbucks from "./starbucks.png";
 import tesla from "./tesla.png";
 import logo from "./logo.svg";
+import jayPhoto from "./1768885099268.png";
 
 export {
   hero,
@@ -16,4 +17,5 @@ export {
   logo,
   ImageMapTemplate,
   ImageChain,
+  jayPhoto,
 };
