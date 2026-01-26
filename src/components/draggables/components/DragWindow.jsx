@@ -15,10 +15,32 @@ function DragWindow({
   content = null,
   active = false,
   activeTrigger = (e) => {},
+  expandable = true,
 }) {
   const [position, setPosition] = useState({ x: posX, y: posY });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [fixedSize, setFixedSize] = useState({
+    width,
+    height,
+    x: posX,
+    y: posY,
+  });
+  const [size, setSize] = useState({ width, height });
+  const [maximize, setMaximize] = useState(false);
+
+  const resize = () => {
+    if (maximize) {
+      //reset back
+      setSize({ width: fixedSize.width, height: fixedSize.height });
+      setPosition({ x: fixedSize.x, y: fixedSize.y });
+      setMaximize(false);
+    } else {
+      setSize({ width: "100vw", height: "100vh" });
+      setPosition({ x: 0, y: 0 });
+      setMaximize(true);
+    }
+  };
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -86,7 +108,7 @@ function DragWindow({
 
   return (
     <div
-      className={`${active && "z-[999999]"} absolute rounded-2xl overflow-hidden shadow-2xl bg-transparent ${
+      className={`${active && "z-[999999]"} absolute rounded-md overflow-hidden shadow-2xl bg-transparent border-[1px] border-[rgba(255,255,255,0.5)] ${
         show ? "block" : "hidden"
       }`}
       style={{ left: position.x, top: position.y }}
@@ -97,22 +119,39 @@ function DragWindow({
       <div
         onTouchStart={handleTouchStart}
         onMouseDown={handleMouseDown}
-        className={`bg-blue-400 bg-opacity-40 backdrop-blur-lg rounded-t-lg drop-shadow-lg p-2 flex items-center ${isDragging ? "cursor-grabbing" : "cursor-pointer"}`}
+        className={`bg-blue-400 bg-opacity-40 backdrop-blur-lg drop-shadow-lg p-2 flex items-center ${isDragging ? "cursor-grabbing" : "cursor-pointer"}`}
       >
         {icon && <span className="mr-2">{icon}</span>}
         <span>{title}</span>
-        <button
-          className="ml-auto cursor-pointer bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
-          onClick={(e) => {
-            e.stopPropagation();
-            setShow(false);
-          }}
-        >
-          x
-        </button>
+
+        <div className="w-auto m-auto mr-0 flex gap-2">
+          {expandable && (
+            <button
+              className="ml-auto cursor-pointer bg-yellow-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
+              onClick={resize}
+            >
+              {maximize ? (
+                <i class="fa-solid fa-minimize" />
+              ) : (
+                <i class="fa-solid fa-maximize" />
+              )}
+            </button>
+          )}
+          <button
+            className="ml-auto cursor-pointer bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShow(false);
+              if (maximize) resize();
+            }}
+          >
+            <i className="fa-solid fa-xmark" />
+          </button>
+        </div>
       </div>
       <div
-        className={`p-4 ${background ? background : "bg-white bg-opacity-10 backdrop-blur-lg"} w-${width} h-${height} ${overflow} drop-shadow-lg`}
+        className={`p-4 ${background ? background : "bg-white bg-opacity-10 backdrop-blur-lg"} ${overflow} drop-shadow-lg`}
+        style={{ width: size.width, height: size.height }}
       >
         {content ? content : <p>This is the content area of the window.</p>}
       </div>
