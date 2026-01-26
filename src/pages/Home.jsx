@@ -150,14 +150,15 @@ const Home = () => {
             content={<SocialInfoWindow />}
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "social-window"}
+            expandable={false}
           />
           <DragWindow
             key={"window-2"}
             id="about-window"
-            posX={getScreenCenter(totalWidth > 520 ? 510 : 175, 260).x}
+            posX={getScreenCenter(totalWidth > 720 ? 360 : 175, 260).x}
             posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 520 ? "[510px]" : "[350px]"}
-            height="[450px]"
+            width={totalWidth > 720 ? "720px" : "350px"}
+            height="450px"
             overflow="overflow-y-scroll"
             background="bg-slate-800"
             show={showResume}
@@ -177,10 +178,10 @@ const Home = () => {
           <DragWindow
             key={"window-3"}
             id="project-window"
-            posX={getScreenCenter(totalWidth > 520 ? 510 : 175, 260).x}
+            posX={getScreenCenter(totalWidth > 720 ? 360 : 175, 260).x}
             posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 520 ? "[510px]" : "[350px]"}
-            height="[450px]"
+            width={totalWidth > 720 ? "720px" : "350px"}
+            height="450px"
             overflow="overflow-y-scroll"
             background="bg-slate-800"
             show={showProject}
