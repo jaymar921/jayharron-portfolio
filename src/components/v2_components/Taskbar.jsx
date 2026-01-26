@@ -16,7 +16,7 @@ function Taskbar({
 }) {
   return (
     <div className={className}>
-      <div className="z-[99999999] h-20 w-[300px] bg-white bg-opacity-10 backdrop-blur-lg rounded-t-xl drop-shadow-lg">
+      <div className="z-[99999999] h-20 w-[300px] bg-white bg-opacity-10 backdrop-blur-lg rounded-t-xl drop-shadow-lg border-[1px] border-[rgba(255,255,255,0.5)] border-b-0">
         <div className="grid grid-cols-6 gap-16 px-4 h-[100%]">
           <div
             onClick={personalInfoClicked}
