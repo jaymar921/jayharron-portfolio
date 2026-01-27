@@ -49,6 +49,7 @@ const Home = () => {
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
   const [showResume, setShowResume] = useState(false);
   const [showProject, setShowProject] = useState(false);
+  const [showCE3, setShowCE3] = useState(false);
   const [fullScreen, setFullScreen] = useState(isFullscreen());
   const [activeTrigger, setActiveTrigger] = useState("");
 
@@ -75,6 +76,11 @@ const Home = () => {
   const projectInfoClicked = () => {
     setShowProject(true);
     setActiveTrigger("project-window");
+  };
+
+  const ce3Clicked = () => {
+    setShowCE3(true);
+    setActiveTrigger("ce3-window");
   };
 
   useEffect(() => {
@@ -106,7 +112,7 @@ const Home = () => {
   return (
     <>
       <section className="w-full h-screen relative z-0 overflow-hidden">
-        {!fullScreen && (
+        {/* {!fullScreen && (
           <div className="w-full h-screen relative overflow-hidden z-[999999999] bg-[rgba(0,0,0,0.8)] flex items-center place-content-center">
             <div className="text-white m-auto">
               <p className="py-1">Hello there...</p>
@@ -115,7 +121,7 @@ const Home = () => {
               </button>
             </div>
           </div>
-        )}
+        )} */}
         {/* <InformationBox
           handleNext={handleNext}
           worldMoving={worldMoving}
@@ -137,6 +143,16 @@ const Home = () => {
             icon={medalIcon}
             title={"About"}
             onDoubleClick={setShowResume}
+          />
+          <DragIcon
+            key={"icon-3"}
+            posX={15}
+            posY={155}
+            icon={
+              "https://jaymar921.github.io/jayharronabejar/assets/images/ce3.png"
+            }
+            title={"CE 3"}
+            onDoubleClick={ce3Clicked}
           />
           <DragWindow
             key={"window-1"}
@@ -194,6 +210,32 @@ const Home = () => {
               <>
                 <div>
                   <Projects />
+                </div>
+              </>
+            }
+          />
+          <DragWindow
+            key={"window-4"}
+            id="ce3-window"
+            posX={getScreenCenter(totalWidth > 720 ? 360 : 175, 260).x}
+            posY={getScreenCenter(175, 260).y}
+            width={totalWidth > 720 ? "720px" : "350px"}
+            height="450px"
+            overflow="overflow-y-scroll"
+            background="bg-slate-800"
+            show={showCE3}
+            setShow={setShowCE3}
+            icon={<img className="w-4" src={projectIcon} />}
+            title="Custom Enchants 3"
+            activeTrigger={setActiveTrigger}
+            active={activeTrigger === "ce3-window"}
+            content={
+              <>
+                <div className="h-[100%]">
+                  <iframe
+                    className="w-full h-[100%]"
+                    src="https://jhprojects.vercel.app/ce3"
+                  />
                 </div>
               </>
             }
