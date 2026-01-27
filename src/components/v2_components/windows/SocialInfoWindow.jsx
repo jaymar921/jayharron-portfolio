@@ -22,7 +22,7 @@ function SocialInfoWindow() {
           </div>
         </div>
         <hr className="mt-4 mb-2" />
-        <p className="px-2 text-sm">
+        <p className="px-2 text-sm text-justify">
           Born and raised in the Philippines, I'm a Software Engineer serving
           clients in the United States while working remotely from home. Beyond
           tech, I'm a dedicated dividend investor with a diversified portfolio

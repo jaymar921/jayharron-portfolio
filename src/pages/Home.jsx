@@ -112,7 +112,7 @@ const Home = () => {
   return (
     <>
       <section className="w-full h-screen relative z-0 overflow-hidden">
-        {!fullScreen && (
+        {/* {!fullScreen && (
           <div className="w-full h-screen relative overflow-hidden z-[999999999] bg-[rgba(0,0,0,0.8)] flex items-center place-content-center">
             <div className="text-white m-auto">
               <p className="py-1">Hello there...</p>
@@ -121,7 +121,7 @@ const Home = () => {
               </button>
             </div>
           </div>
-        )}
+        )} */}
         {/* <InformationBox
           handleNext={handleNext}
           worldMoving={worldMoving}
@@ -157,13 +157,17 @@ const Home = () => {
           <DragWindow
             key={"window-1"}
             id="social-window"
-            posX={getScreenCenter(175, 260).x}
-            posY={getScreenCenter(175, 260).y}
+            posX={getScreenCenter(168, 300).x}
+            posY={getScreenCenter(168, 300).y}
             show={showPersonalInfo}
             setShow={setShowPersonalInfo}
             icon={"📚"}
             title="Short Info"
-            content={<SocialInfoWindow />}
+            content={
+              <div className="p-2">
+                <SocialInfoWindow />
+              </div>
+            }
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "social-window"}
             expandable={false}
