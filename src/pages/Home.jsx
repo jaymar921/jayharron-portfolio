@@ -107,6 +107,7 @@ const Home = () => {
       }
     }
     setFullScreen(true);
+    personalInfoClicked();
   };
 
   return (
