@@ -164,10 +164,10 @@ const Home = () => {
           />
           <DragIcon
             key={"icon-4"}
-            posX={15}
+            posX={13}
             posY={225}
             icon={"https://avatars.githubusercontent.com/u/259235313?s=64&v=4"}
-            title={"IP"}
+            title={"IP inc"}
             onDoubleClick={illuminaryPeakClicked}
           />
           <DragWindow
