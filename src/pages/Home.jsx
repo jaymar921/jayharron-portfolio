@@ -17,6 +17,7 @@ import { jhlogo, medalIcon, projectIcon } from "../assets/icons";
 import About from "./About";
 import Projects from "./Projects";
 import DragIcon from "../components/draggables/components/DragIcon";
+import { win11BG } from "../assets/images";
 
 // Function to check if the browser is in fullscreen mode
 function isFullscreen() {
@@ -41,8 +42,8 @@ const Home = () => {
   };
 
   const [currentStage, setCurrentStage] = useState(-1); // -1
-  const [worldMoving, setWorldMoving] = useState(true);
-  const [worldPosRot, setWorldPosRot] = useState(undefined);
+  // const [worldMoving, setWorldMoving] = useState(true);
+  // const [worldPosRot, setWorldPosRot] = useState(undefined);
   const [DOFEnabled, enableDOF] = useState(
     /* totalWidth > 520 ? true :  false*/ false,
   );
@@ -93,7 +94,7 @@ const Home = () => {
     setInterval(() => {
       handleNext();
     }, 20_000);
-  }, [currentStage]);
+  }, [currentStage, handleNext]);
 
   const enterFullSceen = () => {
     if (!isFullscreen()) {
@@ -263,9 +264,9 @@ const Home = () => {
           <DragWindow
             key={"window-5"}
             id="illuminary-peak-window"
-            posX={getScreenCenter(totalWidth > 720 ? 360 : 175, 260).x}
+            posX={getScreenCenter(totalWidth > 720 ? 360 : 200, 260).x}
             posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 720 ? "720px" : "350px"}
+            width={totalWidth > 720 ? "720px" : "390px"}
             height="450px"
             overflow="overflow-y-scroll"
             background="bg-slate-800"
@@ -377,19 +378,25 @@ const Home = () => {
           </Suspense>
         </Canvas> */}
 
-        {totalWidth > 520 && (
+        {/* {totalWidth > 520 && (
           <button
             className="z-[999999] absolute bottom-2 left-2 font-minecraft text-slate-300 border-2 border-slate-500 px-2 text-[15px]"
             onClick={handleEnableDOF}
           >
             {DOFEnabled ? "Disable DOF" : "Enable DOF"}
           </button>
-        )}
+        )} */}
         <Taskbar
           personalInfoClicked={personalInfoClicked}
           aboutInfoClicked={resumeInfoClicked}
           projectInfoClicked={projectInfoClicked}
           className="absolute bottom-0 w-screen flex place-content-center"
+        />
+        {/* Background */}
+        <div className="fixed top-0  w-screen h-screen z-[-1]" />
+        <div
+          className={`fixed left-0 top-0 bg-cover bg-center w-screen h-screen z-[-2]`}
+          style={{ backgroundImage: `url('${win11BG}')` }}
         />
       </section>
     </>
