@@ -7,6 +7,7 @@ import starbucks from "./starbucks.png";
 import tesla from "./tesla.png";
 import logo from "./logo.svg";
 import jayPhoto from "./1768885099268.png";
+import win11BG from "./win11-purple-img.jpg";
 
 export {
   hero,
@@ -18,4 +19,5 @@ export {
   ImageMapTemplate,
   ImageChain,
   jayPhoto,
+  win11BG,
 };
