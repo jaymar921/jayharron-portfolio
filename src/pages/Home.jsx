@@ -50,6 +50,7 @@ const Home = () => {
   const [showResume, setShowResume] = useState(false);
   const [showProject, setShowProject] = useState(false);
   const [showCE3, setShowCE3] = useState(false);
+  const [showIP, setShowIP] = useState(false);
   const [fullScreen, setFullScreen] = useState(isFullscreen());
   const [activeTrigger, setActiveTrigger] = useState("");
 
@@ -81,6 +82,11 @@ const Home = () => {
   const ce3Clicked = () => {
     setShowCE3(true);
     setActiveTrigger("ce3-window");
+  };
+
+  const illuminaryPeakClicked = () => {
+    setShowIP(true);
+    setActiveTrigger("illuminary-peak-window");
   };
 
   useEffect(() => {
@@ -154,6 +160,14 @@ const Home = () => {
             }
             title={"CE 3"}
             onDoubleClick={ce3Clicked}
+          />
+          <DragIcon
+            key={"icon-4"}
+            posX={15}
+            posY={225}
+            icon={"https://avatars.githubusercontent.com/u/259235313?s=64&v=4"}
+            title={"IP"}
+            onDoubleClick={illuminaryPeakClicked}
           />
           <DragWindow
             key={"window-1"}
@@ -245,8 +259,35 @@ const Home = () => {
               </>
             }
           />
+
+          <DragWindow
+            key={"window-5"}
+            id="illuminary-peak-window"
+            posX={getScreenCenter(totalWidth > 720 ? 360 : 175, 260).x}
+            posY={getScreenCenter(175, 260).y}
+            width={totalWidth > 720 ? "720px" : "350px"}
+            height="450px"
+            overflow="overflow-y-scroll"
+            background="bg-slate-800"
+            show={showIP}
+            setShow={setShowIP}
+            icon={<img className="w-4" src={projectIcon} />}
+            title="Illuminary Peak, Inc."
+            activeTrigger={setActiveTrigger}
+            active={activeTrigger === "illuminary-peak-window"}
+            content={
+              <>
+                <div className="h-[100%]">
+                  <iframe
+                    className="w-full h-[100%]"
+                    src="https://illuminary-peak.vercel.app/"
+                  />
+                </div>
+              </>
+            }
+          />
         </DragContainer>
-        <Canvas
+        {/* <Canvas
           className="w-full h-full bg-transparent"
           camera={{ near: 0.1, far: 20, fov: 80, focus: 200 }}
           style={{ backgroundColor: "#171B21" }}
@@ -334,7 +375,7 @@ const Home = () => {
               setWorldPosRot={setWorldPosRot}
             />
           </Suspense>
-        </Canvas>
+        </Canvas> */}
 
         {totalWidth > 520 && (
           <button
