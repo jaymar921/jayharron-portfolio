@@ -17,7 +17,7 @@ function SocialInfoWindow() {
               Full Stack .NET / React JS
             </h1>
             <h1 className="text-sm text-center text-green-400 font-bold">
-              Software Developer
+              Software Engineer
             </h1>
           </div>
         </div>

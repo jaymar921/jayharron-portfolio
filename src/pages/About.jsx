@@ -27,7 +27,7 @@ const About = () => {
           </h1>
           <div className="mt-5 flex flex-col gap-3 text-slate-500">
             <p>
-              I am a Software Developer based in Cebu, Philippines, with three
+              I am a Software Engineer based in Cebu, Philippines, with three
               years of experience building high-quality web applications using
               .NET, React.js, and Next.js. I also have solid experience working
               with Microsoft Azure DevOps, including setting up CI/CD pipelines,
