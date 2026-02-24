@@ -1,18 +1,18 @@
-import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useEffect, useState } from "react";
-import Loader from "../components/Loader";
-import MinecraftWorld from "../models/MinecraftWorld";
-import InformationBox from "../components/InformationBox";
-import Bee from "../models/Bee";
-import { AnimalPositions } from "../constants";
-import Allay from "../models/Allay";
-import AmbientScene from "../models/AmbientScene";
-import ProfileCard from "../components/ProfileCard";
+//import { Canvas } from "@react-three/fiber";
+import React, { /*Suspense,*/ useEffect, useState } from "react";
+// import Loader from "../components/Loader";
+// import MinecraftWorld from "../models/MinecraftWorld";
+// import InformationBox from "../components/InformationBox";
+// import Bee from "../models/Bee";
+// import { AnimalPositions } from "../constants";
+// import Allay from "../models/Allay";
+// import AmbientScene from "../models/AmbientScene";
+// import ProfileCard from "../components/ProfileCard";
 import DragContainer from "../components/draggables/containers/DragContainer";
 import Taskbar from "../components/v2_components/Taskbar";
 import DragWindow from "../components/draggables/components/DragWindow";
 import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWindow";
-import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
+// import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
 import { jhlogo, medalIcon, projectIcon } from "../assets/icons";
 import About from "./About";
 import Projects from "./Projects";
@@ -156,7 +156,7 @@ const Home = () => {
           />
           <DragIcon
             key={"icon-3"}
-            posX={15}
+            posX={13}
             posY={155}
             icon={
               "https://jaymar921.github.io/jayharronabejar/assets/images/ce3.png"
@@ -164,14 +164,14 @@ const Home = () => {
             title={"CE 3"}
             onDoubleClick={ce3Clicked}
           />
-          {/* <DragIcon
+          <DragIcon
             key={"icon-4"}
             posX={13}
             posY={225}
             icon={"https://avatars.githubusercontent.com/u/259235313?s=64&v=4"}
-            title={"IP inc"}
+            title={"IP Inc"}
             onDoubleClick={illuminaryPeakClicked}
-          /> */}
+          />
           <DragWindow
             key={"window-1"}
             id="social-window"
@@ -266,10 +266,10 @@ const Home = () => {
           <DragWindow
             key={"window-5"}
             id="illuminary-peak-window"
-            posX={getScreenCenter(totalWidth > 720 ? 360 : 200, 260).x}
+            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
             posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 720 ? "720px" : "390px"}
-            height="450px"
+            width={totalWidth > 1080 ? "1080px" : "350px"}
+            height={totalWidth > 1080 ? "620px" : "450px"}
             overflow="overflow-y-scroll"
             background="bg-slate-800"
             show={showIP}
