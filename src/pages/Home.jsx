@@ -122,10 +122,12 @@ const Home = () => {
       <section className="w-full h-screen relative z-0 overflow-hidden">
         {!fullScreen && (
           <div className="w-full h-screen relative overflow-hidden z-[999999999] bg-[rgba(0,0,0,0.8)] flex items-center place-content-center">
-            <div className="text-white m-auto">
-              <p className="py-1">Hello there...</p>
+            <div className="text-white m-auto text-center">
+              <p className="py-1 text-md">
+                Weclome to Jayharron&apos;s portfolio
+              </p>
               <button onClick={enterFullSceen} className="btn cursor-pointer">
-                Start Window
+                Boot Window
               </button>
             </div>
           </div>
