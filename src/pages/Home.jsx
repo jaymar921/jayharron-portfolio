@@ -164,14 +164,14 @@ const Home = () => {
             title={"CE 3"}
             onDoubleClick={ce3Clicked}
           />
-          <DragIcon
+          {/* <DragIcon
             key={"icon-4"}
             posX={13}
             posY={225}
             icon={"https://avatars.githubusercontent.com/u/259235313?s=64&v=4"}
             title={"IP Inc"}
             onDoubleClick={illuminaryPeakClicked}
-          />
+          /> */}
           <DragWindow
             key={"window-1"}
             id="social-window"
