@@ -191,10 +191,10 @@ const Home = () => {
           <DragWindow
             key={"window-2"}
             id="about-window"
-            posX={getScreenCenter(totalWidth > 720 ? 360 : 175, 260).x}
+            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
             posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 720 ? "720px" : "350px"}
-            height="450px"
+            width={totalWidth > 1080 ? "1080px" : "350px"}
+            height={totalWidth > 1080 ? "620px" : "450px"}
             overflow="overflow-y-scroll"
             background="bg-slate-800"
             show={showResume}
@@ -214,10 +214,10 @@ const Home = () => {
           <DragWindow
             key={"window-3"}
             id="project-window"
-            posX={getScreenCenter(totalWidth > 720 ? 360 : 175, 260).x}
+            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
             posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 720 ? "720px" : "350px"}
-            height="450px"
+            width={totalWidth > 1080 ? "1080px" : "350px"}
+            height={totalWidth > 1080 ? "620px" : "450px"}
             overflow="overflow-y-scroll"
             background="bg-slate-800"
             show={showProject}
@@ -237,10 +237,10 @@ const Home = () => {
           <DragWindow
             key={"window-4"}
             id="ce3-window"
-            posX={getScreenCenter(totalWidth > 720 ? 360 : 175, 260).x}
+            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
             posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 720 ? "720px" : "350px"}
-            height="450px"
+            width={totalWidth > 1080 ? "1080px" : "350px"}
+            height={totalWidth > 1080 ? "620px" : "450px"}
             overflow="overflow-y-scroll"
             background="bg-slate-800"
             show={showCE3}
