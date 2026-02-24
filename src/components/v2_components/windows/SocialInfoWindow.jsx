@@ -25,11 +25,9 @@ function SocialInfoWindow() {
         <p className="px-2 text-sm text-justify">
           Born and raised in the Philippines, I'm a Software Engineer serving
           clients in the United States while working remotely from home. Beyond
-          tech, I'm a dedicated dividend investor with a diversified portfolio
-          spanning both local and international markets. I'm also a hands-on
-          hobbyist who enjoys DIY projects and setting up solar home systems.
-          Outside of work, I'm always up for an adventure especially if it
-          involves mountains rather than beaches.
+          tech, I'm also a hands-on hobbyist who enjoys DIY projects and setting
+          up solar home systems. Outside of work, I'm always up for an adventure
+          especially if it involves mountains rather than beaches.
         </p>
         <hr className="mt-2 mb-2" />
         <h2 className="text-white text-xl">Social Accounts:</h2>
