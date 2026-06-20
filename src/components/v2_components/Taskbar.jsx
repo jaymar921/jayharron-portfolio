@@ -14,6 +14,7 @@ function Taskbar({
   personalInfoClicked = () => {},
   aboutInfoClicked = () => {},
   projectInfoClicked = () => {},
+  resumeInfoClicked = () => {},
 }) {
   return (
     <div className={className}>
@@ -37,12 +38,12 @@ function Taskbar({
           >
             <img src={projectIcon} />
           </div>
-          {/* <div
+          <div
             onClick={resumeInfoClicked}
-            className="h-10 w-10 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] rounded-lg"
+            className="h-8 w-8 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] rounded-lg"
           >
             <img src={resumeIcon} />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

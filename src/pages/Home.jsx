@@ -13,11 +13,12 @@ import Taskbar from "../components/v2_components/Taskbar";
 import DragWindow from "../components/draggables/components/DragWindow";
 import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWindow";
 // import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
-import { profile, medalIcon, projectIcon } from "../assets/icons";
+import { profile, medalIcon, projectIcon, resumeIcon } from "../assets/icons";
 import About from "./About";
 import Projects from "./Projects";
 import DragIcon from "../components/draggables/components/DragIcon";
 import { win11BG } from "../assets/images";
+import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
 
 // Function to check if the browser is in fullscreen mode
 function isFullscreen() {
@@ -49,6 +50,7 @@ const Home = () => {
   );
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
   const [showResume, setShowResume] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
   const [showProject, setShowProject] = useState(false);
   const [showCE3, setShowCE3] = useState(false);
   const [showIP, setShowIP] = useState(false);
@@ -72,6 +74,11 @@ const Home = () => {
 
   const resumeInfoClicked = () => {
     setShowResume(true);
+    setActiveTrigger("resume-window");
+  };
+
+  const aboutInfoClicked = () => {
+    setShowAbout(true);
     setActiveTrigger("about-window");
   };
 
@@ -140,7 +147,7 @@ const Home = () => {
         <DragContainer>
           <DragIcon
             key={"icon-1"}
-            posX={20}
+            posX={21}
             posY={15}
             icon={profile}
             title={"Info"}
@@ -148,21 +155,29 @@ const Home = () => {
           />
           <DragIcon
             key={"icon-2"}
-            posX={10}
+            posX={12}
             posY={85}
             icon={medalIcon}
             title={"About"}
-            onDoubleClick={setShowResume}
+            onDoubleClick={setShowAbout}
           />
           <DragIcon
             key={"icon-3"}
-            posX={13}
+            posX={15}
             posY={155}
             icon={
               "https://jaymar921.github.io/jayharronabejar/assets/images/ce3.png"
             }
             title={"CE 3"}
             onDoubleClick={ce3Clicked}
+          />
+          <DragIcon
+            key={"icon-4"}
+            posX={4}
+            posY={225}
+            icon={resumeIcon}
+            title={"Resume"}
+            onDoubleClick={setShowResume}
           />
           {/* <DragIcon
             key={"icon-4"}
@@ -199,8 +214,8 @@ const Home = () => {
             height={totalWidth > 1080 ? "620px" : "450px"}
             overflow="overflow-y-scroll"
             background="bg-slate-800"
-            show={showResume}
-            setShow={setShowResume}
+            show={showAbout}
+            setShow={setShowAbout}
             icon={<img className="w-4" src={medalIcon} />}
             title="About Me"
             activeTrigger={setActiveTrigger}
@@ -285,6 +300,30 @@ const Home = () => {
                     className="w-full h-[100%]"
                     src="https://illuminary-peak.vercel.app/"
                   />
+                </div>
+              </>
+            }
+          />
+
+          <DragWindow
+            key={"window-6"}
+            id="resume-window"
+            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
+            posY={getScreenCenter(175, 260).y}
+            width={totalWidth > 1080 ? "1080px" : "350px"}
+            height={totalWidth > 1080 ? "620px" : "450px"}
+            overflow="overflow-y-scroll"
+            background="bg-slate-800"
+            show={showResume}
+            setShow={setShowResume}
+            icon={<img className="w-4" src={projectIcon} />}
+            title="My Resume"
+            activeTrigger={setActiveTrigger}
+            active={activeTrigger === "resume-window"}
+            content={
+              <>
+                <div>
+                  <ResumeWindow />
                 </div>
               </>
             }
@@ -390,8 +429,9 @@ const Home = () => {
         )} */}
         <Taskbar
           personalInfoClicked={personalInfoClicked}
-          aboutInfoClicked={resumeInfoClicked}
+          aboutInfoClicked={aboutInfoClicked}
           projectInfoClicked={projectInfoClicked}
+          resumeInfoClicked={resumeInfoClicked}
           className="absolute bottom-0 w-screen flex place-content-center"
         />
         {/* Background */}

@@ -25,6 +25,17 @@ import {
   threads,
   typescript,
 } from "../assets/icons";
+
+import {
+  cert_owasp_2025_knowb4,
+  cert_owasp_data_hygience,
+  cert_owasp_memory_management,
+  cert_owasp_password_hygiene,
+  cert_owasp_projecting_source_code,
+  cert_owasp_top_10_sec_2021,
+  itpec_logo,
+} from "../assets/images";
+
 export const positions = [
   { position: [3, -67, 4], rotation: [0, 1.0, 0] },
   { position: [0, -48, 4], rotation: [0, -0.9, 0] },
@@ -48,7 +59,7 @@ export const smoothTransition = (
   endPos,
   startRot,
   endRot,
-  progress
+  progress,
 ) => {
   const smoothPosition = [
     InterpolateWithEase(startPos[0], endPos[0], progress),
@@ -102,106 +113,167 @@ export const AnimalPositions = [
   },
 ];
 
+const getYears = (year) => {
+  return new Date().getFullYear() - year;
+};
+
 export const skills = [
   {
     imageUrl: css,
     name: "CSS",
     type: "Frontend",
+    years: getYears(2019),
   },
   {
     imageUrl: express,
     name: "Express",
     type: "Backend",
+    years: getYears(2023),
   },
   {
     imageUrl: git,
     name: "Git",
     type: "Version Control",
+    years: getYears(2020),
   },
   {
     imageUrl: github,
     name: "GitHub",
     type: "Version Control",
+    years: getYears(2020),
   },
   {
     imageUrl: html,
     name: "HTML",
     type: "Frontend",
+    years: getYears(2019),
   },
   {
     imageUrl: javascript,
     name: "JavaScript",
     type: "Frontend",
+    years: getYears(2020),
   },
   {
     imageUrl: mongodb,
     name: "MongoDB",
     type: "Database",
+    years: getYears(2022),
   },
   {
     imageUrl: nextjs,
     name: "Next.js",
     type: "Frontend",
+    years: getYears(2023),
   },
   {
     imageUrl: nodejs,
     name: "Node.js",
     type: "Backend",
+    years: getYears(2022),
   },
   {
     imageUrl: react,
     name: "React",
     type: "Frontend",
+    years: getYears(2022),
   },
   {
     imageUrl: tailwindcss,
     name: "Tailwind CSS",
     type: "Frontend",
+    years: getYears(2022),
   },
   {
     imageUrl: typescript,
     name: "TypeScript",
     type: "Frontend",
+    years: getYears(2023),
   },
   {
     imageUrl: "https://wpguru.co.uk/wp-content/uploads/2020/04/dotnet-logo.png",
     name: ".NET",
     type: "Framework",
+    years: getYears(2022),
   },
   {
     imageUrl: "https://komorinfo.com/blog/cast-of-smart-pointers/feature.png",
     name: "C#",
     type: "Backend",
+    years: getYears(2022),
   },
   {
     imageUrl:
       "https://th.bing.com/th/id/OIP.xT82C8aQ9vnAyGbemBkCcgHaH1?rs=1&pid=ImgDetMain",
     name: "RabbitMq",
     type: "MessageBus",
+    years: getYears(2023),
   },
   {
     imageUrl:
       "https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/267_Python_logo-512.png",
     name: "Python",
     type: "Backend",
+    years: getYears(2021),
   },
   {
     imageUrl:
       "https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-1024.png",
     name: "Docker",
     type: "DevOps",
+    years: 2, // Only 2 years of experience with Docker, so we set it to 2 instead of calculating from the current year
   },
   {
     imageUrl:
       "https://www.vaisulweb.com/wp-content/uploads/2019/02/azure_logo_794_new.png",
     name: "Azure",
     type: "DevOps",
+    years: getYears(2024),
+  },
+];
+
+export const certifications = [
+  {
+    name: "2025 KnowBe4 Security Awareness Training",
+    imageUrl: cert_owasp_2025_knowb4,
+    dateIssued: "September 16, 2025",
+  },
+  {
+    name: "Secure Application Development: Data Hygiene",
+    imageUrl: cert_owasp_data_hygience,
+    dateIssued: "August 6, 2025",
+  },
+  {
+    name: "Secure Application Development: Memory Management",
+    imageUrl: cert_owasp_memory_management,
+    dateIssued: "August 6, 2025",
+  },
+  {
+    name: "Secure Application Development: Password Hygiene",
+    imageUrl: cert_owasp_password_hygiene,
+    dateIssued: "August 6, 2025",
+  },
+  {
+    name: "Secure Application Development: Projecting Source Code",
+    imageUrl: cert_owasp_projecting_source_code,
+    dateIssued: "August 6, 2025",
+  },
+  {
+    name: "Secure Application Development: 0WASP 2021 Top 10 Security Awareness",
+    imageUrl: cert_owasp_top_10_sec_2021,
+    dateIssued: "August 6, 2025",
+  },
+  {
+    name: "ITPEC Certification",
+    imageUrl: itpec_logo,
+    link: "https://itpec.org/statsandresults/all-passers-information/Philippines/2023S_IP_rev.pdf",
+    dateIssued: "April 2023",
   },
 ];
 
 export const experiences = [
   {
-    title: "Software Engineer II (Contract)",
+    title: "Software Engineer (Contract)",
     company_name: "Forrest T Jones (FTJ)",
     job_type: "Full-Time | Remote",
     icon: ftjLogo,
@@ -212,6 +284,9 @@ export const experiences = [
       "Experienced xUnit, Jest testing tools",
       "Has background in deploying application with Microsoft Azure, DevOps",
       "Experienced reverse engineering old .NET applications including old vbscripts and rewriting them on latest technology possible",
+      "Gained experience rewriting old applications to be more efficient and modern",
+      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
+      "Gained experience on setting up CI/CD pipelines, managing deployments, and configuring Key Vaults.",
     ],
   },
   {

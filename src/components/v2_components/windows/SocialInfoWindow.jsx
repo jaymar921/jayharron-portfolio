@@ -14,20 +14,21 @@ function SocialInfoWindow() {
               Jayharron Mar Abejar
             </h1>
             <h1 className="text-sm text-center text-green-400 font-bold">
-              Full Stack .NET / React JS
+              Software Engineer
             </h1>
             <h1 className="text-sm text-center text-green-400 font-bold">
-              Software Engineer
+              DevOps | Azure | Cloud
             </h1>
           </div>
         </div>
         <hr className="mt-4 mb-2" />
         <p className="px-2 text-sm text-justify">
-          Born and raised in the Philippines, I'm a Software Engineer serving
-          clients in the United States while working remotely from home. Beyond
-          tech, I'm also a hands-on hobbyist who enjoys DIY projects and setting
-          up solar home systems. Outside of work, I'm always up for an adventure
-          especially if it involves mountains rather than beaches.
+          I'm a Filipino Software Engineer working remotely with clients in the
+          United States. I'm open to collaborations too, though I usually take
+          them on during my free time. Outside of tech, I'm a hobbyist who
+          enjoys DIY projects, whether it's carpentry or tinkering with
+          electrical setups. And when I'm not working, you'll probably find me
+          hiking through mountains or spending time with family and friends.
         </p>
         <hr className="mt-2 mb-2" />
         <h2 className="text-white text-xl">Social Accounts:</h2>
