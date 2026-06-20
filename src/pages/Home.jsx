@@ -13,7 +13,7 @@ import Taskbar from "../components/v2_components/Taskbar";
 import DragWindow from "../components/draggables/components/DragWindow";
 import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWindow";
 // import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
-import { jhlogo, medalIcon, projectIcon } from "../assets/icons";
+import { profile, medalIcon, projectIcon } from "../assets/icons";
 import About from "./About";
 import Projects from "./Projects";
 import DragIcon from "../components/draggables/components/DragIcon";
@@ -52,7 +52,7 @@ const Home = () => {
   const [showProject, setShowProject] = useState(false);
   const [showCE3, setShowCE3] = useState(false);
   const [showIP, setShowIP] = useState(false);
-  const [fullScreen, setFullScreen] = useState(isFullscreen());
+  const [fullScreen, setFullScreen] = useState(true);
   const [activeTrigger, setActiveTrigger] = useState("");
 
   const handleNext = () => {
@@ -142,7 +142,7 @@ const Home = () => {
             key={"icon-1"}
             posX={20}
             posY={15}
-            icon={jhlogo}
+            icon={profile}
             title={"Info"}
             onDoubleClick={setShowPersonalInfo}
           />

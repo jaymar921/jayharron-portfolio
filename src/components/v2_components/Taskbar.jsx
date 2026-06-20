@@ -3,6 +3,7 @@ import React from "react";
 import {
   exitIcon,
   jhlogo,
+  profile,
   medalIcon,
   projectIcon,
   resumeIcon,
@@ -16,13 +17,13 @@ function Taskbar({
 }) {
   return (
     <div className={className}>
-      <div className="z-[99999999] h-14 w-[300px] bg-white bg-opacity-10 backdrop-blur-lg rounded-t-xl drop-shadow-lg border-[1px] border-[rgba(255,255,255,0.5)] border-b-0">
+      <div className="z-[99999999] h-14 w-[300px] bg-white bg-opacity-10 backdrop-blur-sm rounded-xl mb-2 drop-shadow-lg border-[1px] border-[rgba(255,255,255,0.2)]">
         <div className="grid grid-cols-8 gap-12 px-4 h-[100%]">
           <div
             onClick={personalInfoClicked}
-            className="h-8 w-8 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] p-1 rounded-lg border-cyan-500"
+            className="h-8 w-8 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] rounded-lg"
           >
-            <img src={jhlogo} />
+            <img className="h-full w-full rounded-md" src={profile} />
           </div>
           <div
             onClick={aboutInfoClicked}

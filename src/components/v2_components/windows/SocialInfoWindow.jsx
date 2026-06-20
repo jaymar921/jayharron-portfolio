@@ -50,14 +50,14 @@ function SocialInfoWindow() {
               <i class="fa-brands fa-instagram text-red-200"></i> Instagram
             </a>
           </p>
-          <p className="px-4">
+          {/* <p className="px-4">
             <a
               href="https://www.spigotmc.org/members/jaymar921.1073076/"
               target="_blank"
             >
               <i class="fa-solid fa-cube text-orange-300"></i> SpigotMC
             </a>
-          </p>
+          </p> */}
         </div>
       </div>
     </>
