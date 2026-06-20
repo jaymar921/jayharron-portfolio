@@ -39,6 +39,7 @@ import resumeIcon from "./resume.png";
 import exitIcon from "./exitapp.png";
 import projectIcon from "./projecticon.png";
 import medalIcon from "./medal.webp";
+import profile from "./profile.jpg";
 
 export {
   css,
@@ -82,4 +83,5 @@ export {
   exitIcon,
   projectIcon,
   medalIcon,
+  profile,
 };

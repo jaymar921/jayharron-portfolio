@@ -6,7 +6,7 @@ import shopify from "./shopify.png";
 import starbucks from "./starbucks.png";
 import tesla from "./tesla.png";
 import logo from "./logo.svg";
-import jayPhoto from "./1768885099268.png";
+import jayPhoto from "./profile.jpg";
 import win11BG from "./win11-purple-img.jpg";
 
 export {
