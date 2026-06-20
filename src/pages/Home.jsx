@@ -54,7 +54,7 @@ const Home = () => {
   const [showProject, setShowProject] = useState(false);
   const [showCE3, setShowCE3] = useState(false);
   const [showIP, setShowIP] = useState(false);
-  const [fullScreen, setFullScreen] = useState(true);
+  const [fullScreen, setFullScreen] = useState(isFullscreen());
   const [activeTrigger, setActiveTrigger] = useState("");
 
   const handleNext = () => {
@@ -131,7 +131,7 @@ const Home = () => {
           <div className="w-full h-screen relative overflow-hidden z-[999999999] bg-[rgba(0,0,0,0.8)] flex items-center place-content-center">
             <div className="text-white m-auto text-center">
               <p className="py-1 text-md">
-                Weclome to Jayharron&apos;s portfolio
+                Welcome to Jayharron&apos;s portfolio
               </p>
               <button onClick={enterFullSceen} className="btn cursor-pointer">
                 Boot Window
