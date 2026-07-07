@@ -333,7 +333,7 @@ export const experiences = [
     job_type: "Part-Time | Remote",
     icon: spigotLogo,
     iconBg: "#FFD3BB",
-    date: "Sep 10, 2020 - Present",
+    date: "Sep 10, 2020 - October 2025",
     points: [
       "Experienced building awesome game plugin specific for Minecraft Servers.",
       "Enhanced game development experience.",
