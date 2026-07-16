@@ -1,0 +1,14 @@
+# Allow all search engine crawlers to index the site
+User-agent: *
+Allow: /
+Allow: /graphic2d
+Allow: /about
+Allow: /projects
+Allow: /projects/path-finding-algorithms
+
+# Disallow paths that do not contain public content
+Disallow: /v2
+
+# Host and Sitemap locations
+Host: https://jayharronabejar.vercel.app
+Sitemap: https://jayharronabejar.vercel.app/sitemap.xml
