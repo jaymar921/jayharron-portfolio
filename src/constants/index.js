@@ -8,6 +8,7 @@ import {
   git,
   github,
   html,
+  illuminaryPeakLogo,
   javascript,
   linkedin,
   mongodb,
@@ -273,8 +274,23 @@ export const certifications = [
 
 export const experiences = [
   {
+    title: "Co-Founder | Lead Software Engineer",
+    company_name: "Illuminary Peak (Startup)",
+    company_url: "https://illuminary-peak.vercel.app",
+    job_type: "Part-Time | Remote",
+    icon: illuminaryPeakLogo,
+    iconBg: "#FFFFFF",
+    date: "March 15, 2026 - Present",
+    points: [
+      "Developed modern and scalable web applications using ReactJS, NodeJS, and related technologies.",
+      "Utilized advanced AI tools such as Microsoft Copilot and Claude Pro, applying agentic development approaches to improve workflow efficiency.",
+      "Implemented secure payment integrations with PayMongo and applied DevSecOps practices using GitHub Actions to enhance reliability and security.",
+    ]
+  },
+  {
     title: "Software Engineer (Contract)",
     company_name: "Forrest T Jones (FTJ)",
+    company_url: "https://ftj.com",
     job_type: "Full-Time | Remote",
     icon: ftjLogo,
     iconBg: "#FFFFFF",
@@ -292,6 +308,7 @@ export const experiences = [
   {
     title: "Software Developer",
     company_name: "FullScale",
+    company_url: "https://fullscale.ph",
     job_type: "Full-Time | Remote",
     icon: fullScaleLogo,
     iconBg: "#BDFFD1",
@@ -306,6 +323,7 @@ export const experiences = [
   {
     title: "FullStack Developer",
     company_name: "PSITS UC MAIN",
+    company_url: "https://www.psits.org",
     job_type: "Part-Time | On site",
     icon: PSITS_LOGO,
     iconBg: "#4CA0C2",
@@ -318,6 +336,7 @@ export const experiences = [
   {
     title: "Developer Intern",
     company_name: "FullScale",
+    company_url: "https://fullscale.ph",
     job_type: "Part-Time | Remote",
     icon: fullScaleLogo,
     iconBg: "#BDFFD1",
@@ -330,6 +349,7 @@ export const experiences = [
   {
     title: "Game Developer | Freelance",
     company_name: "SpigotMC.org",
+    company_url: "https://www.spigotmc.org",
     job_type: "Part-Time | Remote",
     icon: spigotLogo,
     iconBg: "#FFD3BB",
