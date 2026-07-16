@@ -123,7 +123,12 @@ function ResumeWindow() {
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-green-500 font-bold text-lg">
+                    <h3
+                      onClick={() =>
+                        window.open(experience?.company_url, "_blank")
+                      }
+                      className="text-green-500 font-bold text-lg hover:cursor-pointer hover:text-green-400"
+                    >
                       {experience.company_name}
                     </h3>
                     <p className="text-white font-medium">{experience.title}</p>
