@@ -40,6 +40,7 @@ import exitIcon from "./exitapp.png";
 import projectIcon from "./projecticon.png";
 import medalIcon from "./medal.webp";
 import profile from "./profile.jpg";
+import illuminaryPeakLogo from "./ip-128.png"
 
 export {
   css,
@@ -84,4 +85,5 @@ export {
   projectIcon,
   medalIcon,
   profile,
+  illuminaryPeakLogo,
 };
