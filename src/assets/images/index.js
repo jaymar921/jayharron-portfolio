@@ -17,6 +17,7 @@ import cert_owasp_password_hygiene from "./certs/cert_owasp_password_hygiene.jpg
 import cert_owasp_protecting_source_code from "./certs/cert_owasp_protecting_source_code.jpg";
 import cert_owasp_top_10_sec_2021 from "./certs/cert_owasp_top_10_sec_2021.jpg";
 import itpec_logo from "./certs/ITPEC-logo.gif";
+import cert_completion_renewavolt from "./certs/cert_completion_renewavolt.png"
 
 export {
   hero,
@@ -36,4 +37,5 @@ export {
   cert_owasp_protecting_source_code as cert_owasp_projecting_source_code,
   cert_owasp_top_10_sec_2021,
   itpec_logo,
+  cert_completion_renewavolt,
 };

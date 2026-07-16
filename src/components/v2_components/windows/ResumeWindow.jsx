@@ -69,7 +69,7 @@ function ResumeWindow() {
             <h3 className="text-white font-semibold mb-2">
               Verified Certifications
             </h3>
-            <div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {certifications
                 .filter((c) => c.link)
                 .map((cert, idx) => (

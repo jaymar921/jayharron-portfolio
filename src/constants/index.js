@@ -28,6 +28,7 @@ import {
 } from "../assets/icons";
 
 import {
+  cert_completion_renewavolt,
   cert_owasp_2025_knowb4,
   cert_owasp_data_hygience,
   cert_owasp_memory_management,
@@ -269,6 +270,12 @@ export const certifications = [
     imageUrl: itpec_logo,
     link: "https://itpec.org/statsandresults/all-passers-information/Philippines/2023S_IP_rev.pdf",
     dateIssued: "April 2023",
+  },
+  {
+    name: "Basic Solar PV Design",
+    imageUrl: cert_completion_renewavolt,
+    link: "https://drive.google.com/file/d/1CUgFWkW09ja1YRSRTD4STfoes6UOCdDa/view?usp=sharing",
+    dateIssued: "June 27, 2026",
   },
 ];
 
