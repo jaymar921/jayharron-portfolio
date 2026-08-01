@@ -8,8 +8,10 @@ import {
 
 function ResumeWindow() {
   return (
-    <div className="w-full bg-slate-900 text-white p-4 pb-14">
-      <h2 className="text-white text-xl font-semibold mb-4">My Skills</h2>
+    <div className="w-full bg-ubuntu-aubergine-dark text-white p-4 pb-14 font-ubuntu">
+      <h2 className="text-white text-xl font-semibold mb-4 border-l-4 border-ubuntu-orange pl-3">
+        My Skills
+      </h2>
       <p className="text-slate-400 text-sm mb-4">
         Technologies I use and the years I have worked with them.
       </p>
@@ -17,7 +19,7 @@ function ResumeWindow() {
         {skills.map((skill, index) => (
           <div
             key={`${skill.name}-${index}`}
-            className="bg-[rgba(255,255,255,0.04)] border border-slate-700 rounded-xl p-3 flex items-center gap-3"
+            className="bg-[rgba(255,255,255,0.04)] border border-white/10 rounded-xl p-3 flex items-center gap-3 hover:border-ubuntu-orange/50 transition-colors"
           >
             <div className="w-12 h-12 rounded-xl bg-[#0F172A] flex items-center justify-center">
               <img
@@ -39,7 +41,7 @@ function ResumeWindow() {
       </div>
 
       <div className="mt-8">
-        <h2 className="text-white text-xl font-semibold mb-2">
+        <h2 className="text-white text-xl font-semibold mb-2 border-l-4 border-ubuntu-orange pl-3">
           Certifications
         </h2>
         <p className="text-slate-400 text-sm mb-4">
@@ -51,7 +53,7 @@ function ResumeWindow() {
             .map((cert, idx) => (
               <div
                 key={`cert-${idx}`}
-                className="bg-[rgba(255,255,255,0.03)] border border-slate-700 rounded-xl p-3 flex flex-col items-center text-center"
+                className="bg-[rgba(255,255,255,0.03)] border border-white/10 rounded-xl p-3 flex flex-col items-center text-center"
               >
                 <img
                   src={cert.imageUrl}
@@ -78,7 +80,7 @@ function ResumeWindow() {
                     href={cert.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-4 bg-[rgba(255,255,255,0.02)] p-3 rounded-xl border border-slate-700"
+                    className="inline-flex items-center gap-4 bg-[rgba(255,255,255,0.02)] p-3 rounded-xl border border-white/10 hover:border-ubuntu-orange/50 transition-colors"
                   >
                     <img
                       src={cert.imageUrl}
@@ -98,7 +100,7 @@ function ResumeWindow() {
         )}
 
         <div className="mt-8">
-          <h2 className="text-white text-xl font-semibold mb-4">
+          <h2 className="text-white text-xl font-semibold mb-4 border-l-4 border-ubuntu-orange pl-3">
             Professional Experience
           </h2>
 
@@ -106,7 +108,7 @@ function ResumeWindow() {
             {experiences.map((experience, index) => (
               <div
                 key={`${experience.company_name}-${index}`}
-                className="bg-[rgba(0,0,0,0.2)] border-2 border-slate-700 rounded-xl p-4"
+                className="bg-[rgba(0,0,0,0.2)] border-2 border-white/10 rounded-xl p-4"
               >
                 <div className="flex items-start gap-3">
                   <div
@@ -127,7 +129,7 @@ function ResumeWindow() {
                       onClick={() =>
                         window.open(experience?.company_url, "_blank")
                       }
-                      className="text-green-500 font-bold text-lg hover:cursor-pointer hover:text-green-400"
+                      className="text-ubuntu-orange font-bold text-lg hover:cursor-pointer hover:text-ubuntu-orange-light"
                     >
                       {experience.company_name}
                     </h3>
@@ -149,12 +151,14 @@ function ResumeWindow() {
           </div>
 
           <div className="mt-6">
-            <h2 className="text-white text-xl font-semibold mb-3">Education</h2>
+            <h2 className="text-white text-xl font-semibold mb-3 border-l-4 border-ubuntu-orange pl-3">
+              Education
+            </h2>
             <div className="space-y-3">
               {educationalAttainment.map((school, index) => (
                 <div
                   key={`${school.school}-${index}`}
-                  className="bg-[#141F38] p-4 rounded-md border-b-[6px] border-b-red-400 shadow-md"
+                  className="bg-[rgba(255,255,255,0.03)] p-4 rounded-md border-b-4 border-b-ubuntu-orange shadow-md"
                 >
                   <div className="flex items-center gap-3">
                     <img
