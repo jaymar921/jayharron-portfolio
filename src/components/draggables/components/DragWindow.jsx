@@ -27,6 +27,7 @@ function DragWindow({
   activeTrigger = () => {},
   expandable = true,
   resizable = true,
+  reopenSignal = 0,
 }) {
   const [position, setPosition] = useState({ x: posX, y: posY });
   const [isDragging, setIsDragging] = useState(false);
@@ -44,6 +45,13 @@ function DragWindow({
   const [maximize, setMaximize] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const resizeState = useRef(null);
+
+  // reopenSignal increments on every icon/taskbar click, even repeated
+  // clicks on an already-active window, so a minimized window always
+  // un-minimizes instead of relying on a prop value actually changing.
+  useEffect(() => {
+    if (reopenSignal) setMinimized(false);
+  }, [reopenSignal]);
 
   const resize = () => {
     if (maximize) {
