@@ -6,6 +6,11 @@ import {
   resumeIcon,
 } from "../../assets/icons";
 
+// Kept for when the browser dock icon is re-enabled.
+// eslint-disable-next-line no-unused-vars
+const BROWSER_ICON =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23E95420'/%3E%3Cellipse cx='12' cy='12' rx='4.2' ry='10' fill='none' stroke='white' stroke-width='1.1'/%3E%3Cline x1='2' y1='12' x2='22' y2='12' stroke='white' stroke-width='1.1'/%3E%3Cpath d='M4 7.5c2.2 1.3 5 2 8 2s5.8-.7 8-2M4 16.5c2.2-1.3 5-2 8-2s5.8.7 8 2' fill='none' stroke='white' stroke-width='1.1'/%3E%3C/svg%3E";
+
 function DockIcon({ icon, label, onClick, active }) {
   return (
     <button
@@ -27,6 +32,8 @@ function Taskbar({
   aboutInfoClicked = () => {},
   projectInfoClicked = () => {},
   resumeInfoClicked = () => {},
+  // eslint-disable-next-line no-unused-vars
+  browserClicked = () => {},
 }) {
   return (
     <div className={className}>
@@ -58,6 +65,7 @@ function Taskbar({
           onClick={resumeInfoClicked}
           active={activeTrigger === "resume-window"}
         />
+        {/* Browser dock icon disabled for now, see BROWSER_ICON/browserClicked */}
       </div>
     </div>
   );
