@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&family=Ubuntu:wght@300;400;500;700&family=Ubuntu+Mono&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -221,3 +221,124 @@ body:has(.card[data-color="green"]:hover) {
 ::-webkit-scrollbar-thumb:hover {
   background: #534949;
 }
+
+/* ===== Linux (Ubuntu/GNOME) desktop theme ===== */
+.font-ubuntu {
+  font-family: "Ubuntu", "Work Sans", sans-serif;
+}
+
+.linux-wallpaper {
+  background: radial-gradient(
+      circle at 15% 20%,
+      rgba(233, 84, 32, 0.35),
+      transparent 45%
+    ),
+    linear-gradient(160deg, #2c001e 0%, #1c0012 55%, #10000a 100%);
+}
+
+.ubuntu-topbar {
+  background: rgba(20, 6, 15, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ubuntu-dock {
+  background: rgba(20, 6, 15, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ubuntu-dock-icon {
+  position: relative;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.ubuntu-dock-icon:hover {
+  transform: scale(1.08);
+}
+
+.ubuntu-dock-icon.is-active::after {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 18px;
+  border-radius: 2px;
+  background: #ffffff;
+}
+
+.window-titlebar {
+  background: linear-gradient(180deg, #3c3c3c 0%, #2e2e2e 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.window-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.desktop-icon-label {
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.resize-handle {
+  position: absolute;
+  z-index: 10;
+}
+.resize-handle.top,
+.resize-handle.bottom {
+  left: 6px;
+  right: 6px;
+  height: 6px;
+  cursor: ns-resize;
+}
+.resize-handle.left,
+.resize-handle.right {
+  top: 6px;
+  bottom: 6px;
+  width: 6px;
+  cursor: ew-resize;
+}
+.resize-handle.top {
+  top: -3px;
+}
+.resize-handle.bottom {
+  bottom: -3px;
+}
+.resize-handle.left {
+  left: -3px;
+}
+.resize-handle.right {
+  right: -3px;
+}
+.resize-handle.corner {
+  width: 12px;
+  height: 12px;
+}
+.resize-handle.top-left {
+  top: -4px;
+  left: -4px;
+  cursor: nwse-resize;
+}
+.resize-handle.top-right {
+  top: -4px;
+  right: -4px;
+  cursor: nesw-resize;
+}
+.resize-handle.bottom-left {
+  bottom: -4px;
+  left: -4px;
+  cursor: nesw-resize;
+}
+.resize-handle.bottom-right {
+  bottom: -4px;
+  right: -4px;
+  cursor: nwse-resize;
+}
+
