@@ -48,11 +48,27 @@ const Home = () => {
     window.innerWidth,
   );
 
+  // x/y are half the window's width/height. On narrow (mobile) screens the
+  // dock is skipped from the centering math and the result is clamped to the
+  // viewport so windows never open off-screen or skewed toward the dock.
   const getScreenCenter = (x = 200, y = 150) => {
-    const centerX = DOCK_WIDTH + (window.innerWidth - DOCK_WIDTH) / 2 - x;
-    const centerY =
-      TOPBAR_HEIGHT + (window.innerHeight - TOPBAR_HEIGHT) / 2 - y;
-    return { x: centerX, y: centerY };
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const isCompact = viewportWidth < 768;
+    const reservedLeft = isCompact ? 0 : DOCK_WIDTH;
+
+    const idealX = reservedLeft + (viewportWidth - reservedLeft) / 2 - x;
+    const idealY = TOPBAR_HEIGHT + (viewportHeight - TOPBAR_HEIGHT) / 2 - y;
+
+    const minX = isCompact ? 8 : DOCK_WIDTH + 8;
+    const maxX = Math.max(minX, viewportWidth - x * 2 - 8);
+    const minY = TOPBAR_HEIGHT + 8;
+    const maxY = Math.max(minY, viewportHeight - y * 2 - 8);
+
+    return {
+      x: Math.min(Math.max(idealX, minX), maxX),
+      y: Math.min(Math.max(idealY, minY), maxY),
+    };
   };
 
   const [currentStage, setCurrentStage] = useState(-1); // -1
