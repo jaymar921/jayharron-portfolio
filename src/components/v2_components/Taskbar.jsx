@@ -1,7 +1,4 @@
-import React from "react";
-
 import {
-  exitIcon,
   jhlogo,
   profile,
   medalIcon,
@@ -9,8 +6,23 @@ import {
   resumeIcon,
 } from "../../assets/icons";
 
+function DockIcon({ icon, label, onClick, active }) {
+  return (
+    <button
+      onClick={onClick}
+      title={label}
+      className={`ubuntu-dock-icon ${
+        active ? "is-active" : ""
+      } h-10 w-10 rounded-xl overflow-hidden bg-black/20 border border-white/10 flex items-center justify-center shadow-md`}
+    >
+      <img className="h-full w-full object-cover" src={icon} alt={label} />
+    </button>
+  );
+}
+
 function Taskbar({
   className = "",
+  activeTrigger = "",
   personalInfoClicked = () => {},
   aboutInfoClicked = () => {},
   projectInfoClicked = () => {},
@@ -18,33 +30,34 @@ function Taskbar({
 }) {
   return (
     <div className={className}>
-      <div className="z-[99999999] h-14 w-[300px] bg-white bg-opacity-10 backdrop-blur-sm rounded-xl mb-2 drop-shadow-lg border-[1px] border-[rgba(255,255,255,0.2)]">
-        <div className="grid grid-cols-8 gap-12 px-4 h-[100%]">
-          <div
-            onClick={personalInfoClicked}
-            className="h-8 w-8 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] rounded-lg"
-          >
-            <img className="h-full w-full rounded-md" src={profile} />
-          </div>
-          <div
-            onClick={aboutInfoClicked}
-            className="h-8 w-8 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] rounded-lg"
-          >
-            <img src={medalIcon} />
-          </div>
-          <div
-            onClick={projectInfoClicked}
-            className="h-8 w-8 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] rounded-lg border-cyan-500"
-          >
-            <img src={projectIcon} />
-          </div>
-          <div
-            onClick={resumeInfoClicked}
-            className="h-8 w-8 cursor-pointer bg-[rgba(0,0,0,0.2)] my-auto flex items-center justify-center flex-bold shadow-md border-[1px] rounded-lg"
-          >
-            <img src={resumeIcon} />
-          </div>
+      <div className="ubuntu-dock z-[99999999] w-14 py-3 rounded-2xl flex flex-col items-center gap-3 shadow-2xl">
+        <div className="h-9 w-9 rounded-lg overflow-hidden mb-1 bg-ubuntu-orange/20 flex items-center justify-center">
+          <img className="h-6 w-6" src={jhlogo} alt="Logo" />
         </div>
+        <DockIcon
+          icon={profile}
+          label="Info"
+          onClick={personalInfoClicked}
+          active={activeTrigger === "social-window"}
+        />
+        <DockIcon
+          icon={medalIcon}
+          label="About"
+          onClick={aboutInfoClicked}
+          active={activeTrigger === "about-window"}
+        />
+        <DockIcon
+          icon={projectIcon}
+          label="Projects"
+          onClick={projectInfoClicked}
+          active={activeTrigger === "project-window"}
+        />
+        <DockIcon
+          icon={resumeIcon}
+          label="Resume"
+          onClick={resumeInfoClicked}
+          active={activeTrigger === "resume-window"}
+        />
       </div>
     </div>
   );
