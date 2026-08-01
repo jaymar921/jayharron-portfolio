@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ImageMapTemplate } from "../assets/images";
 import { DownArrow } from "../assets/vectors";
-import { Link } from "react-router-dom";
+import { Link } from "../routing";
 
 const Content = {
   "-2": { text: "", more_info: "", link: "" },

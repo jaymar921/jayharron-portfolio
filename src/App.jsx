@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, Routes, RouterProvider } from "./routing";
 import Navbar from "./components/Navbar";
 import { Home, About, Projects, Contact } from "./pages";
 import PathFindingAlgorithmsPage from "./pages/Project/PathFindingAlgorithmsPage";
@@ -8,7 +8,7 @@ import Home_V2 from "./pages/Home_V2";
 const App = () => {
   return (
     <main className="bg-slate-900 h-full">
-      <Router>
+      <RouterProvider>
         {/* <Navbar /> */}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -22,7 +22,7 @@ const App = () => {
             element={<PathFindingAlgorithmsPage />}
           />
         </Routes>
-      </Router>
+      </RouterProvider>
     </main>
   );
 };

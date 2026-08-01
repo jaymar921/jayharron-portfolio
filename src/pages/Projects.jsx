@@ -1,5 +1,5 @@
 import { projects } from "../constants";
-import { Link } from "react-router-dom";
+import { Link } from "../routing";
 import { arrow } from "../assets/icons";
 import CTA from "../components/CTA";
 

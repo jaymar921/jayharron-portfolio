@@ -1,6 +1,6 @@
 import React from "react";
 import { githubmarkWhite, linkedin } from "../assets/icons";
-import { Link } from "react-router-dom";
+import { Link } from "../routing";
 
 function ProfileCard({ className }) {
   return (
