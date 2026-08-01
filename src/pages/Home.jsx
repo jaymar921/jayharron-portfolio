@@ -1,24 +1,26 @@
-//import { Canvas } from "@react-three/fiber";
-import React, { /*Suspense,*/ useEffect, useState } from "react";
-// import Loader from "../components/Loader";
-// import MinecraftWorld from "../models/MinecraftWorld";
-// import InformationBox from "../components/InformationBox";
-// import Bee from "../models/Bee";
-// import { AnimalPositions } from "../constants";
-// import Allay from "../models/Allay";
-// import AmbientScene from "../models/AmbientScene";
-// import ProfileCard from "../components/ProfileCard";
+import { useEffect, useState } from "react";
 import DragContainer from "../components/draggables/containers/DragContainer";
 import Taskbar from "../components/v2_components/Taskbar";
+import TopBar from "../components/v2_components/TopBar";
 import DragWindow from "../components/draggables/components/DragWindow";
 import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWindow";
-// import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
 import { profile, medalIcon, projectIcon, resumeIcon } from "../assets/icons";
 import About from "./About";
 import Projects from "./Projects";
 import DragIcon from "../components/draggables/components/DragIcon";
-import { win11BG } from "../assets/images";
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
+
+const DOCK_WIDTH = 88;
+const TOPBAR_HEIGHT = 40;
+
+const windowTitles = {
+  "social-window": "Short Info",
+  "about-window": "About Me",
+  "project-window": "My Projects",
+  "ce3-window": "Custom Enchants 3",
+  "illuminary-peak-window": "Illuminary Peak, Inc.",
+  "resume-window": "My Resume",
+};
 
 // Function to check if the browser is in fullscreen mode
 function isFullscreen() {
@@ -37,17 +39,13 @@ const Home = () => {
   );
 
   const getScreenCenter = (x = 200, y = 150) => {
-    const centerX = window.innerWidth / 2 - x;
-    const centerY = window.innerHeight / 2 - y;
+    const centerX = DOCK_WIDTH + (window.innerWidth - DOCK_WIDTH) / 2 - x;
+    const centerY =
+      TOPBAR_HEIGHT + (window.innerHeight - TOPBAR_HEIGHT) / 2 - y;
     return { x: centerX, y: centerY };
   };
 
   const [currentStage, setCurrentStage] = useState(-1); // -1
-  // const [worldMoving, setWorldMoving] = useState(true);
-  // const [worldPosRot, setWorldPosRot] = useState(undefined);
-  const [DOFEnabled, enableDOF] = useState(
-    /* totalWidth > 520 ? true :  false*/ false,
-  );
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
   const [showResume, setShowResume] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
@@ -61,10 +59,6 @@ const Home = () => {
     let s = currentStage;
     if (s++ >= 3) setCurrentStage(0);
     else setCurrentStage(s++);
-  };
-
-  const handleEnableDOF = () => {
-    enableDOF(!DOFEnabled);
   };
 
   const personalInfoClicked = () => {
@@ -128,43 +122,40 @@ const Home = () => {
     <>
       <section className="w-full h-screen relative z-0 overflow-hidden">
         {!fullScreen && (
-          <div className="w-full h-screen relative overflow-hidden z-[999999999] bg-[rgba(0,0,0,0.8)] flex items-center place-content-center">
-            <div className="text-white m-auto text-center">
+          <div className="linux-wallpaper w-full h-screen relative overflow-hidden z-[999999999] flex items-center place-content-center">
+            <div className="text-white m-auto text-center font-ubuntu">
+              <i className="fa-brands fa-linux text-5xl text-ubuntu-orange mb-3 block" />
               <p className="py-1 text-md">
                 Welcome to Jayharron&apos;s portfolio
               </p>
               <button onClick={enterFullSceen} className="btn cursor-pointer">
-                Boot Window
+                Boot Desktop
               </button>
             </div>
           </div>
         )}
-        {/* <InformationBox
-          handleNext={handleNext}
-          worldMoving={worldMoving}
-          currentStage={currentStage}
-        /> */}
+        <TopBar activeTitle={windowTitles[activeTrigger] || ""} />
         <DragContainer>
           <DragIcon
             key={"icon-1"}
-            posX={21}
-            posY={15}
+            posX={DOCK_WIDTH + 24}
+            posY={TOPBAR_HEIGHT + 16}
             icon={profile}
             title={"Info"}
             onDoubleClick={setShowPersonalInfo}
           />
           <DragIcon
             key={"icon-2"}
-            posX={12}
-            posY={85}
+            posX={DOCK_WIDTH + 24}
+            posY={TOPBAR_HEIGHT + 100}
             icon={medalIcon}
             title={"About"}
             onDoubleClick={setShowAbout}
           />
           <DragIcon
             key={"icon-3"}
-            posX={15}
-            posY={155}
+            posX={DOCK_WIDTH + 24}
+            posY={TOPBAR_HEIGHT + 184}
             icon={
               "https://jaymar921.github.io/jayharronabejar/assets/images/ce3.png"
             }
@@ -173,25 +164,27 @@ const Home = () => {
           />
           <DragIcon
             key={"icon-4"}
-            posX={4}
-            posY={225}
+            posX={DOCK_WIDTH + 24}
+            posY={TOPBAR_HEIGHT + 268}
             icon={resumeIcon}
             title={"Resume"}
             onDoubleClick={setShowResume}
           />
-          {/* <DragIcon
-            key={"icon-4"}
-            posX={13}
-            posY={225}
+          <DragIcon
+            key={"icon-5"}
+            posX={DOCK_WIDTH + 24}
+            posY={TOPBAR_HEIGHT + 352}
             icon={"https://avatars.githubusercontent.com/u/259235313?s=64&v=4"}
             title={"IP Inc"}
             onDoubleClick={illuminaryPeakClicked}
-          /> */}
+          />
           <DragWindow
             key={"window-1"}
             id="social-window"
-            posX={getScreenCenter(168, 300).x}
-            posY={getScreenCenter(168, 300).y}
+            posX={getScreenCenter(180, 260).x}
+            posY={getScreenCenter(180, 260).y}
+            width="360px"
+            height="520px"
             show={showPersonalInfo}
             setShow={setShowPersonalInfo}
             icon={"📚"}
@@ -329,117 +322,16 @@ const Home = () => {
             }
           />
         </DragContainer>
-        {/* <Canvas
-          className="w-full h-full bg-transparent"
-          camera={{ near: 0.1, far: 20, fov: 80, focus: 200 }}
-          style={{ backgroundColor: "#171B21" }}
-        >
-          <Suspense fallback={<Loader />}>
-            <directionalLight
-              position={[-5, 2, 1]}
-              color={"#D2D4A1"}
-              intensity={3}
-              castShadow
-              shadow-mapSize-height={512}
-              shadow-mapSize-width={512}
-              shadow-mapSize={[1024, 1024]}
-            />
-            <fog attach="fog" args={["#171B21", 5, 15]} />
-            <ambientLight intensity={0.5} />
-            <hemisphereLight
-              skyColor="#B1E1FF"
-              groundColor="#212567"
-              intensity={0.5}
-            />
-
-            <Bee
-              receiveShadow
-              currentStage={currentStage}
-              setWorldMoving={setWorldMoving}
-              worldPosRot={worldPosRot}
-              BeePosition={AnimalPositions[0]}
-            />
-            <Bee
-              receiveShadow
-              currentStage={currentStage}
-              setWorldMoving={setWorldMoving}
-              worldPosRot={worldPosRot}
-              BeePosition={AnimalPositions[1]}
-            />
-            <Bee
-              receiveShadow
-              currentStage={currentStage}
-              setWorldMoving={setWorldMoving}
-              worldPosRot={worldPosRot}
-              BeePosition={AnimalPositions[2]}
-            />
-            <Bee
-              receiveShadow
-              currentStage={currentStage}
-              setWorldMoving={setWorldMoving}
-              worldPosRot={worldPosRot}
-              BeePosition={AnimalPositions[3]}
-            />
-            <Allay
-              receiveShadow
-              currentStage={currentStage}
-              setWorldMoving={setWorldMoving}
-              worldPosRot={worldPosRot}
-              BeePosition={AnimalPositions[4]}
-            />
-            <Allay
-              receiveShadow
-              currentStage={currentStage}
-              setWorldMoving={setWorldMoving}
-              worldPosRot={worldPosRot}
-              BeePosition={AnimalPositions[5]}
-            />
-            <Allay
-              receiveShadow
-              currentStage={currentStage}
-              setWorldMoving={setWorldMoving}
-              worldPosRot={worldPosRot}
-              BeePosition={AnimalPositions[6]}
-            />
-
-            <Allay
-              receiveShadow
-              currentStage={currentStage}
-              setWorldMoving={setWorldMoving}
-              worldPosRot={worldPosRot}
-              BeePosition={AnimalPositions[7]}
-            />
-            <AmbientScene enableDoF={DOFEnabled} />
-            <MinecraftWorld
-              receiveShadow
-              currentStage={currentStage}
-              setWorldMoving={setWorldMoving}
-              setWorldPosRot={setWorldPosRot}
-            />
-          </Suspense>
-        </Canvas> */}
-
-        {/* {totalWidth > 520 && (
-          <button
-            className="z-[999999] absolute bottom-2 left-2 font-minecraft text-slate-300 border-2 border-slate-500 px-2 text-[15px]"
-            onClick={handleEnableDOF}
-          >
-            {DOFEnabled ? "Disable DOF" : "Enable DOF"}
-          </button>
-        )} */}
         <Taskbar
+          activeTrigger={activeTrigger}
           personalInfoClicked={personalInfoClicked}
           aboutInfoClicked={aboutInfoClicked}
           projectInfoClicked={projectInfoClicked}
           resumeInfoClicked={resumeInfoClicked}
-          className="absolute bottom-0 w-screen flex place-content-center"
+          className="fixed left-3 top-1/2 -translate-y-1/2 z-[999999998]"
         />
         {/* Background */}
-        <div className="fixed top-0  w-screen h-screen z-[-1]" />
-        <div
-          className={`fixed left-0 top-0 bg-cover bg-center w-screen h-screen z-[-2]`}
-          style={{ backgroundImage: `url('${win11BG}')` }}
-        />
+        <div className="linux-wallpaper fixed left-0 top-0 w-screen h-screen z-[-2]" />
       </section>
     </>
   );
