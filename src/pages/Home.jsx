@@ -383,7 +383,7 @@ const Home = () => {
           aboutInfoClicked={aboutInfoClicked}
           projectInfoClicked={projectInfoClicked}
           resumeInfoClicked={resumeInfoClicked}
-          className="fixed left-3 top-1/2 -translate-y-1/2 z-[999999998]"
+          className="fixed bottom-3 left-1/2 -translate-x-1/2 md:left-3 md:top-1/2 md:bottom-auto md:translate-x-0 md:-translate-y-1/2 z-[999999998]"
         />
         {/* Background */}
         <div className="linux-wallpaper fixed left-0 top-0 w-screen h-screen z-[-2]" />

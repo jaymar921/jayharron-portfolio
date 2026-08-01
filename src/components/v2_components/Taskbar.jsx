@@ -37,8 +37,8 @@ function Taskbar({
 }) {
   return (
     <div className={className}>
-      <div className="ubuntu-dock z-[99999999] w-14 py-3 rounded-2xl flex flex-col items-center gap-3 shadow-2xl">
-        <div className="h-9 w-9 rounded-lg overflow-hidden mb-1 bg-ubuntu-orange/20 flex items-center justify-center">
+      <div className="ubuntu-dock z-[99999999] rounded-2xl flex flex-row md:flex-col items-center gap-3 shadow-2xl px-3 py-2 md:px-0 md:py-3 md:w-14">
+        <div className="h-9 w-9 rounded-lg overflow-hidden mb-0 md:mb-1 bg-ubuntu-orange/20 flex items-center justify-center">
           <img className="h-6 w-6" src={jhlogo} alt="Logo" />
         </div>
         <DockIcon
