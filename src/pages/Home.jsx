@@ -71,6 +71,10 @@ const Home = () => {
     };
   };
 
+  // The dock moves to the bottom on mobile, so desktop icons no longer need
+  // to clear its width and can sit close to the left edge instead.
+  const iconOffsetX = window.innerWidth < 768 ? 16 : DOCK_WIDTH + 24;
+
   const [currentStage, setCurrentStage] = useState(-1); // -1
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
   const [showResume, setShowResume] = useState(false);
@@ -174,7 +178,7 @@ const Home = () => {
         <DragContainer>
           <DragIcon
             key={"icon-1"}
-            posX={DOCK_WIDTH + 24}
+            posX={iconOffsetX}
             posY={TOPBAR_HEIGHT + 16}
             icon={profile}
             title={"Info"}
@@ -182,7 +186,7 @@ const Home = () => {
           />
           <DragIcon
             key={"icon-2"}
-            posX={DOCK_WIDTH + 24}
+            posX={iconOffsetX}
             posY={TOPBAR_HEIGHT + 100}
             icon={medalIcon}
             title={"About"}
@@ -190,7 +194,7 @@ const Home = () => {
           />
           <DragIcon
             key={"icon-3"}
-            posX={DOCK_WIDTH + 24}
+            posX={iconOffsetX}
             posY={TOPBAR_HEIGHT + 184}
             icon={
               "https://jaymar921.github.io/jayharronabejar/assets/images/ce3.png"
@@ -200,7 +204,7 @@ const Home = () => {
           />
           <DragIcon
             key={"icon-4"}
-            posX={DOCK_WIDTH + 24}
+            posX={iconOffsetX}
             posY={TOPBAR_HEIGHT + 268}
             icon={resumeIcon}
             title={"Resume"}
@@ -208,7 +212,7 @@ const Home = () => {
           />
           <DragIcon
             key={"icon-5"}
-            posX={DOCK_WIDTH + 24}
+            posX={iconOffsetX}
             posY={TOPBAR_HEIGHT + 352}
             icon={"https://avatars.githubusercontent.com/u/259235313?s=64&v=4"}
             title={"IP Inc"}
