@@ -81,8 +81,8 @@ function DragIcon({ posX, posY, icon, title, onDoubleClick }) {
 
   return (
     <div
-      className={`absolute w-fit h-fit cursor-pointer text-center ${
-        isDragging ? "opacity-70" : "opacity-100"
+      className={`absolute w-20 h-fit cursor-pointer text-center rounded-md px-1 py-2 hover:bg-white/10 ${
+        isDragging ? "opacity-70 bg-white/10" : "opacity-100"
       }`}
       style={{ left: position.x, top: position.y }}
       onMouseDown={handleMouseDown}
@@ -95,11 +95,17 @@ function DragIcon({ posX, posY, icon, title, onDoubleClick }) {
           <img
             src={icon}
             alt={title}
-            className="m-auto w-8 h-8 rounded-md select-none"
+            className="m-auto w-10 h-10 rounded-md select-none drop-shadow-lg"
           />
         )}
       </div>
-      <div>{title && <span className="m-1">{title}</span>}</div>
+      <div>
+        {title && (
+          <span className="desktop-icon-label m-1 text-xs text-white font-ubuntu">
+            {title}
+          </span>
+        )}
+      </div>
     </div>
   );
 }
