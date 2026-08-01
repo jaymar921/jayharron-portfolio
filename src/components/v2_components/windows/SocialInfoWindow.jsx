@@ -4,7 +4,7 @@ import { jayPhoto } from "../../../assets/images";
 function SocialInfoWindow() {
   return (
     <>
-      <div className="w-[320px]">
+      <div className="w-[320px] bg-ubuntu-aubergine-dark text-white p-3 rounded-b-md font-ubuntu">
         <div className="relative grid grid-cols-3 gap-0">
           <div className="w-fit rounded-md overflow-hidden m-0">
             <img className="w-[128px]" src={jayPhoto} />
@@ -13,15 +13,15 @@ function SocialInfoWindow() {
             <h1 className="text-white text-2xl text-center font-bold">
               Jayharron Mar Abejar
             </h1>
-            <h1 className="text-sm text-center text-green-400 font-bold">
+            <h1 className="text-sm text-center text-ubuntu-orange font-bold">
               Software Engineer
             </h1>
-            <h1 className="text-sm text-center text-green-400 font-bold">
+            <h1 className="text-sm text-center text-ubuntu-orange font-bold">
               DevOps | Azure | Cloud
             </h1>
           </div>
         </div>
-        <hr className="mt-4 mb-2" />
+        <hr className="mt-4 mb-2 border-white/10" />
         <p className="px-2 text-sm text-justify">
           I'm a Filipino Software Engineer working remotely with clients in the
           United States. I'm open to collaborations too, though I usually take
@@ -30,12 +30,12 @@ function SocialInfoWindow() {
           electrical setups. And when I'm not working, you'll probably find me
           hiking through mountains or spending time with family and friends.
         </p>
-        <hr className="mt-2 mb-2" />
+        <hr className="mt-2 mb-2 border-white/10" />
         <h2 className="text-white text-xl">Social Accounts:</h2>
         <div className="text-lg">
           <p className="px-4">
             <a href="https://github.com/jaymar921" target="_blank">
-              <i class="fa-brands fa-github text-black"></i> GitHub
+              <i class="fa-brands fa-github text-white"></i> GitHub
             </a>
           </p>
           <p className="px-4">
