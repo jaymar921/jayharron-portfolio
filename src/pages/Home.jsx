@@ -9,9 +9,12 @@ import About from "./About";
 import Projects from "./Projects";
 import DragIcon from "../components/draggables/components/DragIcon";
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
+import MiniBrowserWindow from "../components/v2_components/windows/MiniBrowserWindow";
 
 const DOCK_WIDTH = 88;
 const TOPBAR_HEIGHT = 40;
+const BROWSER_ICON =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23E95420'/%3E%3Cellipse cx='12' cy='12' rx='4.2' ry='10' fill='none' stroke='white' stroke-width='1.1'/%3E%3Cline x1='2' y1='12' x2='22' y2='12' stroke='white' stroke-width='1.1'/%3E%3Cpath d='M4 7.5c2.2 1.3 5 2 8 2s5.8-.7 8-2M4 16.5c2.2-1.3 5-2 8-2s5.8.7 8 2' fill='none' stroke='white' stroke-width='1.1'/%3E%3C/svg%3E";
 
 const windowTitles = {
   "social-window": "Short Info",
@@ -20,6 +23,7 @@ const windowTitles = {
   "ce3-window": "Custom Enchants 3",
   "illuminary-peak-window": "Illuminary Peak, Inc.",
   "resume-window": "My Resume",
+  "browser-window": "Mini Browser",
 };
 
 // Function to check if the browser is in fullscreen mode
@@ -30,6 +34,12 @@ function isFullscreen() {
     document.mozFullScreenElement || // Firefox
     document.msFullscreenElement // IE/Edge (old)
   );
+}
+
+// The boot/fullscreen prompt is only relevant on the deployed production site.
+const PROD_HOSTNAME = "jayharronabejar.vercel.app";
+function isProdHost() {
+  return window.location.hostname === PROD_HOSTNAME;
 }
 
 const Home = () => {
@@ -52,7 +62,10 @@ const Home = () => {
   const [showProject, setShowProject] = useState(false);
   const [showCE3, setShowCE3] = useState(false);
   const [showIP, setShowIP] = useState(false);
-  const [fullScreen, setFullScreen] = useState(isFullscreen());
+  const [showBrowser, setShowBrowser] = useState(false);
+  const [fullScreen, setFullScreen] = useState(
+    isProdHost() ? isFullscreen() : true,
+  );
   const [activeTrigger, setActiveTrigger] = useState("");
 
   const handleNext = () => {
@@ -89,6 +102,13 @@ const Home = () => {
   const illuminaryPeakClicked = () => {
     setShowIP(true);
     setActiveTrigger("illuminary-peak-window");
+  };
+
+  // Kept for when the browser desktop/dock icon is re-enabled.
+  // eslint-disable-next-line no-unused-vars
+  const browserClicked = () => {
+    setShowBrowser(true);
+    setActiveTrigger("browser-window");
   };
 
   useEffect(() => {
@@ -178,6 +198,7 @@ const Home = () => {
             title={"IP Inc"}
             onDoubleClick={illuminaryPeakClicked}
           />
+          {/* Browser desktop icon disabled for now, see browserClicked/MiniBrowserWindow */}
           <DragWindow
             key={"window-1"}
             id="social-window"
@@ -320,6 +341,24 @@ const Home = () => {
                 </div>
               </>
             }
+          />
+
+          <DragWindow
+            key={"window-7"}
+            id="browser-window"
+            posX={getScreenCenter(totalWidth > 1080 ? 400 : 175, 260).x}
+            posY={getScreenCenter(175, 260).y}
+            width={totalWidth > 1080 ? "800px" : "350px"}
+            height={totalWidth > 1080 ? "560px" : "450px"}
+            overflow="overflow-hidden"
+            background="bg-white"
+            show={showBrowser}
+            setShow={setShowBrowser}
+            icon={<img className="w-4" src={BROWSER_ICON} />}
+            title="Mini Browser"
+            activeTrigger={setActiveTrigger}
+            active={activeTrigger === "browser-window"}
+            content={<MiniBrowserWindow />}
           />
         </DragContainer>
         <Taskbar
