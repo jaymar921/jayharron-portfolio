@@ -87,6 +87,12 @@ const Home = () => {
     isProdHost() ? isFullscreen() : true,
   );
   const [activeTrigger, setActiveTrigger] = useState("");
+  // Bumped on every icon/taskbar click so DragWindow can un-minimize even
+  // when the window is already the active one (state values wouldn't
+  // otherwise change and no re-render/effect would fire).
+  const [reopenRequest, setReopenRequest] = useState({ id: "", tick: 0 });
+  const requestReopen = (id) =>
+    setReopenRequest((prev) => ({ id, tick: prev.tick + 1 }));
 
   const handleNext = () => {
     let s = currentStage;
@@ -97,31 +103,37 @@ const Home = () => {
   const personalInfoClicked = () => {
     setShowPersonalInfo(true);
     setActiveTrigger("social-window");
+    requestReopen("social-window");
   };
 
   const resumeInfoClicked = () => {
     setShowResume(true);
     setActiveTrigger("resume-window");
+    requestReopen("resume-window");
   };
 
   const aboutInfoClicked = () => {
     setShowAbout(true);
     setActiveTrigger("about-window");
+    requestReopen("about-window");
   };
 
   const projectInfoClicked = () => {
     setShowProject(true);
     setActiveTrigger("project-window");
+    requestReopen("project-window");
   };
 
   const ce3Clicked = () => {
     setShowCE3(true);
     setActiveTrigger("ce3-window");
+    requestReopen("ce3-window");
   };
 
   const illuminaryPeakClicked = () => {
     setShowIP(true);
     setActiveTrigger("illuminary-peak-window");
+    requestReopen("illuminary-peak-window");
   };
 
   // Kept for when the browser desktop/dock icon is re-enabled.
@@ -129,6 +141,7 @@ const Home = () => {
   const browserClicked = () => {
     setShowBrowser(true);
     setActiveTrigger("browser-window");
+    requestReopen("browser-window");
   };
 
   useEffect(() => {
@@ -237,6 +250,9 @@ const Home = () => {
             }
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "social-window"}
+            reopenSignal={
+              reopenRequest.id === "social-window" ? reopenRequest.tick : 0
+            }
             expandable={false}
           />
           <DragWindow
@@ -254,6 +270,9 @@ const Home = () => {
             title="About Me"
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "about-window"}
+            reopenSignal={
+              reopenRequest.id === "about-window" ? reopenRequest.tick : 0
+            }
             content={
               <>
                 <div>
@@ -277,6 +296,9 @@ const Home = () => {
             title="My Projects"
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "project-window"}
+            reopenSignal={
+              reopenRequest.id === "project-window" ? reopenRequest.tick : 0
+            }
             content={
               <>
                 <div>
@@ -300,6 +322,9 @@ const Home = () => {
             title="Custom Enchants 3"
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "ce3-window"}
+            reopenSignal={
+              reopenRequest.id === "ce3-window" ? reopenRequest.tick : 0
+            }
             content={
               <>
                 <div className="h-[100%]">
@@ -327,6 +352,11 @@ const Home = () => {
             title="Illuminary Peak, Inc."
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "illuminary-peak-window"}
+            reopenSignal={
+              reopenRequest.id === "illuminary-peak-window"
+                ? reopenRequest.tick
+                : 0
+            }
             content={
               <>
                 <div className="h-[100%]">
@@ -354,6 +384,9 @@ const Home = () => {
             title="My Resume"
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "resume-window"}
+            reopenSignal={
+              reopenRequest.id === "resume-window" ? reopenRequest.tick : 0
+            }
             content={
               <>
                 <div>
@@ -378,6 +411,9 @@ const Home = () => {
             title="Mini Browser"
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "browser-window"}
+            reopenSignal={
+              reopenRequest.id === "browser-window" ? reopenRequest.tick : 0
+            }
             content={<MiniBrowserWindow />}
           />
         </DragContainer>
