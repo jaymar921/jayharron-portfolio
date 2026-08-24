@@ -29,7 +29,7 @@ const Projects = () => {
           <span className="text-ubuntu-orange">$</span>
           <span>ls -la ./projects</span>
           <span className="ml-auto hidden sm:inline">
-            open-source / selected-work
+            open-source / websites
           </span>
         </div>
 
@@ -64,7 +64,12 @@ const Projects = () => {
 
               <div className="mt-4 flex min-h-8 items-center justify-between gap-3 border-t border-white/10 pt-3 text-xs">
                 <span className="text-ubuntu-warm-grey">
-                  <span className="text-ubuntu-orange">●</span> repository
+                  <span className="text-ubuntu-orange">●</span>{" "}
+                  {project.isOpenSource
+                    ? "open source"
+                    : project.link
+                      ? "website"
+                      : "private / offline"}
                 </span>
                 {project.link ? (
                   <Link
@@ -73,7 +78,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="inline-flex shrink-0 items-center gap-2 font-bold text-ubuntu-orange hover:text-white"
                   >
-                    Open project
+                    {project.isOpenSource ? "Open project" : "Open website"}
                     <i
                       className="fa-solid fa-arrow-up-right-from-square"
                       aria-hidden="true"

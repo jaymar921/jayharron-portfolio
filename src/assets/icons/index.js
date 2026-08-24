@@ -3,6 +3,7 @@ import express from "./express.svg";
 import git from "./git.svg";
 import github from "./github.svg";
 import html from "./html.svg";
+import hirayacoder from "./hirayacoder.png";
 import javascript from "./javascript.svg";
 import mongodb from "./mongodb.svg";
 import motion from "./motion.svg";
@@ -15,6 +16,7 @@ import sass from "./sass.svg";
 import tailwindcss from "./tailwindcss.svg";
 import typescript from "./typescript.svg";
 import linkedin from "./linkedin.svg";
+import logevac from "./logevac.png";
 import twitter from "./twitter.svg";
 import car from "./car.svg";
 import estate from "./estate.svg";
@@ -44,6 +46,7 @@ import illuminaryPeakLogo from "./ip-128.png"
 import unixFolder from "./unix-folder.svg";
 import unixProject from "./unix-project.svg";
 import unixResume from "./unix-resume.svg";
+import zygowork from "./zygowork.png";
 
 export {
   css,
@@ -51,6 +54,7 @@ export {
   git,
   github,
   html,
+  hirayacoder,
   javascript,
   mongodb,
   motion,
@@ -63,6 +67,7 @@ export {
   tailwindcss,
   typescript,
   linkedin,
+  logevac,
   twitter,
   car,
   estate,
@@ -92,4 +97,5 @@ export {
   unixFolder,
   unixProject,
   unixResume,
+  zygowork,
 };

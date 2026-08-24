@@ -8,9 +8,11 @@ import {
   git,
   github,
   html,
+  hirayacoder,
   illuminaryPeakLogo,
   javascript,
   linkedin,
+  logevac,
   mongodb,
   nextjs,
   nodejs,
@@ -25,6 +27,7 @@ import {
   tailwindcss,
   threads,
   typescript,
+  zygowork,
 } from "../assets/icons";
 
 import {
@@ -424,6 +427,32 @@ export const socialLinks = [
 
 export const projects = [
   {
+    iconUrl: logevac,
+    theme: "btn-back-blue",
+    name: "LogEvac",
+    description:
+      "A lightweight .NET library that automatically removes old log records from SQL Server databases configured with Serilog MSSQL sinks, keeping logging databases lean and performant without manual intervention.",
+    link: "https://www.nuget.org/packages/LogEvac",
+    isOpenSource: true,
+  },
+  {
+    iconUrl: hirayacoder,
+    theme: "btn-back-blue",
+    name: "HirayaCoder",
+    description:
+      "A free AI coding assistant that runs entirely on your own computer. Describe what you want in plain English and it writes and edits files locally, with no account, subscription, internet connection, or data leaving your laptop.",
+    link: "https://github.com/jaymar921/HirayaCoder",
+    isOpenSource: true,
+  },
+  {
+    iconUrl: zygowork,
+    theme: "btn-back-green",
+    name: "ZygoWork",
+    description:
+      "A workforce management platform for small and medium-sized businesses to track hours, attendance, productivity, leave, shift planning, delegated approvals, and accountant sign-off for payroll runs.",
+    link: "https://www.zygowork.com",
+  },
+  {
     iconUrl:
       "https://jaymar921.github.io/jayharronabejar/assets/images/PSITS_LOGO.png",
     theme: "btn-back-blue",
@@ -431,6 +460,7 @@ export const projects = [
     description:
       "PSITS web application allows PSITS officers to manage announcements, selling tickets/t-shirts, and create events! UC Main CCS students can create an account for reservation/order of event merch purpose. ",
     link: "https://github.com/PSITS-UC-MAIN",
+    isOpenSource: true,
   },
   {
     iconUrl:
@@ -440,6 +470,7 @@ export const projects = [
     description:
       "The task of helping drivers whose cars break down on the road can be difficult for service providers, especially when there are no other vehicles around.",
     link: "https://github.com/jaymar921/AYUS-WebASP",
+    isOpenSource: true,
   },
   {
     iconUrl: "https://avatars.githubusercontent.com/u/148028870?s=48&v=4",
@@ -448,6 +479,7 @@ export const projects = [
     description:
       "To ignite the spirit of friendly competition, knowledge exploration, and personal growth through the Quiz Bee Competition Web and Mobile Application, creating a community of lifelong learners and champions.",
     link: "https://github.com/full-scale-teams/rocks-quizmaster",
+    isOpenSource: true,
   },
   {
     iconUrl: "https://avatars.githubusercontent.com/u/148028870?s=48&v=4",
