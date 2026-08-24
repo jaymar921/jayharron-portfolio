@@ -4,7 +4,13 @@ import Taskbar from "../components/v2_components/Taskbar";
 import TopBar from "../components/v2_components/TopBar";
 import DragWindow from "../components/draggables/components/DragWindow";
 import SocialInfoWindow from "../components/v2_components/windows/SocialInfoWindow";
-import { profile, medalIcon, projectIcon, resumeIcon } from "../assets/icons";
+import {
+  profile,
+  medalIcon,
+  projectIcon,
+  unixResume,
+  unixFolder,
+} from "../assets/icons";
 import About from "./About";
 import Projects from "./Projects";
 import DragIcon from "../components/draggables/components/DragIcon";
@@ -201,14 +207,6 @@ const Home = () => {
             key={"icon-2"}
             posX={iconOffsetX}
             posY={TOPBAR_HEIGHT + 100}
-            icon={medalIcon}
-            title={"About"}
-            onDoubleClick={setShowAbout}
-          />
-          <DragIcon
-            key={"icon-3"}
-            posX={iconOffsetX}
-            posY={TOPBAR_HEIGHT + 184}
             icon={
               "https://jaymar921.github.io/jayharronabejar/assets/images/ce3.png"
             }
@@ -216,20 +214,28 @@ const Home = () => {
             onDoubleClick={ce3Clicked}
           />
           <DragIcon
+            key={"icon-3"}
+            posX={iconOffsetX}
+            posY={TOPBAR_HEIGHT + 184}
+            icon={"https://avatars.githubusercontent.com/u/259235313?s=64&v=4"}
+            title={"IP Inc"}
+            onDoubleClick={illuminaryPeakClicked}
+          />
+          <DragIcon
             key={"icon-4"}
             posX={iconOffsetX}
             posY={TOPBAR_HEIGHT + 268}
-            icon={resumeIcon}
-            title={"Resume"}
-            onDoubleClick={setShowResume}
+            icon={unixFolder}
+            title={"About"}
+            onDoubleClick={setShowAbout}
           />
           <DragIcon
             key={"icon-5"}
             posX={iconOffsetX}
             posY={TOPBAR_HEIGHT + 352}
-            icon={"https://avatars.githubusercontent.com/u/259235313?s=64&v=4"}
-            title={"IP Inc"}
-            onDoubleClick={illuminaryPeakClicked}
+            icon={unixResume}
+            title={"Resume"}
+            onDoubleClick={setShowResume}
           />
           {/* Browser desktop icon disabled for now, see browserClicked/MiniBrowserWindow */}
           <DragWindow
@@ -238,13 +244,13 @@ const Home = () => {
             posX={getScreenCenter(180, 260).x}
             posY={getScreenCenter(180, 260).y}
             width="360px"
-            height="520px"
+            height="auto"
             show={showPersonalInfo}
             setShow={setShowPersonalInfo}
             icon={"📚"}
             title="Short Info"
             content={
-              <div className="p-2">
+              <div>
                 <SocialInfoWindow />
               </div>
             }
@@ -254,6 +260,7 @@ const Home = () => {
               reopenRequest.id === "social-window" ? reopenRequest.tick : 0
             }
             expandable={false}
+            resizable={false}
           />
           <DragWindow
             key={"window-2"}

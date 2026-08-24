@@ -1,9 +1,9 @@
 import {
   jhlogo,
   profile,
-  medalIcon,
-  projectIcon,
-  resumeIcon,
+  unixFolder,
+  unixProject,
+  unixResume,
 } from "../../assets/icons";
 
 // Kept for when the browser dock icon is re-enabled.
@@ -48,19 +48,19 @@ function Taskbar({
           active={activeTrigger === "social-window"}
         />
         <DockIcon
-          icon={medalIcon}
+          icon={unixFolder}
           label="About"
           onClick={aboutInfoClicked}
           active={activeTrigger === "about-window"}
         />
         <DockIcon
-          icon={projectIcon}
+          icon={unixProject}
           label="Projects"
           onClick={projectInfoClicked}
           active={activeTrigger === "project-window"}
         />
         <DockIcon
-          icon={resumeIcon}
+          icon={unixResume}
           label="Resume"
           onClick={resumeInfoClicked}
           active={activeTrigger === "resume-window"}

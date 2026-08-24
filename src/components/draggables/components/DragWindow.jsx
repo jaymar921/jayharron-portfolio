@@ -276,7 +276,10 @@ function DragWindow({
       </div>
       <div
         className={`${background ? background : "bg-white bg-opacity-10 backdrop-blur-lg"} ${overflow} drop-shadow-lg`}
-        style={{ width: size.width, height: size.height }}
+        style={{
+          width: size.width,
+          height: height === "auto" ? "auto" : size.height,
+        }}
       >
         {content ? content : <p>This is the content area of the window.</p>}
       </div>

@@ -35,7 +35,9 @@ import {
   cert_owasp_password_hygiene,
   cert_owasp_projecting_source_code,
   cert_owasp_top_10_sec_2021,
+  bsit_deploma,
   itpec_logo,
+  shs_deploma,
 } from "../assets/images";
 
 export const positions = [
@@ -117,6 +119,13 @@ export const AnimalPositions = [
 
 const getYears = (year) => {
   return new Date().getFullYear() - year;
+};
+
+export const resumeProfile = {
+  name: "Jayharron Mar Abejar",
+  title: "Software Engineer | DevOps | Azure | Cloud",
+  summary:
+    "Filipino Software Engineer working remotely with clients in the United States, focused on modern web applications, cloud delivery, and secure development practices.",
 };
 
 export const skills = [
@@ -375,6 +384,8 @@ export const educationalAttainment = [
     year: "2019-2023",
     curriculum: "Course: Bachelor of Science in Information Technology (BSIT)",
     logo: school_ucmain,
+    graduationDate: "May 27, 2023",
+    diploma: bsit_deploma,
   },
   {
     school: "St. Scholastica's Academy - Tabunok",
@@ -382,6 +393,8 @@ export const educationalAttainment = [
     curriculum:
       "Strand: Science, Technology, Engineering and Mathematics (STEM)",
     logo: school_stscho,
+    graduationDate: "April 27, 2019",
+    diploma: shs_deploma,
   },
   {
     school: "St. Scholastica's Academy - Tabunok",
@@ -451,7 +464,7 @@ export const projects = [
     name: "Custom Enchantments 3",
     description:
       "The plugin is so called an advanced because it has a built in Custom Enchantments, Skilling System, Player Classifications, CE Currencies/Quests and an RPG feels in the game.",
-    link: "https://jhprojects.vercel.app/ce3",
+    link: "https://jhprojects.vercel.app/customenchantments3",
   },
   {
     iconUrl:

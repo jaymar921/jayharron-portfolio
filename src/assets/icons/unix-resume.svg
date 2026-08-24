@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Resume">
+  <path fill="#f5f5f5" d="M16 5h23l11 11v43H16z"/>
+  <path fill="#d6d6d6" d="M39 5v12h11z"/>
+  <path fill="#e95420" d="M20 27h26v4H20zm0 9h26v4H20zm0 9h18v4H20z"/>
+  <circle cx="27" cy="18" r="5" fill="#772953"/>
+  <path fill="#fff" d="M24 18h6v2h-6z" opacity=".8"/>
+</svg>
