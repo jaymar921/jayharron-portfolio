@@ -330,7 +330,7 @@ const Home = () => {
                 <div className="h-[100%]">
                   <iframe
                     className="w-full h-[100%]"
-                    src="https://jhprojects.vercel.app/ce3"
+                    src="https://jhprojects.vercel.app/customenchantments3"
                   />
                 </div>
               </>
