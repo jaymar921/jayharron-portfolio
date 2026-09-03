@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DragContainer from "../components/draggables/containers/DragContainer";
 import Taskbar from "../components/v2_components/Taskbar";
 import TopBar from "../components/v2_components/TopBar";
@@ -18,9 +18,18 @@ import Projects from "./Projects";
 import DragIcon from "../components/draggables/components/DragIcon";
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
 import MiniBrowserWindow from "../components/v2_components/windows/MiniBrowserWindow";
+import {
+  DESKTOP_TOPBAR_HEIGHT,
+  WINDOW_CHROME_HEIGHT,
+  WINDOW_CHROME_WIDTH,
+} from "../constants/desktop";
 
 const DOCK_WIDTH = 88;
-const TOPBAR_HEIGHT = 40;
+const TOPBAR_HEIGHT = DESKTOP_TOPBAR_HEIGHT;
+const SCREEN_MARGIN = 8;
+const COMPACT_BREAKPOINT = 768;
+// Clearance for the dock, which sits along the bottom edge on compact screens.
+const COMPACT_DOCK_CLEARANCE = 88;
 const BROWSER_ICON =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23E95420'/%3E%3Cellipse cx='12' cy='12' rx='4.2' ry='10' fill='none' stroke='white' stroke-width='1.1'/%3E%3Cline x1='2' y1='12' x2='22' y2='12' stroke='white' stroke-width='1.1'/%3E%3Cpath d='M4 7.5c2.2 1.3 5 2 8 2s5.8-.7 8-2M4 16.5c2.2-1.3 5-2 8-2s5.8.7 8 2' fill='none' stroke='white' stroke-width='1.1'/%3E%3C/svg%3E";
 
@@ -31,8 +40,13 @@ const BROWSER_ICON =
 const ICON_TOP_MARGIN = 16;
 const ICON_SPACING_Y = 100;
 const ICON_SPACING_X = 96;
-// Clearance for the dock, which sits along the bottom edge on compact screens.
-const COMPACT_DOCK_CLEARANCE = 88;
+
+// Largest a content window is allowed to get, and the Short Info window's
+// natural size. Both are capped by whatever the viewport can actually spare.
+const MAX_WINDOW_WIDTH = 1080;
+const MAX_WINDOW_HEIGHT = 620;
+const INFO_WINDOW_WIDTH = 360;
+const INFO_WINDOW_HEIGHT = 490;
 
 const windowTitles = {
   "social-window": "Short Info",
@@ -54,16 +68,22 @@ function isFullscreen() {
   );
 }
 
+function getFullscreenRequest() {
+  const element = document.documentElement;
+  return (
+    element.requestFullscreen ||
+    element.webkitRequestFullscreen ||
+    element.mozRequestFullScreen ||
+    element.msRequestFullscreen
+  );
+}
+
 // Normalises the vendor-prefixed fullscreen calls into a promise. The older
 // prefixed versions return undefined rather than a promise, so the caller also
 // has to confirm the request actually took effect.
 function requestFullscreen() {
   const element = document.documentElement;
-  const request =
-    element.requestFullscreen ||
-    element.webkitRequestFullscreen ||
-    element.mozRequestFullScreen ||
-    element.msRequestFullscreen;
+  const request = getFullscreenRequest();
 
   if (!request) {
     return Promise.reject(new Error("Fullscreen API is not supported here"));
@@ -76,56 +96,85 @@ function requestFullscreen() {
   });
 }
 
-// Auto fullscreen is only wanted on the deployed production site. Locally it
-// would fight with devtools on every hot reload.
+const FULLSCREEN_EVENTS = [
+  "fullscreenchange",
+  "webkitfullscreenchange",
+  "mozfullscreenchange",
+  "MSFullscreenChange",
+];
+
+// The desktop only insists on fullscreen for the deployed site. Locally it
+// would fight with devtools on every hot reload, and a browser with no
+// fullscreen support at all (iOS Safari cannot take the whole document) is
+// never left waiting for something that will not happen.
 const PROD_HOSTNAME = "jayharronabejar.vercel.app";
-function shouldAutoFullscreen() {
-  return window.location.hostname === PROD_HOSTNAME && !isFullscreen();
+function wantsFullscreen() {
+  return (
+    window.location.hostname === PROD_HOSTNAME &&
+    Boolean(getFullscreenRequest())
+  );
+}
+
+function readViewport() {
+  return { width: window.innerWidth, height: window.innerHeight };
 }
 
 const Home = () => {
-  const totalWidth = Math.max(
-    document.documentElement.scrollWidth,
-    window.innerWidth,
-  );
+  // Viewport is state rather than a direct window read, so entering fullscreen
+  // or rotating a phone re-runs the layout instead of leaving windows homed to
+  // whatever size the page happened to load at.
+  const [viewport, setViewport] = useState(readViewport);
+  const [hasEnteredFullscreen, setHasEnteredFullscreen] = useState(isFullscreen);
+  const [needsFullscreen] = useState(wantsFullscreen);
 
-  // x/y are half the window's width/height. On narrow (mobile) screens the
-  // dock is skipped from the centering math and the result is clamped to the
-  // viewport so windows never open off-screen or skewed toward the dock.
-  const getScreenCenter = (x = 200, y = 150) => {
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const isCompact = viewportWidth < 768;
-    const reservedLeft = isCompact ? 0 : DOCK_WIDTH;
+  const isCompactViewport = viewport.width < COMPACT_BREAKPOINT;
 
-    const idealX = reservedLeft + (viewportWidth - reservedLeft) / 2 - x;
-    const idealY = TOPBAR_HEIGHT + (viewportHeight - TOPBAR_HEIGHT) / 2 - y;
+  // Usable desktop: below the top bar and clear of the dock, which is a left
+  // rail on wide screens and a bottom bar on compact ones.
+  const bounds = {
+    left: isCompactViewport ? SCREEN_MARGIN : DOCK_WIDTH + SCREEN_MARGIN,
+    right: viewport.width - SCREEN_MARGIN,
+    top: TOPBAR_HEIGHT + SCREEN_MARGIN,
+    bottom:
+      viewport.height -
+      (isCompactViewport ? COMPACT_DOCK_CLEARANCE : SCREEN_MARGIN),
+  };
+  const usableWidth = Math.max(240, bounds.right - bounds.left);
+  const usableHeight = Math.max(200, bounds.bottom - bounds.top);
 
-    const minX = isCompact ? 8 : DOCK_WIDTH + 8;
-    const maxX = Math.max(minX, viewportWidth - x * 2 - 8);
-    const minY = TOPBAR_HEIGHT + 8;
-    const maxY = Math.max(minY, viewportHeight - y * 2 - 8);
+  // Windows take the space they can actually have. The title bar counts toward
+  // the frame height, so the whole window ends up centred rather than just its
+  // content, and the bottom edge never lands under the dock.
+  const windowSize = {
+    width: Math.min(MAX_WINDOW_WIDTH, usableWidth - WINDOW_CHROME_WIDTH),
+    height: Math.min(MAX_WINDOW_HEIGHT, usableHeight - WINDOW_CHROME_HEIGHT),
+  };
+  const infoSize = {
+    width: Math.min(INFO_WINDOW_WIDTH, usableWidth - WINDOW_CHROME_WIDTH),
+    height: Math.min(INFO_WINDOW_HEIGHT, usableHeight - WINDOW_CHROME_HEIGHT),
+  };
+
+  const getWindowPosition = (width, height) => {
+    const frameWidth = width + WINDOW_CHROME_WIDTH;
+    const frameHeight = height + WINDOW_CHROME_HEIGHT;
+    const x = bounds.left + (usableWidth - frameWidth) / 2;
+    const y = bounds.top + (usableHeight - frameHeight) / 2;
 
     return {
-      x: Math.min(Math.max(idealX, minX), maxX),
-      y: Math.min(Math.max(idealY, minY), maxY),
+      x: Math.round(
+        Math.max(bounds.left, Math.min(x, bounds.right - frameWidth)),
+      ),
+      y: Math.round(
+        Math.max(bounds.top, Math.min(y, bounds.bottom - frameHeight)),
+      ),
     };
   };
 
-  // The dock is a left rail on desktop and a bottom bar on mobile, so each
-  // layout gives up room on a different axis. Icons are laid out on one grid
-  // and wrap into a new column once the usable height runs out.
-  const isCompactViewport = window.innerWidth < 768;
   const iconOffsetX = isCompactViewport ? 16 : DOCK_WIDTH + 24;
   const iconTopY = TOPBAR_HEIGHT + ICON_TOP_MARGIN;
-  const iconBottomClearance = isCompactViewport
-    ? COMPACT_DOCK_CLEARANCE
-    : ICON_TOP_MARGIN;
   const iconsPerColumn = Math.max(
     1,
-    Math.floor(
-      (window.innerHeight - iconTopY - iconBottomClearance) / ICON_SPACING_Y,
-    ),
+    Math.floor((bounds.bottom - iconTopY) / ICON_SPACING_Y),
   );
 
   const getIconPosition = (index) => ({
@@ -133,7 +182,10 @@ const Home = () => {
     posY: iconTopY + (index % iconsPerColumn) * ICON_SPACING_Y,
   });
 
-  const [currentStage, setCurrentStage] = useState(-1); // -1
+  // Icons and windows keep their placement in their own state, so re-homing
+  // them after a viewport change means remounting them under a new key.
+  const layoutKey = `${viewport.width}x${viewport.height}`;
+
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
   const [showResume, setShowResume] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
@@ -141,8 +193,6 @@ const Home = () => {
   const [showIP, setShowIP] = useState(false);
   const [showJHProjects, setShowJHProjects] = useState(false);
   const [showBrowser, setShowBrowser] = useState(false);
-  const [awaitingClickToFullscreen, setAwaitingClickToFullscreen] =
-    useState(false);
   const [activeTrigger, setActiveTrigger] = useState("");
   // Bumped on every icon/taskbar click so DragWindow can un-minimize even
   // when the window is already the active one (state values wouldn't
@@ -150,12 +200,6 @@ const Home = () => {
   const [reopenRequest, setReopenRequest] = useState({ id: "", tick: 0 });
   const requestReopen = (id) =>
     setReopenRequest((prev) => ({ id, tick: prev.tick + 1 }));
-
-  const handleNext = () => {
-    let s = currentStage;
-    if (s++ >= 3) setCurrentStage(0);
-    else setCurrentStage(s++);
-  };
 
   const personalInfoClicked = () => {
     setShowPersonalInfo(true);
@@ -201,56 +245,85 @@ const Home = () => {
     requestReopen("browser-window");
   };
 
+  // Keep the layout in step with the viewport. Fullscreen and rotation settle
+  // their dimensions a beat after the event fires, so the read is debounced.
   useEffect(() => {
-    setInterval(() => {
-      handleNext();
-    }, 20_000);
-  }, [currentStage, handleNext]);
+    let timer = 0;
 
-  // The desktop tries to go fullscreen on its own. Browsers usually only grant
-  // that from a user gesture, so when the automatic attempt is refused the Info
-  // window stays closed and the visitor's first click anywhere does both: it
-  // enters fullscreen and opens the window.
-  useEffect(() => {
-    let cancelled = false;
-
-    const openInfoWindow = () => {
-      if (cancelled) return;
-      setShowPersonalInfo(true);
-      setActiveTrigger("social-window");
-      setReopenRequest((prev) => ({
-        id: "social-window",
-        tick: prev.tick + 1,
-      }));
+    const sync = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        setViewport((previous) => {
+          const next = readViewport();
+          return previous.width === next.width && previous.height === next.height
+            ? previous
+            : next;
+        });
+      }, 180);
     };
 
-    const onFirstClick = () => {
-      window.removeEventListener("pointerdown", onFirstClick);
-      setAwaitingClickToFullscreen(false);
-      requestFullscreen().catch(() => {});
-      openInfoWindow();
+    const onFullscreenChange = () => {
+      if (isFullscreen()) setHasEnteredFullscreen(true);
+      sync();
     };
 
-    if (!shouldAutoFullscreen()) {
-      openInfoWindow();
-      return () => {
-        cancelled = true;
-      };
-    }
-
-    requestFullscreen()
-      .then(openInfoWindow)
-      .catch(() => {
-        if (cancelled) return;
-        setAwaitingClickToFullscreen(true);
-        window.addEventListener("pointerdown", onFirstClick);
-      });
+    window.addEventListener("resize", sync);
+    window.addEventListener("orientationchange", sync);
+    FULLSCREEN_EVENTS.forEach((event) =>
+      document.addEventListener(event, onFullscreenChange),
+    );
 
     return () => {
-      cancelled = true;
-      window.removeEventListener("pointerdown", onFirstClick);
+      window.clearTimeout(timer);
+      window.removeEventListener("resize", sync);
+      window.removeEventListener("orientationchange", sync);
+      FULLSCREEN_EVENTS.forEach((event) =>
+        document.removeEventListener(event, onFullscreenChange),
+      );
     };
   }, []);
+
+  // Fullscreen needs a user gesture, so the request rides on the visitor's
+  // first interaction. The listeners stay armed until it is granted, in case
+  // the first attempt is refused.
+  useEffect(() => {
+    if (!needsFullscreen || hasEnteredFullscreen) return undefined;
+
+    const onInteract = () => {
+      requestFullscreen().catch(() => {});
+    };
+
+    window.addEventListener("pointerdown", onInteract);
+    window.addEventListener("keydown", onInteract);
+
+    return () => {
+      window.removeEventListener("pointerdown", onInteract);
+      window.removeEventListener("keydown", onInteract);
+    };
+  }, [needsFullscreen, hasEnteredFullscreen]);
+
+  // The Short Info window is the desktop's welcome, so it waits until the
+  // desktop is actually fullscreen. The delay lets the fullscreen transition
+  // and the viewport sync above finish first, so the window opens already
+  // centred on the new screen size instead of jumping into place.
+  const desktopReady = hasEnteredFullscreen || !needsFullscreen;
+  const infoWindowOpened = useRef(false);
+
+  useEffect(() => {
+    if (!desktopReady || infoWindowOpened.current) return undefined;
+    infoWindowOpened.current = true;
+
+    const timer = window.setTimeout(() => {
+      setShowPersonalInfo(true);
+      setActiveTrigger("social-window");
+      setReopenRequest((previous) => ({
+        id: "social-window",
+        tick: previous.tick + 1,
+      }));
+    }, 260);
+
+    return () => window.clearTimeout(timer);
+  }, [desktopReady]);
 
   return (
     <>
@@ -258,14 +331,14 @@ const Home = () => {
         <TopBar activeTitle={windowTitles[activeTrigger] || ""} />
         <DragContainer>
           <DragIcon
-            key={"icon-1"}
+            key={`icon-1-${layoutKey}`}
             {...getIconPosition(0)}
             icon={profile}
             title={"Info"}
             onDoubleClick={personalInfoClicked}
           />
           <DragIcon
-            key={"icon-2"}
+            key={`icon-2-${layoutKey}`}
             {...getIconPosition(1)}
             icon={illuminaryPeakLogo}
             iconBg={"#FFFFFF"}
@@ -273,21 +346,21 @@ const Home = () => {
             onDoubleClick={illuminaryPeakClicked}
           />
           <DragIcon
-            key={"icon-3"}
+            key={`icon-3-${layoutKey}`}
             {...getIconPosition(2)}
             icon={jhProjectsLogo}
             title={"JHProjects"}
             onDoubleClick={jhProjectsClicked}
           />
           <DragIcon
-            key={"icon-4"}
+            key={`icon-4-${layoutKey}`}
             {...getIconPosition(3)}
             icon={unixFolder}
             title={"About"}
             onDoubleClick={aboutInfoClicked}
           />
           <DragIcon
-            key={"icon-5"}
+            key={`icon-5-${layoutKey}`}
             {...getIconPosition(4)}
             icon={unixResume}
             title={"Resume"}
@@ -295,11 +368,11 @@ const Home = () => {
           />
           {/* Browser desktop icon disabled for now, see browserClicked/MiniBrowserWindow */}
           <DragWindow
-            key={"window-1"}
+            key={`window-1-${layoutKey}`}
             id="social-window"
-            posX={getScreenCenter(180, 260).x}
-            posY={getScreenCenter(180, 260).y}
-            width="360px"
+            posX={getWindowPosition(infoSize.width, infoSize.height).x}
+            posY={getWindowPosition(infoSize.width, infoSize.height).y}
+            width={infoSize.width}
             height="auto"
             show={showPersonalInfo}
             setShow={setShowPersonalInfo}
@@ -319,13 +392,13 @@ const Home = () => {
             resizable={false}
           />
           <DragWindow
-            key={"window-2"}
+            key={`window-2-${layoutKey}`}
             id="about-window"
-            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
-            posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 1080 ? "1080px" : "350px"}
-            height={totalWidth > 1080 ? "620px" : "450px"}
-            overflow="overflow-y-scroll"
+            posX={getWindowPosition(windowSize.width, windowSize.height).x}
+            posY={getWindowPosition(windowSize.width, windowSize.height).y}
+            width={windowSize.width}
+            height={windowSize.height}
+            overflow="overflow-y-auto overflow-x-hidden"
             background="bg-slate-800"
             show={showAbout}
             setShow={setShowAbout}
@@ -336,22 +409,16 @@ const Home = () => {
             reopenSignal={
               reopenRequest.id === "about-window" ? reopenRequest.tick : 0
             }
-            content={
-              <>
-                <div>
-                  <About />
-                </div>
-              </>
-            }
+            content={<About />}
           />
           <DragWindow
-            key={"window-3"}
+            key={`window-3-${layoutKey}`}
             id="project-window"
-            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
-            posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 1080 ? "1080px" : "350px"}
-            height={totalWidth > 1080 ? "620px" : "450px"}
-            overflow="overflow-y-scroll"
+            posX={getWindowPosition(windowSize.width, windowSize.height).x}
+            posY={getWindowPosition(windowSize.width, windowSize.height).y}
+            width={windowSize.width}
+            height={windowSize.height}
+            overflow="overflow-y-auto overflow-x-hidden"
             background="bg-slate-800"
             show={showProject}
             setShow={setShowProject}
@@ -362,26 +429,21 @@ const Home = () => {
             reopenSignal={
               reopenRequest.id === "project-window" ? reopenRequest.tick : 0
             }
-            content={
-              <>
-                <div>
-                  <Projects />
-                </div>
-              </>
-            }
+            content={<Projects />}
           />
+
           <DragWindow
-            key={"window-4"}
+            key={`window-4-${layoutKey}`}
             id="illuminary-peak-window"
-            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
-            posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 1080 ? "1080px" : "350px"}
-            height={totalWidth > 1080 ? "620px" : "450px"}
-            overflow="overflow-y-scroll"
+            posX={getWindowPosition(windowSize.width, windowSize.height).x}
+            posY={getWindowPosition(windowSize.width, windowSize.height).y}
+            width={windowSize.width}
+            height={windowSize.height}
+            overflow="overflow-hidden"
             background="bg-slate-800"
             show={showIP}
             setShow={setShowIP}
-            icon={<img className="w-4" src={projectIcon} />}
+            icon={<img className="w-4" src={illuminaryPeakLogo} />}
             title="Illuminary Peak, Inc."
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "illuminary-peak-window"}
@@ -391,25 +453,22 @@ const Home = () => {
                 : 0
             }
             content={
-              <>
-                <div className="h-[100%]">
-                  <iframe
-                    className="w-full h-[100%]"
-                    src="https://illuminary-peak.vercel.app/"
-                  />
-                </div>
-              </>
+              <iframe
+                className="w-full h-full block"
+                title="Illuminary Peak, Inc."
+                src="https://illuminary-peak.vercel.app/"
+              />
             }
           />
 
           <DragWindow
-            key={"window-5"}
+            key={`window-5-${layoutKey}`}
             id="jhprojects-window"
-            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
-            posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 1080 ? "1080px" : "350px"}
-            height={totalWidth > 1080 ? "620px" : "450px"}
-            overflow="overflow-y-scroll"
+            posX={getWindowPosition(windowSize.width, windowSize.height).x}
+            posY={getWindowPosition(windowSize.width, windowSize.height).y}
+            width={windowSize.width}
+            height={windowSize.height}
+            overflow="overflow-hidden"
             background="bg-slate-800"
             show={showJHProjects}
             setShow={setShowJHProjects}
@@ -421,52 +480,42 @@ const Home = () => {
               reopenRequest.id === "jhprojects-window" ? reopenRequest.tick : 0
             }
             content={
-              <>
-                <div className="h-[100%]">
-                  <iframe
-                    className="w-full h-[100%]"
-                    title="JHProjects"
-                    src="https://jhprojects.vercel.app/"
-                  />
-                </div>
-              </>
+              <iframe
+                className="w-full h-full block"
+                title="JHProjects"
+                src="https://jhprojects.vercel.app/"
+              />
             }
           />
 
           <DragWindow
-            key={"window-6"}
+            key={`window-6-${layoutKey}`}
             id="resume-window"
-            posX={getScreenCenter(totalWidth > 1080 ? 540 : 175, 260).x}
-            posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 1080 ? "1080px" : "350px"}
-            height={totalWidth > 1080 ? "620px" : "450px"}
-            overflow="overflow-y-scroll"
+            posX={getWindowPosition(windowSize.width, windowSize.height).x}
+            posY={getWindowPosition(windowSize.width, windowSize.height).y}
+            width={windowSize.width}
+            height={windowSize.height}
+            overflow="overflow-y-auto overflow-x-hidden"
             background="bg-slate-800"
             show={showResume}
             setShow={setShowResume}
-            icon={<img className="w-4" src={projectIcon} />}
+            icon={<img className="w-4" src={unixResume} />}
             title="My Resume"
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "resume-window"}
             reopenSignal={
               reopenRequest.id === "resume-window" ? reopenRequest.tick : 0
             }
-            content={
-              <>
-                <div>
-                  <ResumeWindow />
-                </div>
-              </>
-            }
+            content={<ResumeWindow />}
           />
 
           <DragWindow
-            key={"window-7"}
+            key={`window-7-${layoutKey}`}
             id="browser-window"
-            posX={getScreenCenter(totalWidth > 1080 ? 400 : 175, 260).x}
-            posY={getScreenCenter(175, 260).y}
-            width={totalWidth > 1080 ? "800px" : "350px"}
-            height={totalWidth > 1080 ? "560px" : "450px"}
+            posX={getWindowPosition(windowSize.width, windowSize.height).x}
+            posY={getWindowPosition(windowSize.width, windowSize.height).y}
+            width={windowSize.width}
+            height={windowSize.height}
             overflow="overflow-hidden"
             background="bg-white"
             show={showBrowser}
@@ -489,13 +538,13 @@ const Home = () => {
           resumeInfoClicked={resumeInfoClicked}
           className="fixed bottom-3 left-1/2 -translate-x-1/2 md:left-3 md:top-1/2 md:bottom-auto md:translate-x-0 md:-translate-y-1/2 z-[999999998]"
         />
-        {awaitingClickToFullscreen && (
+        {needsFullscreen && !hasEnteredFullscreen && (
           <div className="fullscreen-hint fixed left-1/2 top-10 -translate-x-1/2 md:left-auto md:right-4 md:top-auto md:bottom-4 md:translate-x-0 z-[999999999] flex items-center gap-2 rounded-full px-4 py-2 text-xs text-slate-100 font-ubuntu">
             <i
               className="fa-solid fa-up-right-and-down-left-from-center text-ubuntu-orange"
               aria-hidden="true"
             />
-            Click anywhere to go fullscreen
+            Tap anywhere to enter the desktop
           </div>
         )}
         {/* Background */}

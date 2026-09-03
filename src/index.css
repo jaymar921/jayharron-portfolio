@@ -272,8 +272,19 @@ body:has(.card[data-color="green"]:hover) {
 }
 
 .window-titlebar {
+  /* Pinned to WINDOW_TITLEBAR_HEIGHT in src/constants/desktop.js. The window
+     layout maths counts on this exact height, so a tall icon or a big emoji
+     must not be able to stretch it. */
+  height: 34px;
+  flex: none;
+  overflow: hidden;
   background: linear-gradient(180deg, #3c3c3c 0%, #2e2e2e 100%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.window-titlebar img {
+  max-height: 18px;
+  object-fit: contain;
 }
 
 .window-btn {

@@ -1,7 +1,26 @@
 import { useEffect, useRef, useState } from "react";
+import {
+  DESKTOP_TOPBAR_HEIGHT,
+  WINDOW_CHROME_HEIGHT,
+  WINDOW_CHROME_WIDTH,
+} from "../../../constants/desktop";
 
 const MIN_WIDTH = 280;
 const MIN_HEIGHT = 180;
+
+// A maximized window fills the desktop below the top bar. The title bar stacks
+// above the content area, so its height has to come out of the content height
+// or the bottom of the window sits past the edge of the screen and whatever is
+// down there can never be scrolled into view.
+function getMaximizedGeometry() {
+  return {
+    width: Math.max(MIN_WIDTH, window.innerWidth - WINDOW_CHROME_WIDTH),
+    height: Math.max(
+      MIN_HEIGHT,
+      window.innerHeight - DESKTOP_TOPBAR_HEIGHT - WINDOW_CHROME_HEIGHT,
+    ),
+  };
+}
 
 // Parses "1080px" / 1080 / "fit" into a plain pixel number for resize math.
 function parseSize(value, fallback) {
@@ -61,11 +80,27 @@ function DragWindow({
       setMaximize(false);
     } else {
       setFixedSize({ width: size.width, height: size.height, ...position });
-      setSize({ width: window.innerWidth, height: window.innerHeight });
-      setPosition({ x: 0, y: 0 });
+      setSize(getMaximizedGeometry());
+      setPosition({ x: 0, y: DESKTOP_TOPBAR_HEIGHT });
       setMaximize(true);
     }
   };
+
+  // Entering browser fullscreen changes the desktop out from under a maximized
+  // window, so it re-fills the new dimensions rather than keeping the size it
+  // happened to be maximized to.
+  useEffect(() => {
+    if (!maximize) return undefined;
+
+    const onViewportChange = () => setSize(getMaximizedGeometry());
+    window.addEventListener("resize", onViewportChange);
+    window.addEventListener("orientationchange", onViewportChange);
+
+    return () => {
+      window.removeEventListener("resize", onViewportChange);
+      window.removeEventListener("orientationchange", onViewportChange);
+    };
+  }, [maximize]);
 
   const minimize = (e) => {
     e.stopPropagation();
