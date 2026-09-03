@@ -19,9 +19,10 @@ const About = () => {
           <h1 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">
             About Me
           </h1>
-          <p className="mt-2 text-sm leading-6 text-ubuntu-warm-grey">
-            Software engineer based in Cebu, Philippines, building practical web
-            and cloud experiences.
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-ubuntu-warm-grey">
+            Software Engineer in Cebu, Philippines, building web and cloud
+            products for teams in the United States. Below is the short version
+            of how I got here and what I am good at.
           </p>
         </div>
 
@@ -47,38 +48,38 @@ const About = () => {
             </div>
             <div className="mt-4 border-t border-white/10 pt-4 text-sm leading-6 text-slate-300">
               <p>
-                I was born and raised in the Philippines, and today I work
-                remotely as a Software Engineer with clients in the United
-                States. My technical background includes building applications
-                with .NET and React, and managing deployments through platforms
-                like Microsoft Azure and Vercel. Beyond the tools and
-                frameworks, what drives me is the joy of creating,
-                problem-solving, and continuous learning.
+                I was born and raised in the Philippines and now work remotely
+                with clients in the United States. My day job is .NET and React
+                applications shipped to Microsoft Azure and Vercel, usually the
+                kind that carry a decade of business rules and cannot afford a
+                bad release. A good share of my work is modernization: taking
+                something old and load bearing and rewriting it into a system
+                the next engineer can actually read.
               </p>
               <p className="mt-3">
-                My interests extend well beyond software. I am a hands-on DIY
-                enthusiast, whether I am experimenting with IoT devices using
-                Arduino and Raspberry Pi, setting up solar home systems, or
-                tackling projects that let me build from the ground up.
+                What I care about beyond the stack is the part clients feel
+                later. Releases that are boring on purpose, security handled at
+                the pipeline instead of in a panic, and a codebase that has not
+                turned hostile by its second year.
               </p>
               <p className="mt-3">
-                Outside of work, I recharge by heading outdoors. I have always
-                preferred mountains over beaches. The climb, the quiet, and the
-                view offer a reset that no screen can match.
+                Game development is where I learned to ship to real users. Since
+                2020 I have built and sold Minecraft server plugins, and my most
+                popular one, Custom Enchantments, passed 300,000 downloads. It
+                taught me release cadence, support, and documentation long
+                before any job title did.
               </p>
               <p className="mt-3">
-                On the creative side, I have built a niche in game development.
-                Since 2020, I have developed and sold several Minecraft plugins.
-                My most popular project, Custom Enchantments, has reached over
-                300,000 downloads and 100+ sales. What began as a fun experiment
-                became a rewarding venture that connected me with a global
-                community of players and creators.
+                Away from software I build things with my hands. Arduino and
+                Raspberry Pi projects, solar home setups, and anything that
+                starts from raw parts. When I need a reset, I take it up a
+                mountain rather than to a beach.
               </p>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
               <div className="border border-white/10 p-2">
                 <p className="text-ubuntu-orange">focus</p>
-                <p className="mt-1 text-slate-300">Web & cloud</p>
+                <p className="mt-1 text-slate-300">.NET, React, Azure</p>
               </div>
               <div className="border border-white/10 p-2">
                 <p className="text-ubuntu-orange">location</p>

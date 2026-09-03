@@ -17,7 +17,17 @@ import cert_owasp_password_hygiene from "./certs/cert_owasp_password_hygiene.jpg
 import cert_owasp_protecting_source_code from "./certs/cert_owasp_protecting_source_code.jpg";
 import cert_owasp_top_10_sec_2021 from "./certs/cert_owasp_top_10_sec_2021.jpg";
 import itpec_logo from "./certs/ITPEC-logo.gif";
-import cert_completion_renewavolt from "./certs/cert_completion_renewavolt.png"
+import cert_completion_renewavolt from "./certs/cert_completion_renewavolt.png";
+
+// 2026 KnowBe4 training certificates. The originals are the PDFs sitting
+// beside these files; the JPGs are page-one renders so the resume window can
+// show them inline and open them in the same preview modal as the 2025 set.
+import cert_phish_alert_button from "./certs/cert-phish-alert-button-outlook.jpg";
+import cert_ai_at_work from "./certs/cert-ai-at-work-use-it-wisely.jpg";
+import cert_knowbe4_2026 from "./certs/cert-knowbe4-security-awareness-2026.jpg";
+import cert_api_security_fundamentals from "./certs/cert-api-security-fundamentals-part-1.jpg";
+import cert_secure_app_development from "./certs/cert-secure-app-development-fundamentals.jpg";
+
 import bsit_deploma from "./certs/deplomas/bsit-deploma.png";
 import shs_deploma from "./certs/deplomas/shs-deploma.png";
 
@@ -40,6 +50,11 @@ export {
   cert_owasp_top_10_sec_2021,
   itpec_logo,
   cert_completion_renewavolt,
+  cert_phish_alert_button,
+  cert_ai_at_work,
+  cert_knowbe4_2026,
+  cert_api_security_fundamentals,
+  cert_secure_app_development,
   bsit_deploma,
   shs_deploma,
 };

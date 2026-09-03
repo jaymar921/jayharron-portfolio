@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { jsPDF } from "jspdf";
 import {
@@ -7,15 +7,10 @@ import {
   educationalAttainment,
   certifications,
   resumeProfile,
+  resumeContact,
 } from "../../../constants";
 
-const PDF_CONFIG = {
-  fileName: "jayharron-mar-abejar-resume.pdf",
-  title: resumeProfile.name,
-  subtitle: resumeProfile.title,
-  sections: ["summary", "skills", "experience", "education", "certifications"],
-  summary: resumeProfile.summary,
-};
+const PDF_FILE_NAME = "jayharron-mar-abejar-resume.pdf";
 
 function downloadResumePdf() {
   const pdf = new jsPDF({ unit: "mm", format: "a4" });
@@ -48,63 +43,76 @@ function downloadResumePdf() {
 
   pdf.setTextColor(35, 35, 35);
   addText(resumeProfile.name, 21, { bold: true, gap: 2 });
-  addText(resumeProfile.title, 11, { gap: 5 });
+  addText(resumeProfile.title, 11, { gap: 2 });
 
-  PDF_CONFIG.sections.forEach((section) => {
-    if (section === "summary") {
-      addSection("Profile");
-      addText(resumeProfile.summary);
-    }
-    if (section === "skills") {
-      addSection("Skills");
-      addText(
-        skills.map((skill) => `${skill.name} (${skill.type})`).join("  |  "),
-      );
-    }
-    if (section === "experience") {
-      addSection("Professional Experience");
-      experiences.forEach((experience) => {
-        addText(`${experience.title} - ${experience.company_name}`, 10, {
-          bold: true,
-          gap: 1,
-        });
-        addText(`${experience.date} | ${experience.job_type}`, 9, { gap: 1 });
-        experience.points.forEach((point) =>
-          addText(`- ${point}`, 9, { gap: 1 }),
-        );
-        y += 2;
-      });
-    }
-    if (section === "education") {
-      addSection("Education");
-      educationalAttainment.forEach((school) => {
-        addText(`${school.curriculum} - ${school.school}`, 10, {
-          bold: true,
-          gap: 1,
-        });
-        addText(
-          `${school.year}${school.graduationDate ? ` | Graduated ${school.graduationDate}` : ""}`,
-          9,
-        );
-      });
-    }
-    if (section === "certifications") {
-      addSection("Certifications");
-      certifications.forEach((cert) =>
-        addText(`${cert.name} - ${cert.dateIssued}`, 9, { gap: 1 }),
-      );
-    }
+  // Contact details live in the exported PDF only, never in the site UI.
+  addText(`${resumeContact.email}  |  ${resumeContact.location}`, 9, {
+    gap: 1,
+  });
+  addText(`${resumeContact.github}  |  ${resumeContact.linkedin}`, 9, {
+    gap: 5,
   });
 
-  pdf.save(PDF_CONFIG.fileName);
+  addSection("Profile");
+  addText(resumeProfile.summary);
+
+  addSection("Skills");
+  addText(skills.map((skill) => `${skill.name} (${skill.type})`).join("  |  "));
+
+  addSection("Professional Experience");
+  experiences.forEach((experience) => {
+    addText(`${experience.title} - ${experience.company_name}`, 10, {
+      bold: true,
+      gap: 1,
+    });
+    addText(`${experience.date} | ${experience.job_type}`, 9, { gap: 1 });
+    experience.points.forEach((point) => addText(`- ${point}`, 9, { gap: 1 }));
+    y += 2;
+  });
+
+  addSection("Education");
+  educationalAttainment.forEach((school) => {
+    addText(`${school.curriculum} - ${school.school}`, 10, {
+      bold: true,
+      gap: 1,
+    });
+    addText(
+      `${school.year}${school.graduationDate ? ` | Graduated ${school.graduationDate}` : ""}`,
+      9,
+    );
+  });
+
+  addSection("Certifications");
+  certifications.forEach((cert) =>
+    addText(
+      `${cert.name}${cert.issuer ? ` (${cert.issuer})` : ""} - ${cert.dateIssued}`,
+      9,
+      { gap: 1 },
+    ),
+  );
+
+  pdf.save(PDF_FILE_NAME);
 }
 
+const SECTION_HEADING =
+  "text-white text-xl font-semibold border-l-4 border-ubuntu-orange pl-3";
+
 function ResumeWindow() {
-  const [selectedDiploma, setSelectedDiploma] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [showCertifications, setShowCertifications] = useState(false);
+
+  // Certificates I hold a copy of open in the preview modal; the ones backed by
+  // an external verification page link straight out to it.
+  const { gallery, verified } = useMemo(() => {
+    return {
+      gallery: certifications.filter((cert) => !cert.link),
+      verified: certifications.filter((cert) => cert.link),
+    };
+  }, []);
 
   useEffect(() => {
     const closeOnEscape = (event) => {
-      if (event.key === "Escape") setSelectedDiploma(null);
+      if (event.key === "Escape") setPreview(null);
     };
 
     document.addEventListener("keydown", closeOnEscape);
@@ -124,17 +132,16 @@ function ResumeWindow() {
           type="button"
           onClick={downloadResumePdf}
           className="inline-flex items-center gap-2 rounded-md bg-ubuntu-orange px-3 py-2 text-sm font-semibold text-white hover:bg-ubuntu-orange-light transition-colors"
-          title="Download a simple PDF version of this resume"
+          title="Download this resume as a PDF, including contact details"
         >
           <i className="fa-solid fa-file-arrow-down" aria-hidden="true" />
           Download PDF
         </button>
       </div>
-      <h2 className="text-white text-xl font-semibold mb-4 border-l-4 border-ubuntu-orange pl-3">
-        My Skills
-      </h2>
-      <p className="text-slate-400 text-sm mb-4">
-        Technologies I use and the years I have worked with them.
+
+      <h2 className={SECTION_HEADING}>Skills</h2>
+      <p className="text-slate-400 text-sm mb-4 mt-2">
+        The stack I reach for, and how long I have been shipping with it.
       </p>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
         {skills.map((skill, index) => (
@@ -162,72 +169,118 @@ function ResumeWindow() {
       </div>
 
       <div className="mt-8">
-        <h2 className="text-white text-xl font-semibold mb-2 border-l-4 border-ubuntu-orange pl-3">
-          Certifications
-        </h2>
-        <p className="text-slate-400 text-sm mb-4">
-          Selected training and certifications.
-        </p>
-        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-          {certifications
-            .filter((c) => !c.link)
-            .map((cert, idx) => (
-              <div
-                key={`cert-${idx}`}
-                className="bg-[rgba(255,255,255,0.03)] border border-white/10 rounded-xl p-3 flex flex-col items-center text-center"
-              >
-                <img
-                  src={cert.imageUrl}
-                  alt={cert.name}
-                  className="w-16 h-16 object-contain mb-2"
-                />
-                <p className="text-white font-semibold text-sm">{cert.name}</p>
-                <p className="text-slate-400 text-xs">{cert.dateIssued}</p>
-              </div>
-            ))}
-        </div>
+        <button
+          type="button"
+          onClick={() => setShowCertifications((open) => !open)}
+          aria-expanded={showCertifications}
+          aria-controls="certifications-panel"
+          className="group flex w-full items-center gap-3 rounded-lg border border-white/10 bg-[rgba(255,255,255,0.03)] p-3 text-left transition-colors hover:border-ubuntu-orange/50"
+        >
+          <i
+            className={`fa-solid fa-chevron-right text-ubuntu-orange transition-transform duration-200 ${
+              showCertifications ? "rotate-90" : ""
+            }`}
+            aria-hidden="true"
+          />
+          <span className="flex-1 min-w-0">
+            <span className="block text-white text-lg font-semibold">
+              Certifications
+            </span>
+            <span className="block text-slate-400 text-xs">
+              Security, secure development, and professional training
+            </span>
+          </span>
+          <span className="rounded-full bg-ubuntu-orange/20 px-2.5 py-1 text-xs font-semibold text-ubuntu-orange">
+            {certifications.length}
+          </span>
+          <span className="hidden text-xs text-slate-400 group-hover:text-white sm:inline">
+            {showCertifications ? "Hide" : "Show"}
+          </span>
+        </button>
 
-        {certifications.find((c) => c.link) && (
-          <div className="mt-4">
-            <h3 className="text-white font-semibold mb-2">
-              Verified Certifications
-            </h3>
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-              {certifications
-                .filter((c) => c.link)
-                .map((cert, idx) => (
-                  <a
-                    key={`cert-link-${idx}`}
-                    href={cert.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex w-full min-w-0 flex-row items-center gap-3 bg-[rgba(255,255,255,0.02)] p-3 rounded-xl border border-white/10 hover:border-ubuntu-orange/50 transition-colors"
-                  >
-                    <img
-                      src={cert.imageUrl}
-                      alt={cert.name}
-                      className="h-20 w-20 shrink-0 object-contain"
-                    />
-                    <div className="min-w-0 w-full">
-                      <p className="break-words text-white font-semibold [overflow-wrap:anywhere]">
+        {showCertifications && (
+          <div id="certifications-panel" className="mt-4 space-y-5">
+            {gallery.length > 0 && (
+              <div>
+                <h3 className="text-white font-semibold text-sm mb-2">
+                  Certificates ({gallery.length})
+                </h3>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {gallery.map((cert) => (
+                    <button
+                      key={cert.name}
+                      type="button"
+                      onClick={() =>
+                        setPreview({ src: cert.imageUrl, title: cert.name })
+                      }
+                      className="group flex flex-col rounded-xl border border-white/10 bg-[rgba(255,255,255,0.03)] p-3 text-left transition-colors hover:border-ubuntu-orange/50"
+                      title={`View ${cert.name}`}
+                    >
+                      <span className="mb-3 flex h-28 w-full items-center justify-center overflow-hidden rounded-lg bg-white/5">
+                        <img
+                          src={cert.imageUrl}
+                          alt={cert.name}
+                          loading="lazy"
+                          className="max-h-full max-w-full object-contain transition-transform duration-200 group-hover:scale-[1.03]"
+                        />
+                      </span>
+                      <span className="text-sm font-semibold text-white [overflow-wrap:anywhere]">
                         {cert.name}
-                      </p>
-                      <p className="text-slate-400 text-sm">
+                      </span>
+                      <span className="mt-1 text-xs text-slate-400">
+                        {cert.issuer ? `${cert.issuer} · ` : ""}
                         {cert.dateIssued}
-                      </p>
-                    </div>
-                  </a>
-                ))}
-            </div>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {verified.length > 0 && (
+              <div>
+                <h3 className="text-white font-semibold text-sm mb-2">
+                  Verified credentials ({verified.length})
+                </h3>
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+                  {verified.map((cert) => (
+                    <a
+                      key={cert.name}
+                      href={cert.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex w-full min-w-0 flex-row items-center gap-3 rounded-xl border border-white/10 bg-[rgba(255,255,255,0.02)] p-3 transition-colors hover:border-ubuntu-orange/50"
+                    >
+                      <img
+                        src={cert.imageUrl}
+                        alt=""
+                        className="h-16 w-16 shrink-0 object-contain"
+                      />
+                      <div className="min-w-0 w-full">
+                        <p className="font-semibold text-white [overflow-wrap:anywhere]">
+                          {cert.name}
+                        </p>
+                        <p className="text-sm text-slate-400">
+                          {cert.issuer ? `${cert.issuer} · ` : ""}
+                          {cert.dateIssued}
+                        </p>
+                      </div>
+                      <i
+                        className="fa-solid fa-arrow-up-right-from-square shrink-0 text-ubuntu-orange"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
         <div className="mt-8">
-          <h2 className="text-white text-xl font-semibold mb-4 border-l-4 border-ubuntu-orange pl-3">
-            Professional Experience
-          </h2>
+          <h2 className={SECTION_HEADING}>Professional Experience</h2>
 
-          <div className="space-y-3">
+          <div className="space-y-3 mt-4">
             {experiences.map((experience, index) => (
               <div
                 key={`${experience.company_name}-${index}`}
@@ -274,10 +327,8 @@ function ResumeWindow() {
           </div>
 
           <div className="mt-6">
-            <h2 className="text-white text-xl font-semibold mb-3 border-l-4 border-ubuntu-orange pl-3">
-              Education
-            </h2>
-            <div className="space-y-3">
+            <h2 className={SECTION_HEADING}>Education</h2>
+            <div className="space-y-3 mt-3">
               {educationalAttainment.map((school, index) => (
                 <div
                   key={`${school.school}-${index}`}
@@ -311,12 +362,17 @@ function ResumeWindow() {
                   {school.diploma && (
                     <button
                       type="button"
-                      onClick={() => setSelectedDiploma(school)}
+                      onClick={() =>
+                        setPreview({
+                          src: school.diploma,
+                          title: `${school.school} diploma`,
+                        })
+                      }
                       className="mt-3 inline-flex items-center gap-2 rounded-md border border-ubuntu-orange/60 px-3 py-2 text-sm font-semibold text-ubuntu-orange hover:bg-ubuntu-orange hover:text-white transition-colors"
                       title={`Show ${school.school} diploma`}
                     >
                       <i className="fa-solid fa-eye" aria-hidden="true" />
-                      Show deploma
+                      Show diploma
                     </button>
                   )}
                 </div>
@@ -325,14 +381,14 @@ function ResumeWindow() {
           </div>
         </div>
       </div>
-      {selectedDiploma &&
+      {preview &&
         createPortal(
           <div
             className="fixed inset-0 z-[1000000] flex items-center justify-center bg-black/80 p-4"
             role="dialog"
             aria-modal="true"
-            aria-label={`${selectedDiploma.school} diploma`}
-            onClick={() => setSelectedDiploma(null)}
+            aria-label={preview.title}
+            onClick={() => setPreview(null)}
           >
             <div
               className="relative max-h-full max-w-5xl overflow-auto rounded-lg bg-slate-900 p-3 shadow-2xl"
@@ -340,16 +396,16 @@ function ResumeWindow() {
             >
               <button
                 type="button"
-                onClick={() => setSelectedDiploma(null)}
+                onClick={() => setPreview(null)}
                 className="absolute right-5 top-5 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/70 text-white hover:bg-ubuntu-orange"
-                title="Close diploma"
-                aria-label="Close diploma"
+                title="Close preview"
+                aria-label="Close preview"
               >
                 <i className="fa-solid fa-xmark" aria-hidden="true" />
               </button>
               <img
-                src={selectedDiploma.diploma}
-                alt={`${selectedDiploma.school} diploma`}
+                src={preview.src}
+                alt={preview.title}
                 className="max-h-[calc(100vh-3rem)] max-w-full object-contain"
               />
             </div>

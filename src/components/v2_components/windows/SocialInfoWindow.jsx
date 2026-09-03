@@ -24,18 +24,25 @@ function SocialInfoWindow() {
             </h1>
           </div>
         </div>
+        <div className="mt-3 flex flex-wrap justify-center gap-2 text-xs">
+          <span className="rounded-full border border-ubuntu-orange/40 bg-ubuntu-orange/10 px-2.5 py-1 text-ubuntu-orange">
+            Cebu, Philippines
+          </span>
+          <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-1 text-emerald-300">
+            Open to select projects
+          </span>
+        </div>
         <hr className="mt-4 mb-2 border-white/10" />
         <p className="px-2 text-left text-sm leading-5">
-          I&apos;m a Filipino Software Engineer working remotely with clients in
-          the United States. I&apos;m open to collaborations too, though I
-          usually take them on during my free time. Outside of tech, I&apos;m a
-          hobbyist who enjoys DIY projects, whether it&apos;s carpentry or
-          tinkering with electrical setups. And when I&apos;m not working,
-          you&apos;ll probably find me hiking through mountains or spending time
-          with family and friends.
+          I build web applications on .NET and React, ship them to Azure, and
+          stay with them once they are live. Most of my week goes to remote work
+          with teams in the United States, and I take on a small number of
+          outside projects when the problem is interesting. Away from the
+          keyboard you will usually find me mid DIY build, somewhere on a
+          mountain trail, or with family.
         </p>
         <hr className="mt-2 mb-2 border-white/10" />
-        <h2 className="text-white text-xl">Social Accounts:</h2>
+        <h2 className="text-white text-xl">Find me here:</h2>
         <div className="text-lg">
           <p className="px-4">
             <a

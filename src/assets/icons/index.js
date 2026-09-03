@@ -42,7 +42,8 @@ import exitIcon from "./exitapp.png";
 import projectIcon from "./projecticon.png";
 import medalIcon from "./medal.webp";
 import profile from "./profile.jpg";
-import illuminaryPeakLogo from "./ip-128.png"
+import illuminaryPeakLogo from "./ip-128.png";
+import jhProjectsLogo from "./jhprojects.png";
 import unixFolder from "./unix-folder.svg";
 import unixProject from "./unix-project.svg";
 import unixResume from "./unix-resume.svg";
@@ -94,6 +95,7 @@ export {
   medalIcon,
   profile,
   illuminaryPeakLogo,
+  jhProjectsLogo,
   unixFolder,
   unixProject,
   unixResume,

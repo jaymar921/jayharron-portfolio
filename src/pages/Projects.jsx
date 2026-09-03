@@ -20,8 +20,9 @@ const Projects = () => {
             My Projects
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-ubuntu-warm-grey">
-            A working directory of applications, tools, and experiments built
-            across web, cloud, and game development.
+            Things I have actually shipped: products with paying users, tools I
+            reach for on real work, and experiments that earned their keep.
+            Every entry below links to source or a live site.
           </p>
         </div>
 

@@ -1,5 +1,4 @@
 import {
-  car,
   contact,
   css,
   express,
@@ -16,16 +15,12 @@ import {
   mongodb,
   nextjs,
   nodejs,
-  pricewise,
   PSITS_LOGO,
   react,
   school_stscho,
   school_ucmain,
-  snapgram,
   spigotLogo,
-  summiz,
   tailwindcss,
-  threads,
   typescript,
   zygowork,
 } from "../assets/icons";
@@ -38,6 +33,11 @@ import {
   cert_owasp_password_hygiene,
   cert_owasp_projecting_source_code,
   cert_owasp_top_10_sec_2021,
+  cert_ai_at_work,
+  cert_api_security_fundamentals,
+  cert_knowbe4_2026,
+  cert_phish_alert_button,
+  cert_secure_app_development,
   bsit_deploma,
   itpec_logo,
   shs_deploma,
@@ -128,7 +128,19 @@ export const resumeProfile = {
   name: "Jayharron Mar Abejar",
   title: "Software Engineer | DevOps | Azure | Cloud",
   summary:
-    "Filipino Software Engineer working remotely with clients in the United States, focused on modern web applications, cloud delivery, and secure development practices.",
+    "Software Engineer who builds and modernizes production web applications for teams in the United States, working remotely from Cebu, Philippines. " +
+    "Day to day that means .NET and React services, Azure deployments wired into automated CI/CD, and legacy systems rewritten into something a team can actually maintain. " +
+    "I care about the parts a client feels months later: predictable releases, sensible security defaults, and code that still reads well on its second year.",
+};
+
+// Contact details are intentionally kept out of the UI and used only when the
+// resume is exported to PDF, so the address is not sitting on a public page
+// waiting to be scraped.
+export const resumeContact = {
+  email: "jayharronabejar@gmail.com",
+  location: "Cebu, Philippines",
+  github: "github.com/jaymar921",
+  linkedin: "linkedin.com/in/jaymar921",
 };
 
 export const skills = [
@@ -246,48 +258,89 @@ export const skills = [
   },
 ];
 
+// Each certification carries an image of the certificate itself. Entries that
+// also have a `link` point at an external page that verifies the credential;
+// the rest open in the in-app preview modal.
 export const certifications = [
   {
+    name: "2026 KnowBe4 Security Awareness Training",
+    issuer: "KnowBe4",
+    imageUrl: cert_knowbe4_2026,
+    dateIssued: "August 10, 2026",
+  },
+  {
+    name: "Secure Application Development Fundamentals",
+    issuer: "KnowBe4",
+    imageUrl: cert_secure_app_development,
+    dateIssued: "August 10, 2026",
+  },
+  {
+    name: "API Security Fundamentals Part 1: Why API Security",
+    issuer: "KnowBe4",
+    imageUrl: cert_api_security_fundamentals,
+    dateIssued: "August 10, 2026",
+  },
+  {
+    name: "AI At Work: Use It Wisely",
+    issuer: "KnowBe4",
+    imageUrl: cert_ai_at_work,
+    dateIssued: "August 10, 2026",
+  },
+  {
+    name: "Using the Phish Alert Button: Reporting Suspicious Email in Outlook",
+    issuer: "KnowBe4",
+    imageUrl: cert_phish_alert_button,
+    dateIssued: "August 10, 2026",
+  },
+  {
+    name: "Basic Solar PV Design",
+    issuer: "RenewaVolt",
+    imageUrl: cert_completion_renewavolt,
+    link: "https://drive.google.com/file/d/1CUgFWkW09ja1YRSRTD4STfoes6UOCdDa/view?usp=sharing",
+    dateIssued: "June 27, 2026",
+  },
+  {
     name: "2025 KnowBe4 Security Awareness Training",
+    issuer: "KnowBe4",
     imageUrl: cert_owasp_2025_knowb4,
     dateIssued: "September 16, 2025",
   },
   {
+    name: "Secure Application Development: OWASP Top 10 2021",
+    issuer: "KnowBe4",
+    imageUrl: cert_owasp_top_10_sec_2021,
+    dateIssued: "August 6, 2025",
+  },
+  {
+    name: "Secure Application Development: Protecting Source Code",
+    issuer: "KnowBe4",
+    imageUrl: cert_owasp_projecting_source_code,
+    dateIssued: "August 6, 2025",
+  },
+  {
     name: "Secure Application Development: Data Hygiene",
+    issuer: "KnowBe4",
     imageUrl: cert_owasp_data_hygience,
     dateIssued: "August 6, 2025",
   },
   {
     name: "Secure Application Development: Memory Management",
+    issuer: "KnowBe4",
     imageUrl: cert_owasp_memory_management,
     dateIssued: "August 6, 2025",
   },
   {
     name: "Secure Application Development: Password Hygiene",
+    issuer: "KnowBe4",
     imageUrl: cert_owasp_password_hygiene,
     dateIssued: "August 6, 2025",
   },
   {
-    name: "Secure Application Development: Projecting Source Code",
-    imageUrl: cert_owasp_projecting_source_code,
-    dateIssued: "August 6, 2025",
-  },
-  {
-    name: "Secure Application Development: 0WASP 2021 Top 10 Security Awareness",
-    imageUrl: cert_owasp_top_10_sec_2021,
-    dateIssued: "August 6, 2025",
-  },
-  {
-    name: "ITPEC Certification",
+    name: "ITPEC Information Technology Passport (IP)",
+    issuer: "IT Professionals Examination Council",
     imageUrl: itpec_logo,
     link: "https://itpec.org/statsandresults/all-passers-information/Philippines/2023S_IP_rev.pdf",
     dateIssued: "April 2023",
-  },
-  {
-    name: "Basic Solar PV Design",
-    imageUrl: cert_completion_renewavolt,
-    link: "https://drive.google.com/file/d/1CUgFWkW09ja1YRSRTD4STfoes6UOCdDa/view?usp=sharing",
-    dateIssued: "June 27, 2026",
   },
 ];
 
@@ -301,10 +354,11 @@ export const experiences = [
     iconBg: "#FFFFFF",
     date: "March 15, 2026 - Present",
     points: [
-      "Developed modern and scalable web applications using ReactJS, NodeJS, and related technologies.",
-      "Utilized advanced AI tools such as Microsoft Copilot and Claude Pro, applying agentic development approaches to improve workflow efficiency.",
-      "Implemented secure payment integrations with PayMongo and applied DevSecOps practices using GitHub Actions to enhance reliability and security.",
-    ]
+      "Co-founded the company and lead its engineering, taking products from first sketch to a live, paying release on React and Node.js.",
+      "Integrated PayMongo end to end, covering checkout, webhooks, and reconciliation, so revenue is handled correctly rather than optimistically.",
+      "Set the delivery standard for the team with GitHub Actions pipelines that run security and quality gates on every merge.",
+      "Built an AI assisted workflow around Microsoft Copilot and Claude that shortens the distance between an idea and a reviewable prototype.",
+    ],
   },
   {
     title: "Software Engineer (Contract)",
@@ -315,13 +369,11 @@ export const experiences = [
     iconBg: "#FFFFFF",
     date: "March 10, 2024 - Present",
     points: [
-      "Developing and maintaining web applications using .NET, React.js, NextJS and other related technologies.",
-      "Experienced xUnit, Jest testing tools",
-      "Has background in deploying application with Microsoft Azure, DevOps",
-      "Experienced reverse engineering old .NET applications including old vbscripts and rewriting them on latest technology possible",
-      "Gained experience rewriting old applications to be more efficient and modern",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Gained experience on setting up CI/CD pipelines, managing deployments, and configuring Key Vaults.",
+      "Build and maintain insurance web applications on .NET, React, and Next.js for a US company with decades of policy logic behind it.",
+      "Reverse engineer legacy .NET and classic VBScript systems and rewrite them on the current stack without losing the business rules underneath.",
+      "Own delivery into Microsoft Azure: CI/CD pipelines, environment configuration, and Key Vault backed secret management.",
+      "Keep confidence high on the paths that matter with xUnit and Jest coverage, so refactors stay safe instead of scary.",
+      "Work directly with designers, product managers, and engineers across time zones to turn requirements into shipped features.",
     ],
   },
   {
@@ -333,10 +385,10 @@ export const experiences = [
     iconBg: "#BDFFD1",
     date: "May 22, 2023 - Present",
     points: [
-      "Developing and maintaining web applications using .NET, React.js, NextJS and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Deliver client facing web applications on .NET, React, and Next.js as an embedded engineer on offshore product teams.",
+      "Build responsive interfaces that hold their shape across browsers, screen sizes, and the devices real customers actually use.",
+      "Review teammates' pull requests with feedback aimed at the codebase, not just the diff.",
+      "Translate product intent into scoped, shippable work alongside designers and product managers.",
     ],
   },
   {
@@ -348,8 +400,8 @@ export const experiences = [
     iconBg: "#4CA0C2",
     date: "Sep 12, 2022 - May 22, 2023",
     points: [
-      "Built and maintained the organization's website using Flask Microframework",
-      "Experienced working on a Point of Sale Application",
+      "Built and ran the organization's website on the Flask microframework, serving the entire computing college.",
+      "Shipped a point of sale application used for campus merchandise and event ticket sales.",
     ],
   },
   {
@@ -361,8 +413,8 @@ export const experiences = [
     iconBg: "#BDFFD1",
     date: "Sep 6, 2022 - Jan 16, 2023",
     points: [
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
+      "Contributed production features on live client projects alongside senior engineers.",
+      "Turned design handoffs into responsive, cross browser interfaces.",
     ],
   },
   {
@@ -374,9 +426,9 @@ export const experiences = [
     iconBg: "#FFD3BB",
     date: "Sep 10, 2020 - October 2025",
     points: [
-      "Experienced building awesome game plugin specific for Minecraft Servers.",
-      "Enhanced game development experience.",
-      "Gained more experience to Advanced Java Programming",
+      "Designed and sold Minecraft server plugins to a worldwide player base, with Custom Enchantments passing 300,000 downloads.",
+      "Ran the whole product loop solo: development, releases, documentation, and direct support for paying customers.",
+      "Pushed advanced Java in a performance sensitive runtime where a slow tick is a bug every player can see.",
     ],
   },
 ];
@@ -431,7 +483,7 @@ export const projects = [
     theme: "btn-back-blue",
     name: "LogEvac",
     description:
-      "A lightweight .NET library that automatically removes old log records from SQL Server databases configured with Serilog MSSQL sinks, keeping logging databases lean and performant without manual intervention.",
+      "A .NET library that quietly retires old log rows from SQL Server databases fed by Serilog MSSQL sinks. Drop it in, set a retention window, and stop paying for storage nobody reads. Published on NuGet.",
     link: "https://www.nuget.org/packages/LogEvac",
     isOpenSource: true,
   },
@@ -440,7 +492,7 @@ export const projects = [
     theme: "btn-back-blue",
     name: "HirayaCoder",
     description:
-      "A free AI coding assistant that runs entirely on your own computer. Describe what you want in plain English and it writes and edits files locally, with no account, subscription, internet connection, or data leaving your laptop.",
+      "A free AI coding assistant that runs entirely on your own machine. Describe what you want in plain English and it writes and edits files locally. No account, no subscription, no internet connection, and nothing about your code ever leaves the laptop.",
     link: "https://github.com/jaymar921/HirayaCoder",
     isOpenSource: true,
   },
@@ -449,7 +501,7 @@ export const projects = [
     theme: "btn-back-green",
     name: "ZygoWork",
     description:
-      "A workforce management platform for small and medium-sized businesses to track hours, attendance, productivity, leave, shift planning, delegated approvals, and accountant sign-off for payroll runs.",
+      "A workforce management platform for small and mid sized businesses. Tracks hours, attendance, and productivity, then carries leave requests, shift plans, and delegated approvals all the way through to accountant sign off on payroll.",
     link: "https://www.zygowork.com",
   },
   {
@@ -458,7 +510,7 @@ export const projects = [
     theme: "btn-back-blue",
     name: "PSITS Website",
     description:
-      "PSITS web application allows PSITS officers to manage announcements, selling tickets/t-shirts, and create events! UC Main CCS students can create an account for reservation/order of event merch purpose. ",
+      "The official platform for a university computing organization. Officers publish announcements, run events, and sell tickets and merchandise, while students create accounts to reserve and order. Built and maintained during my time as a student developer.",
     link: "https://github.com/PSITS-UC-MAIN",
     isOpenSource: true,
   },
@@ -466,9 +518,9 @@ export const projects = [
     iconUrl:
       "https://jaymar921.github.io/jayharronabejar/assets/images/ayus%20icon.png",
     theme: "btn-back-blue",
-    name: "AYUS - Mobile App for vehicle assistance (Capstone)",
+    name: "AYUS: Roadside Vehicle Assistance",
     description:
-      "The task of helping drivers whose cars break down on the road can be difficult for service providers, especially when there are no other vehicles around.",
+      "A mobile and web system that connects stranded drivers with nearby service providers, built for the moments when a breakdown happens somewhere with no other vehicle in sight. My undergraduate capstone project.",
     link: "https://github.com/jaymar921/AYUS-WebASP",
     isOpenSource: true,
   },
@@ -477,7 +529,7 @@ export const projects = [
     theme: "btn-back-green",
     name: "QuizMaster",
     description:
-      "To ignite the spirit of friendly competition, knowledge exploration, and personal growth through the Quiz Bee Competition Web and Mobile Application, creating a community of lifelong learners and champions.",
+      "A web and mobile quiz bee platform built for live competition: rounds, scoring, and contestant management that hold up while an audience is watching.",
     link: "https://github.com/full-scale-teams/rocks-quizmaster",
     isOpenSource: true,
   },
@@ -486,7 +538,7 @@ export const projects = [
     theme: "btn-back-green",
     name: "Event Registration",
     description:
-      "The Registration System streamlines event management with QR code-based registration, real-time analytics, and automated notifications, ensuring seamless attendee experiences and efficient operations. Its versatility extends to various company events, while features like name randomizers for raffles add engagement and excitement.",
+      "QR code check in, real time analytics, and automated notifications for company events. Attendees get a smooth arrival, organizers get live numbers, and built in raffle randomizers keep the room engaged.",
     link: null,
   },
   {
@@ -495,7 +547,7 @@ export const projects = [
     theme: "btn-back bg-purple-300",
     name: "Custom Enchantments 3",
     description:
-      "The plugin is so called an advanced because it has a built in Custom Enchantments, Skilling System, Player Classifications, CE Currencies/Quests and an RPG feels in the game.",
+      "A commercial Minecraft server plugin with custom enchantments, a skill system, player classes, in game currencies, and quests layered into a full RPG experience. Past 300,000 downloads and sold to server owners worldwide.",
     link: "https://jhprojects.vercel.app/customenchantments3",
   },
   {
@@ -504,7 +556,7 @@ export const projects = [
     theme: "btn-back bg-slate-800",
     name: "JHC Blockchain",
     description:
-      "JHCoin. A simple blockchain demonstration, how transaction works in a blockchain, how blocks are being mined.",
+      "JHCoin, a hands on blockchain demo. Watch a transaction enter the pool, a block get mined, and the chain validate itself, all in the browser.",
     link: "https://jhc-blockchain.vercel.app/",
   },
 ];

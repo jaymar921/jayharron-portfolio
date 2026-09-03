@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function DragIcon({ posX, posY, icon, title, onDoubleClick }) {
+function DragIcon({ posX, posY, icon, iconBg, title, onDoubleClick }) {
   const [position, setPosition] = useState({ x: posX, y: posY });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -95,7 +95,12 @@ function DragIcon({ posX, posY, icon, title, onDoubleClick }) {
           <img
             src={icon}
             alt={title}
-            className="m-auto w-10 h-10 rounded-md select-none drop-shadow-lg"
+            // Logos with transparent backgrounds vanish against the dark
+            // wallpaper, so they can opt into a plate behind them.
+            style={iconBg ? { backgroundColor: iconBg } : undefined}
+            className={`m-auto w-10 h-10 rounded-md select-none drop-shadow-lg ${
+              iconBg ? "object-contain p-1" : ""
+            }`}
           />
         )}
       </div>
