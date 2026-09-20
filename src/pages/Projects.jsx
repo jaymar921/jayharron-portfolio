@@ -1,5 +1,6 @@
 import { projects } from "../constants";
 import { Link } from "../routing";
+import { CLICK_ACTIONS, trackClick } from "../lib/analytics";
 
 const Projects = () => {
   return (
@@ -78,6 +79,13 @@ const Projects = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex shrink-0 items-center gap-2 font-bold text-ubuntu-orange hover:text-white"
+                    onClick={() =>
+                      trackClick(null, {
+                        action: CLICK_ACTIONS.EXTERNAL,
+                        label: project.name,
+                        target: project.link,
+                      })
+                    }
                   >
                     {project.isOpenSource ? "Open project" : "Open website"}
                     <i

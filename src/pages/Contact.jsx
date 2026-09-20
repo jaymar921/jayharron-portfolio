@@ -7,6 +7,7 @@ import useAlert from "../hooks/useAlert";
 import Alert from "../components/Alert";
 import Bee from "../models/Bee";
 import WhiteFlower from "../models/WhiteFlower";
+import { CLICK_ACTIONS, PAGES, trackClick } from "../lib/analytics";
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -27,6 +28,7 @@ const Contact = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    trackClick(PAGES.CONTACT, { action: CLICK_ACTIONS.SUBMIT, label: "Send Message" });
     setIsLoading(true);
     setCurrentAnimation("hit");
     emailjs

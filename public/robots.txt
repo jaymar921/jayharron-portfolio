@@ -1,5 +1,16 @@
 # Allow all search engine crawlers to index the site
+#
+# /admin is disallowed in every group below, not only the wildcard one: a
+# named agent reads its own group instead of the wildcard, so a rule that
+# lives only up here would not apply to it. The page is also served with a
+# noindex header and carries a noindex meta tag, and it shows nothing at all
+# without a session, so this is about keeping it out of search results rather
+# than about keeping anyone out. /api is not a page and answers a crawler
+# with JSON, so the rule there is only so a well behaved one does not ask.
+
 User-agent: *
+Disallow: /admin
+Disallow: /api
 Allow: /
 Allow: /graphic2d
 Allow: /about
@@ -8,6 +19,58 @@ Allow: /projects/path-finding-algorithms
 
 # Disallow paths that do not contain public content
 Disallow: /v2
+
+User-agent: GPTBot
+Disallow: /admin
+Disallow: /api
+
+User-agent: ChatGPT-User
+Disallow: /admin
+Disallow: /api
+
+User-agent: OAI-SearchBot
+Disallow: /admin
+Disallow: /api
+
+User-agent: ClaudeBot
+Disallow: /admin
+Disallow: /api
+
+User-agent: Claude-User
+Disallow: /admin
+Disallow: /api
+
+User-agent: Claude-SearchBot
+Disallow: /admin
+Disallow: /api
+
+User-agent: anthropic-ai
+Disallow: /admin
+Disallow: /api
+
+User-agent: PerplexityBot
+Disallow: /admin
+Disallow: /api
+
+User-agent: Google-Extended
+Disallow: /admin
+Disallow: /api
+
+User-agent: Applebot-Extended
+Disallow: /admin
+Disallow: /api
+
+User-agent: Meta-ExternalAgent
+Disallow: /admin
+Disallow: /api
+
+User-agent: CCBot
+Disallow: /admin
+Disallow: /api
+
+User-agent: Bytespider
+Disallow: /admin
+Disallow: /api
 
 # Host and Sitemap locations
 Host: https://jayharronabejar.vercel.app

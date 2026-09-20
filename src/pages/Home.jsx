@@ -23,6 +23,7 @@ import {
   WINDOW_CHROME_HEIGHT,
   WINDOW_CHROME_WIDTH,
 } from "../constants/desktop";
+import { CLICK_ACTIONS, PAGES, trackClick } from "../lib/analytics";
 
 const DOCK_WIDTH = 88;
 const TOPBAR_HEIGHT = DESKTOP_TOPBAR_HEIGHT;
@@ -201,49 +202,27 @@ const Home = () => {
   const requestReopen = (id) =>
     setReopenRequest((prev) => ({ id, tick: prev.tick + 1 }));
 
-  const personalInfoClicked = () => {
-    setShowPersonalInfo(true);
-    setActiveTrigger("social-window");
-    requestReopen("social-window");
+  // Every window open is a tracked click, labelled with the window's title,
+  // so the dashboard can say which parts of the desktop visitors actually
+  // look at. The desktop itself is the page; the windows are the buttons.
+  const openWindow = (id, setShow) => {
+    trackClick(PAGES.HOME, { action: CLICK_ACTIONS.OPEN, label: windowTitles[id] });
+    setShow(true);
+    setActiveTrigger(id);
+    requestReopen(id);
   };
 
-  const resumeInfoClicked = () => {
-    setShowResume(true);
-    setActiveTrigger("resume-window");
-    requestReopen("resume-window");
-  };
-
-  const aboutInfoClicked = () => {
-    setShowAbout(true);
-    setActiveTrigger("about-window");
-    requestReopen("about-window");
-  };
-
-  const projectInfoClicked = () => {
-    setShowProject(true);
-    setActiveTrigger("project-window");
-    requestReopen("project-window");
-  };
-
-  const illuminaryPeakClicked = () => {
-    setShowIP(true);
-    setActiveTrigger("illuminary-peak-window");
-    requestReopen("illuminary-peak-window");
-  };
-
-  const jhProjectsClicked = () => {
-    setShowJHProjects(true);
-    setActiveTrigger("jhprojects-window");
-    requestReopen("jhprojects-window");
-  };
+  const personalInfoClicked = () => openWindow("social-window", setShowPersonalInfo);
+  const resumeInfoClicked = () => openWindow("resume-window", setShowResume);
+  const aboutInfoClicked = () => openWindow("about-window", setShowAbout);
+  const projectInfoClicked = () => openWindow("project-window", setShowProject);
+  const illuminaryPeakClicked = () =>
+    openWindow("illuminary-peak-window", setShowIP);
+  const jhProjectsClicked = () => openWindow("jhprojects-window", setShowJHProjects);
 
   // Kept for when the browser desktop/dock icon is re-enabled.
   // eslint-disable-next-line no-unused-vars
-  const browserClicked = () => {
-    setShowBrowser(true);
-    setActiveTrigger("browser-window");
-    requestReopen("browser-window");
-  };
+  const browserClicked = () => openWindow("browser-window", setShowBrowser);
 
   // Keep the layout in step with the viewport. Fullscreen and rotation settle
   // their dimensions a beat after the event fires, so the read is debounced.
