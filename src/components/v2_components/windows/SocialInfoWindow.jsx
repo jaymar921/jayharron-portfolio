@@ -1,4 +1,9 @@
 import { jayPhoto } from "../../../assets/images";
+import { CLICK_ACTIONS, trackClick } from "../../../lib/analytics";
+
+/** Records which link out was taken, then lets the browser follow it. */
+const trackOut = (label, target) => () =>
+  trackClick(null, { action: CLICK_ACTIONS.EXTERNAL, label, target });
 
 function SocialInfoWindow() {
   return (
@@ -49,6 +54,7 @@ function SocialInfoWindow() {
               href="https://github.com/jaymar921"
               target="_blank"
               rel="noreferrer"
+              onClick={trackOut("GitHub", "https://github.com/jaymar921")}
             >
               <i className="fa-brands fa-github text-white" /> GitHub
             </a>
@@ -58,6 +64,10 @@ function SocialInfoWindow() {
               href="https://www.linkedin.com/in/jayharron-mar-abejar-b414a9169/"
               target="_blank"
               rel="noreferrer"
+              onClick={trackOut(
+                "LinkedIn",
+                "https://www.linkedin.com/in/jayharron-mar-abejar-b414a9169/",
+              )}
             >
               <i className="fa-brands fa-linkedin text-blue-500" /> LinkedIn
             </a>
@@ -67,6 +77,7 @@ function SocialInfoWindow() {
               href="https://www.instagram.com/jerronabr/"
               target="_blank"
               rel="noreferrer"
+              onClick={trackOut("Instagram", "https://www.instagram.com/jerronabr/")}
             >
               <i className="fa-brands fa-instagram text-red-200" /> Instagram
             </a>

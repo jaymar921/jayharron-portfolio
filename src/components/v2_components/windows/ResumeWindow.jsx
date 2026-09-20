@@ -9,6 +9,7 @@ import {
   resumeProfile,
   resumeContact,
 } from "../../../constants";
+import { CLICK_ACTIONS, trackClick } from "../../../lib/analytics";
 
 const PDF_FILE_NAME = "jayharron-mar-abejar-resume.pdf";
 
@@ -130,7 +131,10 @@ function ResumeWindow() {
         </div>
         <button
           type="button"
-          onClick={downloadResumePdf}
+          onClick={() => {
+            trackClick(null, { action: CLICK_ACTIONS.DOWNLOAD, label: "Resume PDF" });
+            downloadResumePdf();
+          }}
           className="inline-flex items-center gap-2 rounded-md bg-ubuntu-orange px-3 py-2 text-sm font-semibold text-white hover:bg-ubuntu-orange-light transition-colors"
           title="Download this resume as a PDF, including contact details"
         >
@@ -210,9 +214,10 @@ function ResumeWindow() {
                     <button
                       key={cert.name}
                       type="button"
-                      onClick={() =>
-                        setPreview({ src: cert.imageUrl, title: cert.name })
-                      }
+                      onClick={() => {
+                        trackClick(null, { action: CLICK_ACTIONS.PREVIEW, label: cert.name });
+                        setPreview({ src: cert.imageUrl, title: cert.name });
+                      }}
                       className="group flex flex-col rounded-xl border border-white/10 bg-[rgba(255,255,255,0.03)] p-3 text-left transition-colors hover:border-ubuntu-orange/50"
                       title={`View ${cert.name}`}
                     >
@@ -249,6 +254,13 @@ function ResumeWindow() {
                       href={cert.link}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={() =>
+                        trackClick(null, {
+                          action: CLICK_ACTIONS.EXTERNAL,
+                          label: cert.name,
+                          target: cert.link,
+                        })
+                      }
                       className="flex w-full min-w-0 flex-row items-center gap-3 rounded-xl border border-white/10 bg-[rgba(255,255,255,0.02)] p-3 transition-colors hover:border-ubuntu-orange/50"
                     >
                       <img
@@ -302,9 +314,14 @@ function ResumeWindow() {
                   </div>
                   <div className="flex-1">
                     <h3
-                      onClick={() =>
-                        window.open(experience?.company_url, "_blank")
-                      }
+                      onClick={() => {
+                        trackClick(null, {
+                          action: CLICK_ACTIONS.EXTERNAL,
+                          label: experience.company_name,
+                          target: experience?.company_url,
+                        });
+                        window.open(experience?.company_url, "_blank");
+                      }}
                       className="text-ubuntu-orange font-bold text-lg hover:cursor-pointer hover:text-ubuntu-orange-light"
                     >
                       {experience.company_name}
@@ -362,12 +379,16 @@ function ResumeWindow() {
                   {school.diploma && (
                     <button
                       type="button"
-                      onClick={() =>
+                      onClick={() => {
+                        trackClick(null, {
+                          action: CLICK_ACTIONS.PREVIEW,
+                          label: `${school.school} diploma`,
+                        });
                         setPreview({
                           src: school.diploma,
                           title: `${school.school} diploma`,
-                        })
-                      }
+                        });
+                      }}
                       className="mt-3 inline-flex items-center gap-2 rounded-md border border-ubuntu-orange/60 px-3 py-2 text-sm font-semibold text-ubuntu-orange hover:bg-ubuntu-orange hover:text-white transition-colors"
                       title={`Show ${school.school} diploma`}
                     >

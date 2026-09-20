@@ -47,6 +47,11 @@ function useRouter() {
   return ctx;
 }
 
+/** The current path, kept in step with pushState and the back button. */
+export function usePath() {
+  return useRouter().path;
+}
+
 export function Routes({ children }) {
   const { path } = useRouter();
   const routes = Array.isArray(children) ? children : [children];

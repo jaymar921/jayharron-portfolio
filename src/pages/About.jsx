@@ -1,5 +1,6 @@
 import { experiences, educationalAttainment } from "../constants";
 import { myselfPhoto } from "../assets/icons";
+import { CLICK_ACTIONS, trackClick } from "../lib/analytics";
 
 const About = () => {
   return (
@@ -113,6 +114,13 @@ const About = () => {
                         href={experience.company_url}
                         target="_blank"
                         rel="noreferrer"
+                        onClick={() =>
+                          trackClick(null, {
+                            action: CLICK_ACTIONS.EXTERNAL,
+                            label: experience.company_name,
+                            target: experience.company_url,
+                          })
+                        }
                         className="break-words text-sm font-bold text-ubuntu-orange hover:text-ubuntu-orange-light"
                       >
                         {experience.company_name}
