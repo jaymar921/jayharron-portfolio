@@ -50,9 +50,11 @@ function downloadResumePdf() {
   addText(`${resumeContact.email}  |  ${resumeContact.location}`, 9, {
     gap: 1,
   });
-  addText(`${resumeContact.github}  |  ${resumeContact.linkedin}`, 9, {
-    gap: 5,
-  });
+  addText(
+    `${resumeContact.portfolio}  |  ${resumeContact.github}  |  ${resumeContact.linkedin}`,
+    9,
+    { gap: 5 },
+  );
 
   addSection("Profile");
   addText(resumeProfile.summary);
