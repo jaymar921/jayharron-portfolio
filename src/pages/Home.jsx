@@ -12,9 +12,11 @@ import {
   jhProjectsLogo,
   unixResume,
   unixFolder,
+  unixSideProjects,
 } from "../assets/icons";
 import About from "./About";
 import Projects from "./Projects";
+import SideProjects from "./SideProjects";
 import DragIcon from "../components/draggables/components/DragIcon";
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
 import MiniBrowserWindow from "../components/v2_components/windows/MiniBrowserWindow";
@@ -55,6 +57,7 @@ const windowTitles = {
   "project-window": "My Projects",
   "illuminary-peak-window": "Illuminary Peak, Inc.",
   "jhprojects-window": "JHProjects",
+  "side-projects-window": "Side Projects",
   "resume-window": "My Resume",
   "browser-window": "Mini Browser",
 };
@@ -193,6 +196,7 @@ const Home = () => {
   const [showProject, setShowProject] = useState(false);
   const [showIP, setShowIP] = useState(false);
   const [showJHProjects, setShowJHProjects] = useState(false);
+  const [showSideProjects, setShowSideProjects] = useState(false);
   const [showBrowser, setShowBrowser] = useState(false);
   const [activeTrigger, setActiveTrigger] = useState("");
   // Bumped on every icon/taskbar click so DragWindow can un-minimize even
@@ -219,6 +223,8 @@ const Home = () => {
   const illuminaryPeakClicked = () =>
     openWindow("illuminary-peak-window", setShowIP);
   const jhProjectsClicked = () => openWindow("jhprojects-window", setShowJHProjects);
+  const sideProjectsClicked = () =>
+    openWindow("side-projects-window", setShowSideProjects);
 
   // Kept for when the browser desktop/dock icon is re-enabled.
   // eslint-disable-next-line no-unused-vars
@@ -332,15 +338,22 @@ const Home = () => {
             onDoubleClick={jhProjectsClicked}
           />
           <DragIcon
-            key={`icon-4-${layoutKey}`}
+            key={`icon-6-${layoutKey}`}
             {...getIconPosition(3)}
+            icon={unixSideProjects}
+            title={"Side Projects"}
+            onDoubleClick={sideProjectsClicked}
+          />
+          <DragIcon
+            key={`icon-4-${layoutKey}`}
+            {...getIconPosition(4)}
             icon={unixFolder}
             title={"About"}
             onDoubleClick={aboutInfoClicked}
           />
           <DragIcon
             key={`icon-5-${layoutKey}`}
-            {...getIconPosition(4)}
+            {...getIconPosition(5)}
             icon={unixResume}
             title={"Resume"}
             onDoubleClick={resumeInfoClicked}
@@ -465,6 +478,29 @@ const Home = () => {
                 src="https://jhprojects.vercel.app/"
               />
             }
+          />
+
+          <DragWindow
+            key={`window-8-${layoutKey}`}
+            id="side-projects-window"
+            posX={getWindowPosition(windowSize.width, windowSize.height).x}
+            posY={getWindowPosition(windowSize.width, windowSize.height).y}
+            width={windowSize.width}
+            height={windowSize.height}
+            overflow="overflow-y-auto overflow-x-hidden"
+            background="bg-slate-800"
+            show={showSideProjects}
+            setShow={setShowSideProjects}
+            icon={<img className="w-4" src={unixSideProjects} />}
+            title="Side Projects"
+            activeTrigger={setActiveTrigger}
+            active={activeTrigger === "side-projects-window"}
+            reopenSignal={
+              reopenRequest.id === "side-projects-window"
+                ? reopenRequest.tick
+                : 0
+            }
+            content={<SideProjects />}
           />
 
           <DragWindow

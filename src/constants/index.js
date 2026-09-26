@@ -10,6 +10,7 @@ import {
   hirayacoder,
   illuminaryPeakLogo,
   javascript,
+  jhProjectsLogo,
   linkedin,
   logevac,
   mongodb,
@@ -344,22 +345,59 @@ export const certifications = [
   },
 ];
 
-export const experiences = [
+// Freelance and after-hours work. Kept apart from `experiences` so the About
+// page and the resume only list employment.
+export const sideProjects = [
   {
-    title: "Co-Founder | Lead Software Engineer",
-    company_name: "Illuminary Peak (Startup)",
+    title: "Lead Software Engineer",
+    company_name: "Illuminary Peak",
     company_url: "https://illuminary-peak.vercel.app",
-    job_type: "Part-Time | Remote",
+    job_type: "Freelance",
+    location: "Philippines | Remote",
     icon: illuminaryPeakLogo,
     iconBg: "#FFFFFF",
-    date: "March 15, 2026 - Present",
+    date: "Mar 2026 - Present",
     points: [
-      "Co-founded the company and lead its engineering, taking products from first sketch to a live, paying release on React and Node.js.",
-      "Integrated PayMongo end to end, covering checkout, webhooks, and reconciliation, so revenue is handled correctly rather than optimistically.",
-      "Set the delivery standard for the team with GitHub Actions pipelines that run security and quality gates on every merge.",
-      "Built an AI assisted workflow around Microsoft Copilot and Claude that shortens the distance between an idea and a reviewable prototype.",
+      "Build modern web applications on the MERN stack, structured so they can grow with the product instead of being rewritten later.",
+      "Use Microsoft Copilot, Claude Pro, and Cursor as part of an agentic workflow, which lets a small team move quickly without skipping code review.",
     ],
   },
+  {
+    title: "Software Engineer",
+    company_name: "ZygoWork",
+    company_url: "https://www.zygowork.com",
+    job_type: "Freelance",
+    location: "Philippines | Remote",
+    icon: zygowork,
+    iconBg: "#FFFFFF",
+    date: "Jul 2026 - Present",
+    points: [
+      "Designed the system architecture from scratch and carried it all the way through to deployment.",
+      "Shipped a secure application with full SAST and DAST coverage, checked against OWASP standards.",
+      "Work directly with the client to understand what they need, own the product decisions, and keep a working relationship that lasts beyond a single release.",
+    ],
+  },
+  {
+    title: "Independent Developer",
+    company_name: "JHProjects",
+    company_url: "https://jhprojects.vercel.app",
+    job_type: "Personal",
+    location: "Philippines | Remote",
+    icon: jhProjectsLogo,
+    iconBg: "#FFFFFF",
+    date: "Sep 2020 - Present",
+    summary:
+      "JHProjects is where I publish what I build outside of client work. Most of it is Minecraft server plugins, released on SpigotMC under the name JayMar921, along with a JavaScript graphics library, a few Bedrock addons, and some small games. It is a one-person operation, not a company.",
+    points: [
+      "Started writing plugins in 2020 to get properly good at Java, and kept going because people were running them on live servers.",
+      "Maintain a mix of free and paid plugins. The paid ones cover hosting and the time that goes into updates.",
+      "Test every idea on a real server before it gets a public listing. Most features come from requests by server owners and players.",
+      "Document each release on its project page, and give paid plugins free updates for as long as they are actively maintained.",
+    ],
+  },
+];
+
+export const experiences = [
   {
     title: "Software Engineer (Contract)",
     company_name: "Forrest T Jones (FTJ)",

@@ -47,6 +47,7 @@ import jhProjectsLogo from "./jhprojects.png";
 import unixFolder from "./unix-folder.svg";
 import unixProject from "./unix-project.svg";
 import unixResume from "./unix-resume.svg";
+import unixSideProjects from "./unix-side-projects.svg";
 import zygowork from "./zygowork.png";
 
 export {
@@ -99,5 +100,6 @@ export {
   unixFolder,
   unixProject,
   unixResume,
+  unixSideProjects,
   zygowork,
 };
