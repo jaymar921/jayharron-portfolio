@@ -8,91 +8,205 @@ import {
   certifications,
   resumeProfile,
   resumeContact,
+  resumeSkillGroups,
+  resumeProjects,
+  resumeCertifications,
 } from "../../../constants";
 import { CLICK_ACTIONS, trackClick } from "../../../lib/analytics";
 
 const PDF_FILE_NAME = "jayharron-mar-abejar-resume.pdf";
 
+const PDF_COLORS = {
+  text: [31, 41, 55],
+  muted: [100, 110, 125],
+  accent: [233, 84, 32],
+  rule: [215, 218, 224],
+};
+
 function downloadResumePdf() {
   const pdf = new jsPDF({ unit: "mm", format: "a4" });
-  const margin = 16;
+  const margin = 18;
   const pageWidth = pdf.internal.pageSize.getWidth();
   const pageHeight = pdf.internal.pageSize.getHeight();
+  const contentWidth = pageWidth - margin * 2;
+  const bottomLimit = pageHeight - margin - 6; // leaves room for the footer
   let y = margin;
 
+  // Line height in mm for a font size in pt, with a little leading.
+  const lineHeight = (size) => size * 0.43;
+
+  const setFont = (size, style = "normal", color = PDF_COLORS.text) => {
+    pdf.setFontSize(size);
+    pdf.setFont("helvetica", style);
+    pdf.setTextColor(...color);
+  };
   const ensureSpace = (height) => {
-    if (y + height > pageHeight - margin) {
+    if (y + height > bottomLimit) {
       pdf.addPage();
       y = margin;
     }
   };
-  const addText = (text, size = 10, options = {}) => {
-    pdf.setFontSize(size);
-    pdf.setFont("helvetica", options.bold ? "bold" : "normal");
-    const lines = pdf.splitTextToSize(text, pageWidth - margin * 2);
-    ensureSpace(lines.length * (size * 0.45) + 2);
-    pdf.text(lines, margin, y);
-    y += lines.length * (size * 0.45) + (options.gap ?? 3);
+  const paragraph = (text, { size = 9.5, x = margin, width = contentWidth, color } = {}) => {
+    setFont(size, "normal", color);
+    const lines = pdf.splitTextToSize(text, width);
+    lines.forEach((line) => {
+      ensureSpace(lineHeight(size));
+      pdf.text(line, x, y);
+      y += lineHeight(size);
+    });
   };
-  const addSection = (heading) => {
-    ensureSpace(12);
-    y += 3;
-    pdf.setDrawColor(233, 84, 32);
-    pdf.line(margin, y, margin + 5, y);
-    addText(heading.toUpperCase(), 11, { bold: true, gap: 4 });
+  const bullet = (text) => {
+    const indent = 4.5;
+    ensureSpace(lineHeight(9.5));
+    pdf.setFillColor(...PDF_COLORS.accent);
+    pdf.circle(margin + 1.4, y - 1.15, 0.55, "F");
+    paragraph(text, { x: margin + indent, width: contentWidth - indent });
+    y += 0.6;
+  };
+  // Renders "a | b | c" style runs that wrap onto a new line when a piece
+  // would overflow. Pieces with a `url` become clickable links.
+  const inlineRow = (pieces, size = 9) => {
+    const separator = "   |   ";
+    setFont(size);
+    const sepWidth = pdf.getTextWidth(separator);
+    let x = margin;
+    pieces.forEach((piece, index) => {
+      const width = pdf.getTextWidth(piece.text);
+      if (index > 0 && x + sepWidth + width > margin + contentWidth) {
+        x = margin;
+        y += lineHeight(size) + 0.6;
+      } else if (index > 0) {
+        setFont(size, "normal", PDF_COLORS.rule);
+        pdf.text(separator, x, y);
+        x += sepWidth;
+      }
+      setFont(size, "normal", piece.url ? PDF_COLORS.text : PDF_COLORS.muted);
+      if (piece.url) pdf.textWithLink(piece.text, x, y, { url: piece.url });
+      else pdf.text(piece.text, x, y);
+      x += width;
+    });
+    y += lineHeight(size);
+  };
+  const section = (heading) => {
+    ensureSpace(16);
+    y += 4.5;
+    setFont(10.5, "bold", PDF_COLORS.accent);
+    pdf.text(heading.toUpperCase(), margin, y, { charSpace: 0.4 });
+    y += 1.8;
+    pdf.setDrawColor(...PDF_COLORS.rule);
+    pdf.setLineWidth(0.3);
+    pdf.line(margin, y, pageWidth - margin, y);
+    y += 4.8;
+  };
+  // Bold title on the left with a muted date pinned to the right margin.
+  const headingRow = (left, right, url) => {
+    setFont(10.5, "bold");
+    if (url) pdf.textWithLink(left, margin, y, { url });
+    else pdf.text(left, margin, y);
+    if (right) {
+      setFont(9, "normal", PDF_COLORS.muted);
+      pdf.text(right, pageWidth - margin, y, { align: "right" });
+    }
+    y += lineHeight(10.5);
   };
 
-  pdf.setTextColor(35, 35, 35);
-  addText(resumeProfile.name, 21, { bold: true, gap: 2 });
-  addText(resumeProfile.title, 11, { gap: 2 });
+  // Header
+  setFont(24, "bold");
+  pdf.text(resumeProfile.name, margin, y + 4);
+  y += 11.5;
+  setFont(12, "bold", PDF_COLORS.accent);
+  pdf.text(resumeProfile.title, margin, y);
+  const titleWidth = pdf.getTextWidth(resumeProfile.title);
+  setFont(12, "normal", PDF_COLORS.muted);
+  pdf.text(resumeProfile.tagline, margin + titleWidth + 4, y);
+  y += 7;
 
   // Contact details live in the exported PDF only, never in the site UI.
-  addText(`${resumeContact.email}  |  ${resumeContact.location}`, 9, {
-    gap: 1,
-  });
-  addText(
-    `${resumeContact.portfolio}  |  ${resumeContact.github}  |  ${resumeContact.linkedin}`,
-    9,
-    { gap: 5 },
-  );
+  inlineRow([
+    { text: resumeContact.email, url: `mailto:${resumeContact.email}` },
+    { text: resumeContact.location },
+    { text: resumeContact.portfolio, url: resumeContact.portfolio },
+  ]);
+  y += 0.6;
+  inlineRow([
+    { text: resumeContact.github, url: resumeContact.github },
+    { text: resumeContact.linkedin, url: resumeContact.linkedin },
+  ]);
+  y += 2.5;
+  pdf.setDrawColor(...PDF_COLORS.accent);
+  pdf.setLineWidth(0.8);
+  pdf.line(margin, y, pageWidth - margin, y);
+  y += 1;
 
-  addSection("Profile");
-  addText(resumeProfile.summary);
+  section("Summary");
+  paragraph(resumeProfile.summary);
 
-  addSection("Skills");
-  addText(skills.map((skill) => `${skill.name} (${skill.type})`).join("  |  "));
-
-  addSection("Professional Experience");
-  experiences.forEach((experience) => {
-    addText(`${experience.title} - ${experience.company_name}`, 10, {
-      bold: true,
-      gap: 1,
+  section("Skills");
+  const labelWidth = 38;
+  resumeSkillGroups.forEach((group) => {
+    ensureSpace(lineHeight(9.5));
+    setFont(9.5, "bold");
+    pdf.text(group.label, margin, y);
+    paragraph(group.items.join(", "), {
+      x: margin + labelWidth,
+      width: contentWidth - labelWidth,
     });
-    addText(`${experience.date} | ${experience.job_type}`, 9, { gap: 1 });
-    experience.points.forEach((point) => addText(`- ${point}`, 9, { gap: 1 }));
-    y += 2;
+    y += 0.8;
   });
 
-  addSection("Education");
-  educationalAttainment.forEach((school) => {
-    addText(`${school.curriculum} - ${school.school}`, 10, {
-      bold: true,
-      gap: 1,
+  section("Experience");
+  experiences.forEach((experience, index) => {
+    // Keep the role header with at least its first bullet.
+    ensureSpace(lineHeight(10.5) + lineHeight(9) + lineHeight(9.5) * 2 + 2);
+    headingRow(experience.title, experience.date);
+    setFont(9.5, "normal", PDF_COLORS.accent);
+    pdf.textWithLink(experience.company_name, margin, y, {
+      url: experience.company_url,
     });
-    addText(
-      `${school.year}${school.graduationDate ? ` | Graduated ${school.graduationDate}` : ""}`,
-      9,
-    );
+    const companyWidth = pdf.getTextWidth(experience.company_name);
+    setFont(9, "normal", PDF_COLORS.muted);
+    pdf.text(`  |  ${experience.job_type}`, margin + companyWidth, y);
+    y += lineHeight(9) + 1.4;
+    experience.points.forEach(bullet);
+    if (index < experiences.length - 1) y += 2.6;
   });
 
-  addSection("Certifications");
-  certifications.forEach((cert) =>
-    addText(
-      `${cert.name}${cert.issuer ? ` (${cert.issuer})` : ""} - ${cert.dateIssued}`,
-      9,
-      { gap: 1 },
-    ),
-  );
+  section("Selected Projects");
+  resumeProjects.forEach((project, index) => {
+    ensureSpace(lineHeight(10.5) + lineHeight(9.5) * 2);
+    headingRow(project.name, null, project.link);
+    paragraph(project.description);
+    setFont(8.5, "normal", PDF_COLORS.muted);
+    pdf.textWithLink(project.link, margin, y, { url: project.link });
+    y += lineHeight(8.5);
+    if (index < resumeProjects.length - 1) y += 2.2;
+  });
+
+  section("Education");
+  educationalAttainment
+    .filter((school) => school.onResume)
+    .forEach((school) => {
+      ensureSpace(lineHeight(10.5) + lineHeight(9.5));
+      headingRow(
+        school.curriculum.replace(/^(Course|Strand):\s*/, ""),
+        school.graduationDate ? `Graduated ${school.graduationDate}` : school.year,
+      );
+      paragraph(school.school, { color: PDF_COLORS.muted });
+    });
+
+  section("Certifications");
+  resumeCertifications.forEach(bullet);
+
+  // Footer on every page, drawn last so the page count is known.
+  const pageCount = pdf.getNumberOfPages();
+  for (let page = 1; page <= pageCount; page += 1) {
+    pdf.setPage(page);
+    setFont(8, "normal", PDF_COLORS.muted);
+    pdf.text(resumeProfile.name, margin, pageHeight - margin + 4);
+    pdf.text(`Page ${page} of ${pageCount}`, pageWidth - margin, pageHeight - margin + 4, {
+      align: "right",
+    });
+  }
 
   pdf.save(PDF_FILE_NAME);
 }
@@ -124,12 +238,17 @@ function ResumeWindow() {
 
   return (
     <div className="relative w-full bg-ubuntu-aubergine-dark text-white p-4 pb-14 font-ubuntu">
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <div>
           <h1 className="text-white text-2xl font-bold">
             {resumeProfile.name}
           </h1>
-          <p className="text-slate-400 text-sm">{resumeProfile.title}</p>
+          <p className="text-sm">
+            <span className="font-semibold text-ubuntu-orange">
+              {resumeProfile.title}
+            </span>
+            <span className="text-slate-400"> · {resumeProfile.tagline}</span>
+          </p>
         </div>
         <button
           type="button"
@@ -144,6 +263,10 @@ function ResumeWindow() {
           Download PDF
         </button>
       </div>
+
+      <p className="mb-8 max-w-3xl border-l-2 border-white/10 pl-3 text-sm leading-6 text-slate-300">
+        {resumeProfile.summary}
+      </p>
 
       <h2 className={SECTION_HEADING}>Skills</h2>
       <p className="text-slate-400 text-sm mb-4 mt-2">
