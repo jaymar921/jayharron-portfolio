@@ -84,7 +84,7 @@ function SocialInfoWindow() {
           </p>
           {/* <p className="px-4">
             <a
-              href="https://www.spigotmc.org/members/jaymar921.1073076/"
+              href="https://www.spigotmc.org/resources/authors/jaymar921.1073076/"
               target="_blank"
             >
               <i class="fa-solid fa-cube text-orange-300"></i> SpigotMC

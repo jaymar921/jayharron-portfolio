@@ -57,7 +57,10 @@ function downloadResumePdf() {
   };
   const bullet = (text) => {
     const indent = 4.5;
-    ensureSpace(lineHeight(9.5));
+    // Keep a bullet on one page instead of stranding its last line.
+    setFont(9.5);
+    const lineCount = pdf.splitTextToSize(text, contentWidth - indent).length;
+    ensureSpace(lineHeight(9.5) * lineCount);
     pdf.setFillColor(...PDF_COLORS.accent);
     pdf.circle(margin + 1.4, y - 1.15, 0.55, "F");
     paragraph(text, { x: margin + indent, width: contentWidth - indent });
@@ -165,7 +168,19 @@ function downloadResumePdf() {
     });
     const companyWidth = pdf.getTextWidth(experience.company_name);
     setFont(9, "normal", PDF_COLORS.muted);
-    pdf.text(`  |  ${experience.job_type}`, margin + companyWidth, y);
+    const jobType = `  |  ${experience.job_type}`;
+    pdf.text(jobType, margin + companyWidth, y);
+    if (experience.projects_url) {
+      const linkX = margin + companyWidth + pdf.getTextWidth(jobType);
+      pdf.text("  |  Projects: ", linkX, y);
+      setFont(9, "normal", PDF_COLORS.accent);
+      pdf.textWithLink(
+        experience.projects_label,
+        linkX + pdf.getTextWidth("  |  Projects: "),
+        y,
+        { url: experience.projects_url },
+      );
+    }
     y += lineHeight(9) + 1.4;
     experience.points.forEach(bullet);
     if (index < experiences.length - 1) y += 2.6;
@@ -456,6 +471,27 @@ function ResumeWindow() {
                     <p className="text-red-300 text-xs mt-1">
                       {experience.job_type}
                     </p>
+                    {experience.projects_url && (
+                      <a
+                        href={experience.projects_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() =>
+                          trackClick(null, {
+                            action: CLICK_ACTIONS.EXTERNAL,
+                            label: experience.projects_label,
+                            target: experience.projects_url,
+                          })
+                        }
+                        className="mt-1 inline-flex items-center gap-1 text-xs text-ubuntu-orange hover:text-ubuntu-orange-light"
+                      >
+                        Projects on {experience.projects_label}
+                        <i
+                          className="fa-solid fa-arrow-up-right-from-square"
+                          aria-hidden="true"
+                        />
+                      </a>
+                    )}
                   </div>
                 </div>
 
