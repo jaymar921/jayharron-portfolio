@@ -1,5 +1,7 @@
 import {
+  claude,
   contact,
+  copilot,
   css,
   express,
   ftjLogo,
@@ -127,23 +129,80 @@ const getYears = (year) => {
 
 export const resumeProfile = {
   name: "Jayharron Mar Abejar",
-  title: "Software Engineer | DevOps | Azure | Cloud",
+  title: "Software Developer",
+  tagline: "Full Stack | DevOps",
   summary:
-    "Software Engineer who builds and modernizes production web applications for teams in the United States, working remotely from Cebu, Philippines. " +
-    "Day to day that means .NET and React services, Azure deployments wired into automated CI/CD, and legacy systems rewritten into something a team can actually maintain. " +
-    "I care about the parts a client feels months later: predictable releases, sensible security defaults, and code that still reads well on its second year.",
+    "Software Developer with 3+ years of professional experience building web applications on .NET, React, and Next.js for US clients, working remotely from Cebu, Philippines. " +
+    "I work on both ends of the stack and own the path to production: automated tests, Azure CI/CD pipelines, and secrets in Key Vault. " +
+    "Much of my recent work is rewriting legacy .NET and VBScript systems onto a current stack without losing the business rules they carry.",
 };
 
 // Contact details are intentionally kept out of the UI and used only when the
 // resume is exported to PDF, so the address is not sitting on a public page
-// waiting to be scraped.
+// waiting to be scraped. Links carry the scheme so PDF readers make them
+// clickable.
 export const resumeContact = {
   email: "jayharronabejar@gmail.com",
   location: "Cebu, Philippines",
-  portfolio: "jayharronabejar.vercel.app",
-  github: "github.com/jaymar921",
-  linkedin: "linkedin.com/in/jaymar921",
+  portfolio: "https://jayharronabejar.vercel.app",
+  github: "https://github.com/jaymar921",
+  linkedin: "https://www.linkedin.com/in/jayharron-mar-abejar-b414a9169",
 };
+
+// Grouped skills for the PDF export. Reads faster than one long list.
+export const resumeSkillGroups = [
+  {
+    label: "Languages",
+    items: ["C#", "TypeScript", "JavaScript", "Java", "Python", "HTML", "CSS"],
+  },
+  { label: "Frontend", items: ["React", "Next.js", "Tailwind CSS"] },
+  { label: "Backend", items: [".NET", "Node.js", "Express", "RabbitMQ"] },
+  { label: "Databases", items: ["SQL Server", "MongoDB"] },
+  {
+    label: "DevOps and Cloud",
+    items: [
+      "Azure",
+      "Azure Key Vault",
+      "CI/CD pipelines",
+      "Docker",
+      "Git",
+      "GitHub",
+    ],
+  },
+  { label: "Testing", items: ["xUnit", "Jest"] },
+  { label: "AI-Assisted Coding", items: ["Microsoft Copilot", "Claude Pro"] },
+];
+
+// Selected work for the PDF export. The full list lives in the Projects window.
+export const resumeProjects = [
+  {
+    name: "LogEvac",
+    link: "https://www.nuget.org/packages/LogEvac",
+    description:
+      ".NET library on NuGet that deletes old log rows from SQL Server databases written by Serilog MSSQL sinks, based on a configurable retention window.",
+  },
+  {
+    name: "HirayaCoder",
+    link: "https://github.com/jaymar921/HirayaCoder",
+    description:
+      "Open source AI coding assistant that runs fully offline on your own machine and writes and edits files from plain English prompts.",
+  },
+  {
+    name: "Custom Enchantments 3",
+    link: "https://jhprojects.vercel.app/customenchantments3",
+    description:
+      "Commercial Minecraft server plugin written in Java, with custom enchantments, player classes, quests, and in game currencies. Over 300,000 downloads.",
+  },
+];
+
+// Condensed certification list for the PDF export. The Resume window shows
+// every certificate individually.
+export const resumeCertifications = [
+  "ITPEC Information Technology Passport (IP), IT Professionals Examination Council, 2023",
+  "Secure Application Development Fundamentals and API Security Fundamentals, KnowBe4, 2026",
+  "Secure Application Development: OWASP Top 10 2021, Data Hygiene, Protecting Source Code, KnowBe4, 2025",
+  "Security Awareness Training, KnowBe4, 2025 and 2026",
+];
 
 export const skills = [
   {
@@ -233,8 +292,8 @@ export const skills = [
   {
     imageUrl:
       "https://th.bing.com/th/id/OIP.xT82C8aQ9vnAyGbemBkCcgHaH1?rs=1&pid=ImgDetMain",
-    name: "RabbitMq",
-    type: "MessageBus",
+    name: "RabbitMQ",
+    type: "Message Broker",
     years: getYears(2023),
   },
   {
@@ -257,6 +316,18 @@ export const skills = [
     name: "Azure",
     type: "DevOps",
     years: getYears(2024),
+  },
+  {
+    imageUrl: copilot,
+    name: "Microsoft Copilot",
+    type: "AI-Assisted Coding",
+    years: getYears(2025),
+  },
+  {
+    imageUrl: claude,
+    name: "Claude Pro",
+    type: "AI-Assisted Coding",
+    years: getYears(2025),
   },
 ];
 
@@ -406,13 +477,13 @@ export const experiences = [
     job_type: "Full-Time | Remote",
     icon: ftjLogo,
     iconBg: "#FFFFFF",
-    date: "March 10, 2024 - Present",
+    date: "Mar 2024 - Present",
     points: [
-      "Build and maintain insurance web applications on .NET, React, and Next.js for a US company with decades of policy logic behind it.",
-      "Reverse engineer legacy .NET and classic VBScript systems and rewrite them on the current stack without losing the business rules underneath.",
-      "Own delivery into Microsoft Azure: CI/CD pipelines, environment configuration, and Key Vault backed secret management.",
-      "Keep confidence high on the paths that matter with xUnit and Jest coverage, so refactors stay safe instead of scary.",
-      "Work directly with designers, product managers, and engineers across time zones to turn requirements into shipped features.",
+      "Build and maintain insurance web applications on .NET, React, and Next.js for a US insurer with decades of policy logic behind it.",
+      "Rewrite legacy .NET and classic VBScript systems on the current stack while keeping the business rules intact.",
+      "Own releases to Microsoft Azure: CI/CD pipelines, environment configuration, and Key Vault secrets.",
+      "Write xUnit and Jest tests around critical paths so refactors ship without regressions.",
+      "Work with designers, product managers, and developers across time zones from requirements to release.",
     ],
   },
   {
@@ -422,25 +493,25 @@ export const experiences = [
     job_type: "Full-Time | Remote",
     icon: fullScaleLogo,
     iconBg: "#BDFFD1",
-    date: "May 22, 2023 - Present",
+    date: "May 2023 - Present",
     points: [
-      "Deliver client facing web applications on .NET, React, and Next.js as an embedded engineer on offshore product teams.",
-      "Build responsive interfaces that hold their shape across browsers, screen sizes, and the devices real customers actually use.",
-      "Review teammates' pull requests with feedback aimed at the codebase, not just the diff.",
-      "Translate product intent into scoped, shippable work alongside designers and product managers.",
+      "Build client web applications on .NET, React, and Next.js as an embedded developer on offshore product teams.",
+      "Build responsive interfaces and test them across browsers, screen sizes, and devices.",
+      "Review pull requests for correctness, maintainability, and consistency with the rest of the codebase.",
+      "Break product requirements into scoped, estimable tickets with designers and product managers.",
     ],
   },
   {
-    title: "FullStack Developer",
+    title: "Full Stack Developer",
     company_name: "PSITS UC MAIN",
     company_url: "https://www.psits.org",
     job_type: "Part-Time | On site",
     icon: PSITS_LOGO,
     iconBg: "#4CA0C2",
-    date: "Sep 12, 2022 - May 22, 2023",
+    date: "Sep 2022 - May 2023",
     points: [
-      "Built and ran the organization's website on the Flask microframework, serving the entire computing college.",
-      "Shipped a point of sale application used for campus merchandise and event ticket sales.",
+      "Built and maintained the organization's website on Flask, used by students across the computing college.",
+      "Built a point of sale application for campus merchandise and event ticket sales.",
     ],
   },
   {
@@ -450,24 +521,24 @@ export const experiences = [
     job_type: "Part-Time | Remote",
     icon: fullScaleLogo,
     iconBg: "#BDFFD1",
-    date: "Sep 6, 2022 - Jan 16, 2023",
+    date: "Sep 2022 - Jan 2023",
     points: [
-      "Contributed production features on live client projects alongside senior engineers.",
+      "Shipped features on live client projects alongside senior developers.",
       "Turned design handoffs into responsive, cross browser interfaces.",
     ],
   },
   {
-    title: "Game Developer | Freelance",
+    title: "Game Developer (Freelance)",
     company_name: "SpigotMC.org",
     company_url: "https://www.spigotmc.org",
     job_type: "Part-Time | Remote",
     icon: spigotLogo,
     iconBg: "#FFD3BB",
-    date: "Sep 10, 2020 - October 2025",
+    date: "Sep 2020 - Oct 2025",
     points: [
-      "Designed and sold Minecraft server plugins to a worldwide player base, with Custom Enchantments passing 300,000 downloads.",
-      "Ran the whole product loop solo: development, releases, documentation, and direct support for paying customers.",
-      "Pushed advanced Java in a performance sensitive runtime where a slow tick is a bug every player can see.",
+      "Built and sold Java plugins for Minecraft servers worldwide. Custom Enchantments passed 300,000 downloads.",
+      "Handled development, releases, documentation, and customer support on my own.",
+      "Profiled and optimized code in the server tick loop, where slow code shows up as lag for every player.",
     ],
   },
 ];
@@ -480,6 +551,7 @@ export const educationalAttainment = [
     logo: school_ucmain,
     graduationDate: "May 27, 2023",
     diploma: bsit_deploma,
+    onResume: true,
   },
   {
     school: "St. Scholastica's Academy - Tabunok",

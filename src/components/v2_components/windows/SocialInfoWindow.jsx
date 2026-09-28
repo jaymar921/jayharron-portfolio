@@ -22,10 +22,10 @@ function SocialInfoWindow() {
               Jayharron Mar Abejar
             </h1>
             <h1 className="text-sm text-center text-ubuntu-orange font-bold">
-              Software Engineer
+              Software Developer
             </h1>
             <h1 className="text-sm text-center text-ubuntu-orange font-bold">
-              DevOps | Azure | Cloud
+              Full Stack | DevOps
             </h1>
           </div>
         </div>

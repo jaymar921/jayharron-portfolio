@@ -21,7 +21,7 @@ const About = () => {
             About Me
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-ubuntu-warm-grey">
-            Software Engineer in Cebu, Philippines, building web and cloud
+            Software Developer in Cebu, Philippines, building web and cloud
             products for teams in the United States. Below is the short version
             of how I got here and what I am good at.
           </p>
@@ -40,10 +40,10 @@ const About = () => {
                   Jayharron Mar Abejar
                 </h2>
                 <p className="mt-1 text-sm text-ubuntu-orange">
-                  Software Engineer
+                  Software Developer
                 </p>
                 <p className="text-xs text-ubuntu-warm-grey">
-                  DevOps | Azure | Cloud
+                  Full Stack | DevOps
                 </p>
               </div>
             </div>
