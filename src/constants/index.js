@@ -146,7 +146,7 @@ export const resumeContact = {
   location: "Cebu, Philippines",
   portfolio: "https://jayharronabejar.vercel.app",
   github: "https://github.com/jaymar921",
-  linkedin: "https://www.linkedin.com/in/jayharron-mar-abejar-b414a9169",
+  linkedin: "https://www.linkedin.com/in/jaymar921/",
 };
 
 // Grouped skills for the PDF export. Reads faster than one long list.
@@ -530,15 +530,17 @@ export const experiences = [
   {
     title: "Game Developer (Freelance)",
     company_name: "SpigotMC.org",
-    company_url: "https://www.spigotmc.org",
+    company_url: "https://www.spigotmc.org/resources/authors/jaymar921.1073076/",
+    projects_label: "JHProjects",
+    projects_url: "https://jhprojects.vercel.app",
     job_type: "Part-Time | Remote",
     icon: spigotLogo,
     iconBg: "#FFD3BB",
-    date: "Sep 2020 - Oct 2025",
+    date: "Sep 2020 - Present",
     points: [
-      "Built and sold Java plugins for Minecraft servers worldwide. Custom Enchantments passed 300,000 downloads.",
-      "Handled development, releases, documentation, and customer support on my own.",
-      "Profiled and optimized code in the server tick loop, where slow code shows up as lag for every player.",
+      "Build and sell Java plugins for Minecraft servers. Custom Enchantments has passed 300,000 downloads.",
+      "Maintain them in my free time with version updates, bug fixes, documentation, and customer support.",
+      "Profile and optimize code in the server tick loop, where slow code shows up as lag for every player.",
     ],
   },
 ];
