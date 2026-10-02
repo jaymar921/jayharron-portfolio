@@ -44,6 +44,12 @@ import {
   bsit_deploma,
   itpec_logo,
   shs_deploma,
+  graduationPortrait,
+  travelBukidnonRemoteWork,
+  travelBukidnonMountains,
+  travelBugisSingapore,
+  travelChinatownSingapore,
+  travelCebuMarathon,
 } from "../assets/images";
 
 export const positions = [
@@ -129,6 +135,8 @@ const getYears = (year) => {
 
 export const resumeProfile = {
   name: "Jayharron Mar Abejar",
+  // Graduation portrait, cropped to head and shoulders for the CV header.
+  photo: graduationPortrait,
   title: "Software Developer",
   tagline: "Full Stack | DevOps",
   summary:
@@ -466,6 +474,51 @@ export const sideProjects = [
       "Test every idea on a real server before it gets a public listing. Most features come from requests by server owners and players.",
       "Document each release on its project page, and give paid plugins free updates for as long as they are actively maintained.",
     ],
+  },
+];
+
+// Travel window. Captions are short on purpose, the photos do the talking.
+export const travelIntro = {
+  title: "Out of Office",
+  caption:
+    "Proof that I do leave the desk. Sometimes I bring the laptop anyway.",
+};
+
+export const travelPhotos = [
+  {
+    image: travelBukidnonRemoteWork,
+    place: "Bukidnon, Philippines",
+    title: "Remote, literally",
+    caption:
+      "Pushing commits from a campsite in the Bukidnon highlands. The signal held up better than I expected.",
+  },
+  {
+    image: travelBukidnonMountains,
+    place: "Bukidnon, Philippines",
+    title: "Above the clouds",
+    caption:
+      "Fog rolling over the ridges. The laptop stayed in the bag for this one.",
+  },
+  {
+    image: travelBugisSingapore,
+    place: "Bugis, Singapore",
+    title: "First stop, Singapore",
+    caption:
+      "Backpack on and walking everywhere. Bugis was the first stop on the list.",
+  },
+  {
+    image: travelChinatownSingapore,
+    place: "Chinatown, Singapore",
+    title: "Night walk",
+    caption:
+      "Chinatown after dark, all neon signs and busy crosswalks. Good way to end a long day out.",
+  },
+  {
+    image: travelCebuMarathon,
+    place: "Cebu City, Philippines",
+    title: "Cebu Marathon 2026",
+    caption:
+      "Ran it with the Full Scale running club. Same team I ship code with, different kind of sprint.",
   },
 ];
 

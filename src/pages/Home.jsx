@@ -13,10 +13,12 @@ import {
   unixResume,
   unixFolder,
   unixSideProjects,
+  unixTravel,
 } from "../assets/icons";
 import About from "./About";
 import Projects from "./Projects";
 import SideProjects from "./SideProjects";
+import Travel from "./Travel";
 import DragIcon from "../components/draggables/components/DragIcon";
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
 import MiniBrowserWindow from "../components/v2_components/windows/MiniBrowserWindow";
@@ -58,7 +60,8 @@ const windowTitles = {
   "illuminary-peak-window": "Illuminary Peak, Inc.",
   "jhprojects-window": "JHProjects",
   "side-projects-window": "Side Projects",
-  "resume-window": "My Resume",
+  "travel-window": "Travel",
+  "resume-window": "My CV",
   "browser-window": "Mini Browser",
 };
 
@@ -197,6 +200,7 @@ const Home = () => {
   const [showIP, setShowIP] = useState(false);
   const [showJHProjects, setShowJHProjects] = useState(false);
   const [showSideProjects, setShowSideProjects] = useState(false);
+  const [showTravel, setShowTravel] = useState(false);
   const [showBrowser, setShowBrowser] = useState(false);
   const [activeTrigger, setActiveTrigger] = useState("");
   // Bumped on every icon/taskbar click so DragWindow can un-minimize even
@@ -225,6 +229,7 @@ const Home = () => {
   const jhProjectsClicked = () => openWindow("jhprojects-window", setShowJHProjects);
   const sideProjectsClicked = () =>
     openWindow("side-projects-window", setShowSideProjects);
+  const travelClicked = () => openWindow("travel-window", setShowTravel);
 
   // Kept for when the browser desktop/dock icon is re-enabled.
   // eslint-disable-next-line no-unused-vars
@@ -345,17 +350,24 @@ const Home = () => {
             onDoubleClick={sideProjectsClicked}
           />
           <DragIcon
-            key={`icon-4-${layoutKey}`}
+            key={`icon-7-${layoutKey}`}
             {...getIconPosition(4)}
+            icon={unixTravel}
+            title={"Travel"}
+            onDoubleClick={travelClicked}
+          />
+          <DragIcon
+            key={`icon-4-${layoutKey}`}
+            {...getIconPosition(5)}
             icon={unixFolder}
             title={"About"}
             onDoubleClick={aboutInfoClicked}
           />
           <DragIcon
             key={`icon-5-${layoutKey}`}
-            {...getIconPosition(5)}
+            {...getIconPosition(6)}
             icon={unixResume}
-            title={"Resume"}
+            title={"CV"}
             onDoubleClick={resumeInfoClicked}
           />
           {/* Browser desktop icon disabled for now, see browserClicked/MiniBrowserWindow */}
@@ -504,6 +516,27 @@ const Home = () => {
           />
 
           <DragWindow
+            key={`window-9-${layoutKey}`}
+            id="travel-window"
+            posX={getWindowPosition(windowSize.width, windowSize.height).x}
+            posY={getWindowPosition(windowSize.width, windowSize.height).y}
+            width={windowSize.width}
+            height={windowSize.height}
+            overflow="overflow-y-auto overflow-x-hidden"
+            background="bg-slate-800"
+            show={showTravel}
+            setShow={setShowTravel}
+            icon={<img className="w-4" src={unixTravel} />}
+            title="Travel"
+            activeTrigger={setActiveTrigger}
+            active={activeTrigger === "travel-window"}
+            reopenSignal={
+              reopenRequest.id === "travel-window" ? reopenRequest.tick : 0
+            }
+            content={<Travel />}
+          />
+
+          <DragWindow
             key={`window-6-${layoutKey}`}
             id="resume-window"
             posX={getWindowPosition(windowSize.width, windowSize.height).x}
@@ -515,7 +548,7 @@ const Home = () => {
             show={showResume}
             setShow={setShowResume}
             icon={<img className="w-4" src={unixResume} />}
-            title="My Resume"
+            title="My CV"
             activeTrigger={setActiveTrigger}
             active={activeTrigger === "resume-window"}
             reopenSignal={

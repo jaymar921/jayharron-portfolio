@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Travel">
+  <path fill="#e95420" d="M5 14a5 5 0 0 1 5-5h15l6 7h23a5 5 0 0 1 5 5v29a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V14Z"/>
+  <path fill="#f47745" d="M5 20h54v30a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V20Z"/>
+  <path fill="#c7431c" d="M5 20h54v6H5z" opacity=".55"/>
+  <g fill="#fff" opacity=".92">
+    <path d="M23 33.5a2.5 2.5 0 0 1 2.5-2.5h3l1.6-2.4h3.8l1.6 2.4h3a2.5 2.5 0 0 1 2.5 2.5v10a2.5 2.5 0 0 1-2.5 2.5h-13a2.5 2.5 0 0 1-2.5-2.5Z"/>
+  </g>
+  <circle cx="32" cy="38.4" r="4.4" fill="#e95420"/>
+  <circle cx="32" cy="38.4" r="2.4" fill="#fff" opacity=".92"/>
+</svg>

@@ -61,7 +61,7 @@ function Taskbar({
         />
         <DockIcon
           icon={unixResume}
-          label="Resume"
+          label="CV"
           onClick={resumeInfoClicked}
           active={activeTrigger === "resume-window"}
         />
