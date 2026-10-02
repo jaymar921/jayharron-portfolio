@@ -31,6 +31,14 @@ import cert_secure_app_development from "./certs/cert-secure-app-development-fun
 import bsit_deploma from "./certs/deplomas/bsit-deploma.png";
 import shs_deploma from "./certs/deplomas/shs-deploma.png";
 
+import graduationPortrait from "./cv/graduation-portrait.jpg";
+
+import travelBukidnonRemoteWork from "./travel/bukidnon-remote-work.jpg";
+import travelBukidnonMountains from "./travel/bukidnon-mountains.jpg";
+import travelBugisSingapore from "./travel/bugis-singapore.jpg";
+import travelChinatownSingapore from "./travel/chinatown-singapore.jpg";
+import travelCebuMarathon from "./travel/cebu-marathon-2026.jpg";
+
 export {
   hero,
   meta,
@@ -57,4 +65,10 @@ export {
   cert_secure_app_development,
   bsit_deploma,
   shs_deploma,
+  graduationPortrait,
+  travelBukidnonRemoteWork,
+  travelBukidnonMountains,
+  travelBugisSingapore,
+  travelChinatownSingapore,
+  travelCebuMarathon,
 };

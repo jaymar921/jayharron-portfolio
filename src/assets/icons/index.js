@@ -50,6 +50,7 @@ import unixFolder from "./unix-folder.svg";
 import unixProject from "./unix-project.svg";
 import unixResume from "./unix-resume.svg";
 import unixSideProjects from "./unix-side-projects.svg";
+import unixTravel from "./unix-travel.svg";
 import zygowork from "./zygowork.png";
 
 export {
@@ -105,5 +106,6 @@ export {
   unixProject,
   unixResume,
   unixSideProjects,
+  unixTravel,
   zygowork,
 };
