@@ -16,6 +16,14 @@ const Travel = () => {
     setOpenIndex(index);
   };
 
+  const openLink = (link) => {
+    trackClick(null, {
+      action: CLICK_ACTIONS.EXTERNAL,
+      label: `Travel: ${link.label}`,
+      target: link.href,
+    });
+  };
+
   const step = useCallback((direction) => {
     setOpenIndex((index) =>
       index === null
@@ -114,6 +122,28 @@ const Travel = () => {
                   <p className="mt-3 text-sm leading-7 text-slate-300">
                     {photo.caption}
                   </p>
+                  {photo.links && (
+                    <ul className="mt-3 space-y-1">
+                      {photo.links.map((link) => (
+                        <li key={link.href}>
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => openLink(link)}
+                            className="inline-flex items-center gap-2 text-sm text-ubuntu-orange hover:underline focus:outline-none focus-visible:underline"
+                          >
+                            <span className="text-ubuntu-warm-grey">$</span> open{" "}
+                            {link.label}
+                            <i
+                              className="fa-solid fa-arrow-up-right-from-square text-xs"
+                              aria-hidden="true"
+                            />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
             </li>

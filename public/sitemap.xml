@@ -3,7 +3,7 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://jayharronabejar.vercel.app</loc>
+    <loc>https://jayharronabejar.info</loc>
     <lastmod>2026-07-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- About Page -->
   <url>
-    <loc>https://jayharronabejar.vercel.app/about</loc>
+    <loc>https://jayharronabejar.info/about</loc>
     <lastmod>2026-07-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

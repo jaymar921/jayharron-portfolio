@@ -393,7 +393,7 @@ body:has(.card[data-color="green"]:hover) {
 
 .boot-identity.is-shown .boot-progress {
   /* Fills between the identity and exit steps in BootScreen.jsx. */
-  animation: boot-progress 3900ms cubic-bezier(0.3, 0.6, 0.4, 1) forwards;
+  animation: boot-progress 2900ms cubic-bezier(0.3, 0.6, 0.4, 1) forwards;
 }
 
 .boot-greeting.is-shown > * {

@@ -115,10 +115,14 @@ const FULLSCREEN_EVENTS = [
 // would fight with devtools on every hot reload, and a browser with no
 // fullscreen support at all (iOS Safari cannot take the whole document) is
 // never left waiting for something that will not happen.
-const PROD_HOSTNAME = "jayharronabejar.vercel.app";
+const PROD_HOSTNAMES = [
+  "jayharronabejar.info",
+  "www.jayharronabejar.info",
+  "jayharronabejar.vercel.app",
+];
 function wantsFullscreen() {
   return (
-    window.location.hostname === PROD_HOSTNAME &&
+    PROD_HOSTNAMES.includes(window.location.hostname) &&
     Boolean(getFullscreenRequest())
   );
 }

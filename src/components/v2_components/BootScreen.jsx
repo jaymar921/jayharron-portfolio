@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { jhlogo } from "../../assets/icons";
+import { jayPhoto } from "../../assets/images";
 import { resumeProfile } from "../../constants";
 import { fetchVisitorCountry, resolveGreeting } from "../../lib/greeting";
 
@@ -8,15 +8,14 @@ import { fetchVisitorCountry, resolveGreeting } from "../../lib/greeting";
  * hello in the visitor's language. The desktop is already rendered underneath,
  * so the exit is just this overlay letting go of its blur.
  *
- * Any key or tap skips straight to the exit. It does not stop the event, so
- * the same tap still counts as the gesture Home needs for fullscreen.
+ * It always plays through; there is no skip.
  */
 
-// Milliseconds from mount, about eight seconds end to end. Reduced motion gets
+// Milliseconds from mount, about six seconds end to end. Reduced motion gets
 // a shorter run with no stagger. The progress bar in index.css is timed to
 // fill between `identity` and `exit`.
 const TIMINGS = {
-  normal: { lineEvery: 380, identity: 3400, greeting: 4400, exit: 7300, done: 8000 },
+  normal: { lineEvery: 270, identity: 2400, greeting: 3100, exit: 5300, done: 6000 },
   reduced: { lineEvery: 0, identity: 500, greeting: 500, exit: 2000, done: 2000 },
 };
 
@@ -52,7 +51,6 @@ function BootScreen({ onDone }) {
   const [shownLines, setShownLines] = useState(reduced ? Infinity : 0);
   const [showGreeting, setShowGreeting] = useState(false);
   const greetingShown = useRef(false);
-  const finished = useRef(false);
 
   const onDoneRef = useRef(onDone);
   onDoneRef.current = onDone;
@@ -75,42 +73,16 @@ function BootScreen({ onDone }) {
     if (timing.lineEvery > 0) {
       for (let i = 1; i <= 8; i += 1) at(i * timing.lineEvery, () => setShownLines(i));
     }
-    at(timing.identity, () => setPhase((p) => (p === "log" ? "identity" : p)));
+    at(timing.identity, () => setPhase("identity"));
     at(timing.greeting, () => {
       greetingShown.current = true;
       setShowGreeting(true);
     });
     at(timing.exit, () => setPhase("exit"));
-    at(timing.done, () => {
-      if (finished.current) return;
-      finished.current = true;
-      onDoneRef.current();
-    });
+    at(timing.done, () => onDoneRef.current());
 
     return () => timers.forEach(window.clearTimeout);
   }, [timing]);
-
-  // Skip: jump to the exit and finish once the fade has played.
-  useEffect(() => {
-    if (phase === "exit") return undefined;
-
-    const skip = () => {
-      greetingShown.current = true;
-      setPhase("exit");
-      window.setTimeout(() => {
-        if (finished.current) return;
-        finished.current = true;
-        onDoneRef.current();
-      }, reduced ? 0 : 700);
-    };
-
-    window.addEventListener("pointerdown", skip);
-    window.addEventListener("keydown", skip);
-    return () => {
-      window.removeEventListener("pointerdown", skip);
-      window.removeEventListener("keydown", skip);
-    };
-  }, [phase, reduced]);
 
   const lines = bootLines(locale);
 
@@ -171,7 +143,11 @@ function BootScreen({ onDone }) {
           )}
         </div>
 
-        <img src={jhlogo} alt="" className="h-14 w-14 opacity-90" />
+        <img
+          src={jayPhoto}
+          alt=""
+          className="h-20 w-20 rounded-full object-cover ring-2 ring-white/15"
+        />
         <h1 className="mt-4 font-ubuntu text-xl font-bold tracking-tight text-white sm:text-2xl">
           {resumeProfile.name}
         </h1>
@@ -184,10 +160,6 @@ function BootScreen({ onDone }) {
           <div className="boot-progress h-full rounded-full bg-ubuntu-orange" />
         </div>
       </div>
-
-      <p className="absolute bottom-5 left-0 right-0 text-center text-[11px] text-slate-500">
-        press any key or tap to skip
-      </p>
     </div>
   );
 }

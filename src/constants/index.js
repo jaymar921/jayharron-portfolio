@@ -50,6 +50,7 @@ import {
   travelBugisSingapore,
   travelChinatownSingapore,
   travelCebuMarathon,
+  travelSingaporeSideProject,
 } from "../assets/images";
 
 export const positions = [
@@ -152,7 +153,7 @@ export const resumeProfile = {
 export const resumeContact = {
   email: "jayharronabejar@gmail.com",
   location: "Cebu, Philippines",
-  portfolio: "https://jayharronabejar.vercel.app",
+  portfolio: "https://jayharronabejar.info",
   github: "https://github.com/jaymar921",
   linkedin: "https://www.linkedin.com/in/jaymar921/",
 };
@@ -544,6 +545,7 @@ export const sideProjects = [
 
 // Travel window, told as one short story. Each photo is a chapter and its
 // caption is the next few lines, so the order of this array is the plot.
+// `links` is optional and shows under the caption.
 export const travelIntro = {
   title: "Out of Office",
   caption:
@@ -586,6 +588,17 @@ export const travelPhotos = [
     title: "Night walk",
     caption:
       "By the time I reached Chinatown it was dark. Neon signs, packed crosswalks, and legs that had clearly walked enough for one day. Good way to close the chapter.",
+  },
+  {
+    image: travelSingaporeSideProject,
+    place: "Singapore",
+    title: "Mostly offline",
+    caption:
+      "Of course the laptop came along. An iced coffee, a corner seat at Starbucks, and two projects open: JHProjects, my side project, and ZygoWork, mid-way through the release that takes it international.",
+    links: [
+      { label: "jhprojects.dev", href: "https://www.jhprojects.dev/?style=unix" },
+      { label: "zygowork.com", href: "https://www.zygowork.com/" },
+    ],
   },
 ];
 

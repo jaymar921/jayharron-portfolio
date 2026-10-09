@@ -38,6 +38,7 @@ import travelBukidnonMountains from "./travel/bukidnon-mountains.jpg";
 import travelBugisSingapore from "./travel/bugis-singapore.jpg";
 import travelChinatownSingapore from "./travel/chinatown-singapore.jpg";
 import travelCebuMarathon from "./travel/cebu-marathon-2026.jpg";
+import travelSingaporeSideProject from "./travel/2026-working-on-a-side-project-jhprojects-at-singapore.jpg";
 
 export {
   hero,
@@ -71,4 +72,5 @@ export {
   travelBugisSingapore,
   travelChinatownSingapore,
   travelCebuMarathon,
+  travelSingaporeSideProject,
 };
