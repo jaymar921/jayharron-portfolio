@@ -197,10 +197,10 @@ export const resumeProjects = [
       "Open source AI coding assistant that runs fully offline on your own machine and writes and edits files from plain English prompts.",
   },
   {
-    name: "Custom Enchantments 3",
-    link: "https://www.jhprojects.dev/customenchantments3",
+    name: "JHProjects",
+    link: "https://www.jhprojects.dev",
     description:
-      "Commercial Minecraft server plugin written in Java, with custom enchantments, player classes, quests, and in game currencies. Over 300,000 downloads.",
+      "Where I publish my Minecraft server plugins, written in Java and led by Custom Enchantments with over 300,000 downloads, plus an npm canvas library. Built and run end to end: React front end, Express API on Vercel, MongoDB, PayPal checkout, buyer accounts, and an admin dashboard fed by hourly pings from live servers.",
   },
 ];
 
