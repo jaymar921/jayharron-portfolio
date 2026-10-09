@@ -73,5 +73,5 @@ Disallow: /admin
 Disallow: /api
 
 # Host and Sitemap locations
-Host: https://jayharronabejar.vercel.app
-Sitemap: https://jayharronabejar.vercel.app/sitemap.xml
+Host: https://jayharronabejar.info
+Sitemap: https://jayharronabejar.info/sitemap.xml

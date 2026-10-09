@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://jayharronabejar.vercel.app">
+  <a href="https://jayharronabejar.info">
     <img src="https://github.com/jaymar921/jaymar921/blob/main/cover_img.jpg" />
   </a>
 </p>
@@ -64,7 +64,7 @@
   <a href="https://youtube.com/c/jaymar921">
     <img src="https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white" />
   </a>
-  <a href="https://jayharronabejar.vercel.app">
+  <a href="https://jayharronabejar.info">
     <img src="https://img.shields.io/badge/Portfolio-%23FFAA00.svg?logo=GoogleChrome&logoColor=white" />
   </a>
 </p>

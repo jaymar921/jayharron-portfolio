@@ -153,7 +153,7 @@ export const resumeProfile = {
 export const resumeContact = {
   email: "jayharronabejar@gmail.com",
   location: "Cebu, Philippines",
-  portfolio: "https://jayharronabejar.vercel.app",
+  portfolio: "https://jayharronabejar.info",
   github: "https://github.com/jaymar921",
   linkedin: "https://www.linkedin.com/in/jaymar921/",
 };
