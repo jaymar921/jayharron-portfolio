@@ -163,6 +163,13 @@ async function downloadCvPdf() {
     // Keep the role header with at least its first bullet.
     ensureSpace(lineHeight(10.5) + lineHeight(9) + lineHeight(9.5) * 2 + 2);
     headingRow(experience.title, experience.date);
+    if (experience.title_note) {
+      // Drawn back on the title's baseline, after the bold title.
+      setFont(10.5, "bold");
+      const noteX = margin + pdf.getTextWidth(experience.title) + 2.5;
+      setFont(9, "italic", PDF_COLORS.muted);
+      pdf.text(`| ${experience.title_note}`, noteX, y - lineHeight(10.5));
+    }
     setFont(9.5, "normal", PDF_COLORS.accent);
     pdf.textWithLink(experience.company_name, margin, y, {
       url: experience.company_url,
@@ -411,7 +418,14 @@ function ResumeWindow() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                      <h3 className="font-semibold text-slate-900">{experience.title}</h3>
+                      <h3 className="font-semibold text-slate-900">
+                        {experience.title}
+                        {experience.title_note && (
+                          <span className="ml-2 inline-block rounded bg-emerald-50 px-1.5 py-0.5 align-middle text-[11px] font-medium text-emerald-700 ring-1 ring-emerald-200">
+                            {experience.title_note}
+                          </span>
+                        )}
+                      </h3>
                       <span className="shrink-0 text-xs font-medium text-slate-500">
                         {experience.date}
                       </span>

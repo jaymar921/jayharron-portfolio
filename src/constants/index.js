@@ -141,7 +141,7 @@ export const resumeProfile = {
   tagline: "Full Stack | DevOps",
   summary:
     "Software Developer with 3+ years of professional experience building web applications on .NET, React, and Next.js for US clients, working remotely from Cebu, Philippines. " +
-    "I work on both ends of the stack and own the path to production: automated tests, Azure CI/CD pipelines, and secrets in Key Vault. " +
+    "I work on both ends of the stack and, more and more, on the platform under it: Azure DevOps pipelines, Key Vault, and production releases planned together with infrastructure and database teams. " +
     "Much of my recent work is rewriting legacy .NET and VBScript systems onto a current stack without losing the business rules they carry.",
 };
 
@@ -170,6 +170,7 @@ export const resumeSkillGroups = [
     label: "DevOps and Cloud",
     items: [
       "Azure",
+      "Azure DevOps",
       "Azure Key Vault",
       "CI/CD pipelines",
       "Docker",
@@ -197,7 +198,7 @@ export const resumeProjects = [
   },
   {
     name: "Custom Enchantments 3",
-    link: "https://jhprojects.vercel.app/customenchantments3",
+    link: "https://www.jhprojects.dev/customenchantments3",
     description:
       "Commercial Minecraft server plugin written in Java, with custom enchantments, player classes, quests, and in game currencies. Over 300,000 downloads.",
   },
@@ -460,71 +461,140 @@ export const sideProjects = [
   {
     title: "Independent Developer",
     company_name: "JHProjects",
-    company_url: "https://jhprojects.vercel.app",
+    company_url: "https://www.jhprojects.dev",
     job_type: "Personal",
     location: "Philippines | Remote",
     icon: jhProjectsLogo,
     iconBg: "#FFFFFF",
     date: "Sep 2020 - Present",
     summary:
-      "JHProjects is where I publish what I build outside of client work. Most of it is Minecraft server plugins, released on SpigotMC under the name JayMar921, along with a JavaScript graphics library, a few Bedrock addons, and some small games. It is a one-person operation, not a company.",
+      "JHProjects is where I publish what I build outside of client work. Most of it is Minecraft server plugins, released on SpigotMC under the name JayMar921, plus a JavaScript graphics library on npm. It started in 2020 as a lockdown experiment while I was teaching myself Java, went quiet in 2023 when work took over, and came back in late 2025 when I found my old to-do files still sitting in the repo. It is a one-person operation, not a company.",
+    // What is actually on the shelf. Mirrors the cards on jhprojects.dev.
+    products: [
+      {
+        name: "Custom Enchantments 3",
+        tag: "Premium",
+        url: "https://www.jhprojects.dev/customenchantments3",
+        blurb:
+          "159 enchantments, 149 treasures, three player classes and an economy. Free Lite build alongside it. The Custom Enchantments line has passed 300,000 downloads.",
+      },
+      {
+        name: "Epic Mobs Rework",
+        tag: "Premium",
+        url: "https://www.jhprojects.dev/epic-mobs-rework",
+        blurb:
+          "Custom mobs from any vanilla entity, telegraphed abilities, boss phases, companions, and raids in the Nether and the End.",
+      },
+      {
+        name: "Farm Tales",
+        tag: "Premium",
+        url: "https://www.jhprojects.dev/farm-tales",
+        blurb:
+          "Farming where how you tend a crop decides what you harvest. 134 crops, fruits and meats across six quality grades.",
+      },
+      {
+        name: "Fish Tales",
+        tag: "Premium",
+        url: "https://www.jhprojects.dev/fish-tales",
+        blurb:
+          "Server-wide fishing contests on water and lava, with a live HUD, 100 fish in six tiers, and a market.",
+      },
+      {
+        name: "Kumandra's Economy",
+        tag: "Free",
+        url: "https://www.jhprojects.dev/kumandras-economy",
+        blurb:
+          "Jobs, trading, deliveries, shops and quests in one free jar, from Minecraft 1.16 up to the latest release.",
+      },
+      {
+        name: "2dgraphic-utils",
+        tag: "npm",
+        url: "https://www.jhprojects.dev/2dgraphic-utils",
+        blurb:
+          "Canvas rendering for the browser: sprites, a render loop, pan and zoom, and Y-sort depth in one package.",
+      },
+    ],
     points: [
-      "Started writing plugins in 2020 to get properly good at Java, and kept going because people were running them on live servers.",
-      "Maintain a mix of free and paid plugins. The paid ones cover hosting and the time that goes into updates.",
-      "Test every idea on a real server before it gets a public listing. Most features come from requests by server owners and players.",
-      "Document each release on its project page, and give paid plugins free updates for as long as they are actively maintained.",
+      "Built the site and its API myself: React and Vite on the front, an Express API that runs as a Vercel function, and MongoDB behind it. One HTML entry per plugin page so link previews work without JavaScript.",
+      "Sell premium builds directly through PayPal checkout. Buyers get an account, and downloads are checked against ownership and streamed through the API, so a storage link is never handed out.",
+      "Every running copy of the plugins reports in once an hour. An admin dashboard shows live servers, players and versions in the wild, and the pings expire on their own after 90 days.",
+      "Kept analytics privacy minded: visitor IPs are only ever stored as a salted hash, bots are left out of the counts, and Do Not Track is respected.",
+      "Test every idea on a real server before it gets a listing. Most features come from requests by server owners and players, and paid plugins get free updates for as long as they are maintained.",
+    ],
+    stack: [
+      "Java",
+      "Spigot API",
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Express",
+      "MongoDB",
+      "Vercel",
+      "PayPal API",
+    ],
+    links: [
+      { label: "jhprojects.dev", url: "https://www.jhprojects.dev" },
+      {
+        label: "SpigotMC",
+        url: "https://www.spigotmc.org/resources/authors/jaymar921.1073076/",
+      },
     ],
   },
 ];
 
-// Travel window. Captions are short on purpose, the photos do the talking.
+// Travel window, told as one short story. Each photo is a chapter and its
+// caption is the next few lines, so the order of this array is the plot.
 export const travelIntro = {
   title: "Out of Office",
   caption:
-    "Proof that I do leave the desk. Sometimes I bring the laptop anyway.",
+    "Most of my days are a desk, a monitor and a build that needs to go green. Every so often I leave all of that behind. Mostly.",
+  outro: "Next destination not booked yet. Working on it.",
 };
 
 export const travelPhotos = [
+  {
+    image: travelCebuMarathon,
+    place: "Cebu City, Philippines",
+    title: "Start line",
+    caption:
+      "It started at home. Cebu Marathon 2026 with the Full Scale running club, the same people I ship code with. Turns out a race and a release ask for the same thing: keep going after it stops being fun.",
+  },
   {
     image: travelBukidnonRemoteWork,
     place: "Bukidnon, Philippines",
     title: "Remote, literally",
     caption:
-      "Pushing commits from a campsite in the Bukidnon highlands. The signal held up better than I expected.",
+      "Then I wanted to see how far remote work could stretch. I hauled the laptop up to a campsite in the Bukidnon highlands and pushed commits from a folding chair. The signal held. Barely.",
   },
   {
     image: travelBukidnonMountains,
     place: "Bukidnon, Philippines",
     title: "Above the clouds",
     caption:
-      "Fog rolling over the ridges. The laptop stayed in the bag for this one.",
+      "The next morning the fog rolled over the ridges and the laptop stayed in the bag. Some views do not need a second monitor.",
   },
   {
     image: travelBugisSingapore,
     place: "Bugis, Singapore",
-    title: "First stop, Singapore",
+    title: "Passport out",
     caption:
-      "Backpack on and walking everywhere. Bugis was the first stop on the list.",
+      "Singapore came next. Backpack on, comfortable shoes, and no plan beyond a list of places. Bugis was first on it.",
   },
   {
     image: travelChinatownSingapore,
     place: "Chinatown, Singapore",
     title: "Night walk",
     caption:
-      "Chinatown after dark, all neon signs and busy crosswalks. Good way to end a long day out.",
-  },
-  {
-    image: travelCebuMarathon,
-    place: "Cebu City, Philippines",
-    title: "Cebu Marathon 2026",
-    caption:
-      "Ran it with the Full Scale running club. Same team I ship code with, different kind of sprint.",
+      "By the time I reached Chinatown it was dark. Neon signs, packed crosswalks, and legs that had clearly walked enough for one day. Good way to close the chapter.",
   },
 ];
 
 export const experiences = [
   {
     title: "Software Engineer (Contract)",
+    // Same contract and title, with the work shifting toward Azure DevOps.
+    // Shown beside the title so the change reads as growth, not a new job.
+    title_note: "Moving into Azure DevOps / Cloud",
     company_name: "Forrest T Jones (FTJ)",
     company_url: "https://ftj.com",
     job_type: "Full-Time | Remote",
@@ -533,10 +603,10 @@ export const experiences = [
     date: "Mar 2024 - Present",
     points: [
       "Build and maintain insurance web applications on .NET, React, and Next.js for a US insurer with decades of policy logic behind it.",
+      "Took on the DevOps side of delivery: Azure DevOps build and release pipelines, environment configuration, and secrets in Azure Key Vault.",
+      "Worked with the Infrastructure and DBA teams to get a secured application into production, from server and access setup to database deployment and go-live.",
       "Rewrite legacy .NET and classic VBScript systems on the current stack while keeping the business rules intact.",
-      "Own releases to Microsoft Azure: CI/CD pipelines, environment configuration, and Key Vault secrets.",
       "Write xUnit and Jest tests around critical paths so refactors ship without regressions.",
-      "Work with designers, product managers, and developers across time zones from requirements to release.",
     ],
   },
   {
@@ -585,7 +655,7 @@ export const experiences = [
     company_name: "SpigotMC.org",
     company_url: "https://www.spigotmc.org/resources/authors/jaymar921.1073076/",
     projects_label: "JHProjects",
-    projects_url: "https://jhprojects.vercel.app",
+    projects_url: "https://www.jhprojects.dev",
     job_type: "Part-Time | Remote",
     icon: spigotLogo,
     iconBg: "#FFD3BB",
@@ -714,7 +784,7 @@ export const projects = [
     name: "Custom Enchantments 3",
     description:
       "A commercial Minecraft server plugin with custom enchantments, a skill system, player classes, in game currencies, and quests layered into a full RPG experience. Past 300,000 downloads and sold to server owners worldwide.",
-    link: "https://jhprojects.vercel.app/customenchantments3",
+    link: "https://www.jhprojects.dev/customenchantments3",
   },
   {
     iconUrl:
