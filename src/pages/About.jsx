@@ -58,6 +58,14 @@ const About = () => {
                 the next engineer can actually read.
               </p>
               <p className="mt-3">
+                Lately I have been spending more time on what happens after the
+                merge. I run Azure DevOps pipelines and Key Vault for my current
+                client, and I sit down with the infrastructure and DBA teams to
+                plan how a secured application actually reaches production.
+                That work is pulling me toward an Azure DevOps and cloud role,
+                and I am leaning into it.
+              </p>
+              <p className="mt-3">
                 What I care about beyond the stack is the part clients feel
                 later. Releases that are boring on purpose, security handled at
                 the pipeline instead of in a panic, and a codebase that has not
@@ -80,7 +88,7 @@ const About = () => {
             <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
               <div className="border border-white/10 p-2">
                 <p className="text-ubuntu-orange">focus</p>
-                <p className="mt-1 text-slate-300">.NET, React, Azure</p>
+                <p className="mt-1 text-slate-300">.NET, React, Azure DevOps</p>
               </div>
               <div className="border border-white/10 p-2">
                 <p className="text-ubuntu-orange">location</p>
@@ -128,13 +136,22 @@ const About = () => {
                       <p className="mt-1 break-words text-sm text-white">
                         {experience.title}
                       </p>
+                      {experience.title_note && (
+                        <p className="mt-1 text-xs text-emerald-300">
+                          <i
+                            className="fa-solid fa-arrow-trend-up pr-1.5"
+                            aria-hidden="true"
+                          />
+                          {experience.title_note}
+                        </p>
+                      )}
                       <p className="mt-1 break-words text-xs text-ubuntu-warm-grey">
                         {experience.date} | {experience.job_type}
                       </p>
                     </div>
                   </div>
                   <ul className="mt-3 list-disc space-y-1 pl-5 text-xs leading-5 text-slate-300">
-                    {experience.points.slice(0, 2).map((point) => (
+                    {experience.points.slice(0, 3).map((point) => (
                       <li key={point}>{point}</li>
                     ))}
                   </ul>

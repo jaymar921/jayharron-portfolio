@@ -329,6 +329,134 @@ body:has(.card[data-color="green"]:hover) {
   }
 }
 
+/* ===== Boot screen ===== */
+/* Dark and blurred over the desktop, which is already rendered underneath.
+   The exit drops the opacity and the blur together, so the desktop comes
+   into focus instead of just appearing. */
+.boot-screen {
+  background: rgba(6, 0, 4, 0.88);
+  backdrop-filter: blur(22px) saturate(0.7);
+  -webkit-backdrop-filter: blur(22px) saturate(0.7);
+  transition:
+    opacity 700ms ease,
+    backdrop-filter 700ms ease,
+    -webkit-backdrop-filter 700ms ease;
+}
+
+.boot-screen.is-exiting {
+  opacity: 0;
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  pointer-events: none;
+}
+
+.boot-vignette {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+.boot-line {
+  animation: boot-line-in 160ms ease-out both;
+}
+
+.boot-cursor {
+  animation: boot-blink 1s steps(2, end) infinite;
+}
+
+.boot-identity {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 600ms ease,
+    transform 700ms ease;
+}
+
+.boot-identity.is-shown {
+  opacity: 1;
+  transform: none;
+}
+
+.boot-screen.is-exiting .boot-identity {
+  transform: scale(1.04);
+}
+
+.boot-progress {
+  width: 0;
+}
+
+.boot-identity.is-shown .boot-progress {
+  /* Fills between the identity and exit steps in BootScreen.jsx. */
+  animation: boot-progress 3900ms cubic-bezier(0.3, 0.6, 0.4, 1) forwards;
+}
+
+.boot-greeting.is-shown > * {
+  animation: boot-rise 600ms ease-out both;
+}
+
+.boot-greeting.is-shown > *:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.boot-screen.is-reduced,
+.boot-screen.is-reduced * {
+  animation-duration: 1ms !important;
+  animation-delay: 0ms !important;
+  transition-duration: 1ms !important;
+}
+
+@keyframes boot-line-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes boot-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes boot-progress {
+  0% {
+    width: 0;
+  }
+  60% {
+    width: 72%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes boot-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
 .resize-handle {
   position: absolute;
   z-index: 10;

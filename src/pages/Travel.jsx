@@ -51,7 +51,7 @@ const Travel = () => {
               />
               ~/jayharron/travel
             </span>
-            <span>{travelPhotos.length} photos</span>
+            <span>{travelPhotos.length} chapters</span>
           </div>
           <h1 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">
             {travelIntro.title}
@@ -61,41 +61,77 @@ const Travel = () => {
           </p>
         </div>
 
-        <div className="mb-3 flex items-center gap-2 text-xs text-ubuntu-warm-grey">
+        <div className="mb-4 flex items-center gap-2 text-xs text-ubuntu-warm-grey">
           <span className="text-ubuntu-orange">$</span>
-          <span>ls ./photos</span>
+          <span>cat ./story.log</span>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {/* One chapter per photo, read top to bottom along the rail. On wide
+            screens the photo swaps sides each chapter so it reads like a
+            path rather than a list. */}
+        <ol className="relative space-y-8 border-l border-white/10 pl-5 sm:pl-7">
           {travelPhotos.map((photo, index) => (
-            <button
-              key={photo.title}
-              type="button"
-              onClick={() => openPhoto(index)}
-              className="group relative aspect-[4/3] overflow-hidden border border-white/10 bg-black/30 text-left transition-colors hover:border-ubuntu-orange/60 focus:outline-none focus-visible:border-ubuntu-orange"
-              title={`Open ${photo.title}`}
-            >
-              <img
-                src={photo.image}
-                alt={`${photo.title}, ${photo.place}`}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            <li key={photo.title} className="relative">
+              <span
+                className="absolute -left-[25px] top-1 h-2.5 w-2.5 rounded-full bg-ubuntu-orange ring-4 ring-ubuntu-orange/20 sm:-left-[33px]"
+                aria-hidden="true"
               />
-              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent p-3 pt-10">
-                <span className="block text-sm font-bold text-white">
-                  {photo.title}
-                </span>
-                <span className="mt-0.5 flex items-center gap-1.5 text-xs text-ubuntu-warm-grey">
-                  <i
-                    className="fa-solid fa-location-dot text-ubuntu-orange"
-                    aria-hidden="true"
+              <div
+                className={`grid items-center gap-4 lg:grid-cols-2 lg:gap-6 ${
+                  index % 2 === 1 ? "lg:[&>button]:order-2" : ""
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={() => openPhoto(index)}
+                  className="group relative aspect-[4/3] overflow-hidden border border-white/10 bg-black/30 text-left transition-colors hover:border-ubuntu-orange/60 focus:outline-none focus-visible:border-ubuntu-orange"
+                  title={`Open ${photo.title}`}
+                >
+                  <img
+                    src={photo.image}
+                    alt={`${photo.title}, ${photo.place}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                  {photo.place}
-                </span>
-              </span>
-            </button>
+                  <span className="absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
+                    <i className="fa-solid fa-expand" aria-hidden="true" />
+                  </span>
+                </button>
+                <div>
+                  <p className="text-xs text-ubuntu-warm-grey">
+                    chapter {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h2 className="mt-1 text-lg font-bold text-white">
+                    {photo.title}
+                  </h2>
+                  <p className="mt-1 flex items-center gap-1.5 text-xs text-ubuntu-warm-grey">
+                    <i
+                      className="fa-solid fa-location-dot text-ubuntu-orange"
+                      aria-hidden="true"
+                    />
+                    {photo.place}
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-slate-300">
+                    {photo.caption}
+                  </p>
+                </div>
+              </div>
+            </li>
           ))}
-        </div>
+          <li className="relative">
+            <span
+              className="absolute -left-[25px] top-1 h-2.5 w-2.5 rounded-full border border-ubuntu-orange bg-ubuntu-aubergine-dark sm:-left-[33px]"
+              aria-hidden="true"
+            />
+            <p className="text-xs text-ubuntu-warm-grey">
+              <span className="text-ubuntu-orange">$</span> ./next-trip.sh
+            </p>
+            <p className="mt-1 text-sm text-slate-300">
+              {travelIntro.outro}
+              <span className="ml-1 inline-block h-4 w-2 translate-y-0.5 animate-pulse bg-ubuntu-orange" />
+            </p>
+          </li>
+        </ol>
       </div>
 
       {active &&

@@ -42,7 +42,7 @@ function loadImageAsJpeg(src) {
   });
 }
 
-async function downloadCvPdf() {
+async function buildCvPdf() {
   const pdf = new jsPDF({ unit: "mm", format: "a4" });
   const margin = 18;
   const pageWidth = pdf.internal.pageSize.getWidth();
@@ -58,6 +58,11 @@ async function downloadCvPdf() {
     pdf.setFontSize(size);
     pdf.setFont("helvetica", style);
     pdf.setTextColor(...color);
+  };
+  // Height a block of wrapped text will take, measured before drawing it.
+  const textHeight = (text, size, width) => {
+    setFont(size);
+    return pdf.splitTextToSize(text, width).length * lineHeight(size);
   };
   const ensureSpace = (height) => {
     if (y + height > bottomLimit) {
@@ -85,8 +90,13 @@ async function downloadCvPdf() {
     paragraph(text, { x: margin + indent, width: contentWidth - indent });
     y += 0.6;
   };
-  const section = (heading) => {
-    ensureSpace(16);
+  // A section heading never sits alone at the foot of a page. Short sections
+  // pass their full height as `keepWith` so they move to the next page whole
+  // instead of leaving two rows behind.
+  const section = (heading, keepWith = 0) => {
+    const headingHeight = 11.1;
+    const blockHeight = headingHeight + keepWith;
+    ensureSpace(blockHeight <= bottomLimit - margin ? Math.max(16, blockHeight) : 16);
     y += 4.5;
     setFont(10.5, "bold", PDF_COLORS.accent);
     pdf.text(heading.toUpperCase(), margin, y, { charSpace: 0.4 });
@@ -163,6 +173,13 @@ async function downloadCvPdf() {
     // Keep the role header with at least its first bullet.
     ensureSpace(lineHeight(10.5) + lineHeight(9) + lineHeight(9.5) * 2 + 2);
     headingRow(experience.title, experience.date);
+    if (experience.title_note) {
+      // Drawn back on the title's baseline, after the bold title.
+      setFont(10.5, "bold");
+      const noteX = margin + pdf.getTextWidth(experience.title) + 2.5;
+      setFont(9, "italic", PDF_COLORS.muted);
+      pdf.text(`| ${experience.title_note}`, noteX, y - lineHeight(10.5));
+    }
     setFont(9.5, "normal", PDF_COLORS.accent);
     pdf.textWithLink(experience.company_name, margin, y, {
       url: experience.company_url,
@@ -187,8 +204,15 @@ async function downloadCvPdf() {
     if (index < experiences.length - 1) y += 2.6;
   });
 
-  section("Technical Skills");
   const labelWidth = 38;
+  const skillsHeight = resumeSkillGroups.reduce(
+    (total, group) =>
+      total +
+      textHeight(group.items.join(", "), 9.5, contentWidth - labelWidth) +
+      0.8,
+    0,
+  );
+  section("Technical Skills", skillsHeight);
   resumeSkillGroups.forEach((group) => {
     ensureSpace(lineHeight(9.5));
     setFont(9.5, "bold");
@@ -200,19 +224,27 @@ async function downloadCvPdf() {
     y += 0.8;
   });
 
-  section("Education");
-  educationalAttainment
-    .filter((school) => school.onResume)
-    .forEach((school) => {
+  const resumeSchools = educationalAttainment.filter((school) => school.onResume);
+  section(
+    "Education",
+    resumeSchools.length * (lineHeight(10.5) + lineHeight(9.5)),
+  );
+  resumeSchools.forEach((school) => {
       ensureSpace(lineHeight(10.5) + lineHeight(9.5));
       headingRow(
         school.curriculum.replace(/^(Course|Strand):\s*/, ""),
         school.graduationDate ? `Graduated ${school.graduationDate}` : school.year,
       );
       paragraph(`${school.school}  |  ${school.year}`, { color: PDF_COLORS.muted });
-    });
+  });
 
-  section("Certifications");
+  section(
+    "Certifications",
+    resumeCertifications.reduce(
+      (total, cert) => total + textHeight(cert, 9.5, contentWidth - 4.5) + 0.6,
+      0,
+    ),
+  );
   resumeCertifications.forEach(bullet);
 
   section("Selected Projects");
@@ -237,6 +269,11 @@ async function downloadCvPdf() {
     });
   }
 
+  return pdf;
+}
+
+async function downloadCvPdf() {
+  const pdf = await buildCvPdf();
   pdf.save(PDF_FILE_NAME);
 }
 
@@ -411,7 +448,14 @@ function ResumeWindow() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                      <h3 className="font-semibold text-slate-900">{experience.title}</h3>
+                      <h3 className="font-semibold text-slate-900">
+                        {experience.title}
+                        {experience.title_note && (
+                          <span className="ml-2 inline-block rounded bg-emerald-50 px-1.5 py-0.5 align-middle text-[11px] font-medium text-emerald-700 ring-1 ring-emerald-200">
+                            {experience.title_note}
+                          </span>
+                        )}
+                      </h3>
                       <span className="shrink-0 text-xs font-medium text-slate-500">
                         {experience.date}
                       </span>

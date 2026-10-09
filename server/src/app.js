@@ -5,6 +5,7 @@ import { hashIp, readIp } from "./lib/clientInfo.js";
 import { rateLimit } from "./lib/rateLimit.js";
 import { ValidationError } from "./lib/validate.js";
 import adminRouter from "./routes/admin.js";
+import geoRouter from "./routes/geo.js";
 import healthRouter from "./routes/health.js";
 import statsRouter from "./routes/stats.js";
 import trackRouter from "./routes/track.js";
@@ -63,6 +64,7 @@ export function createApp() {
   );
 
   app.use("/api/health", healthRouter);
+  app.use("/api/geo", geoRouter);
   app.use("/api/track", trackRouter);
   app.use("/api/stats", statsRouter);
   app.use("/api/admin", adminRouter);
@@ -73,6 +75,7 @@ export function createApp() {
       name: "jayharron-portfolio-api",
       endpoints: [
         "GET  /api/health",
+        "GET  /api/geo",
         "POST /api/track/view",
         "POST /api/track/click",
         "GET  /api/stats          (admin session)",

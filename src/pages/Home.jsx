@@ -22,6 +22,7 @@ import Travel from "./Travel";
 import DragIcon from "../components/draggables/components/DragIcon";
 import ResumeWindow from "../components/v2_components/windows/ResumeWindow";
 import MiniBrowserWindow from "../components/v2_components/windows/MiniBrowserWindow";
+import BootScreen from "../components/v2_components/BootScreen";
 import {
   DESKTOP_TOPBAR_HEIGHT,
   WINDOW_CHROME_HEIGHT,
@@ -133,6 +134,9 @@ const Home = () => {
   const [viewport, setViewport] = useState(readViewport);
   const [hasEnteredFullscreen, setHasEnteredFullscreen] = useState(isFullscreen);
   const [needsFullscreen] = useState(wantsFullscreen);
+  // The boot screen runs first; the fullscreen hint and the Short Info window
+  // both wait for it so they do not land on top of it.
+  const [booted, setBooted] = useState(false);
 
   const isCompactViewport = viewport.width < COMPACT_BREAKPOINT;
 
@@ -296,7 +300,7 @@ const Home = () => {
   // desktop is actually fullscreen. The delay lets the fullscreen transition
   // and the viewport sync above finish first, so the window opens already
   // centred on the new screen size instead of jumping into place.
-  const desktopReady = hasEnteredFullscreen || !needsFullscreen;
+  const desktopReady = booted && (hasEnteredFullscreen || !needsFullscreen);
   const infoWindowOpened = useRef(false);
 
   useEffect(() => {
@@ -487,7 +491,7 @@ const Home = () => {
               <iframe
                 className="w-full h-full block"
                 title="JHProjects"
-                src="https://jhprojects.vercel.app/"
+                src="https://www.jhprojects.dev/"
               />
             }
           />
@@ -586,7 +590,8 @@ const Home = () => {
           resumeInfoClicked={resumeInfoClicked}
           className="fixed bottom-3 left-1/2 -translate-x-1/2 md:left-3 md:top-1/2 md:bottom-auto md:translate-x-0 md:-translate-y-1/2 z-[999999998]"
         />
-        {needsFullscreen && !hasEnteredFullscreen && (
+        {!booted && <BootScreen onDone={() => setBooted(true)} />}
+        {booted && needsFullscreen && !hasEnteredFullscreen && (
           <div className="fullscreen-hint fixed left-1/2 top-10 -translate-x-1/2 md:left-auto md:right-4 md:top-auto md:bottom-4 md:translate-x-0 z-[999999999] flex items-center gap-2 rounded-full px-4 py-2 text-xs text-slate-100 font-ubuntu">
             <i
               className="fa-solid fa-up-right-and-down-left-from-center text-ubuntu-orange"
