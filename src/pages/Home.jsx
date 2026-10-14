@@ -468,7 +468,7 @@ const Home = () => {
               <iframe
                 className="w-full h-full block"
                 title="Illuminary Peak, Inc."
-                src="https://illuminary-peak.vercel.app/"
+                src="https://www.illuminarypeak.com/"
               />
             }
           />

@@ -201,7 +201,7 @@ export const resumeProjects = [
     name: "JHProjects",
     link: "https://www.jhprojects.dev",
     description:
-      "Where I publish my Minecraft server plugins, written in Java and led by Custom Enchantments with over 300,000 downloads, plus an npm canvas library. Built and run end to end: React front end, Express API on Vercel, MongoDB, PayPal checkout, buyer accounts, and an admin dashboard fed by hourly pings from live servers.",
+      "Where I publish my Minecraft server plugins, written in Java and led by Custom Enchantments with over 300,000 downloads, plus an npm canvas library. Built and run end to end on the MERN stack (MongoDB, Express, React, Node.js) deployed on Vercel, with PayPal checkout, buyer accounts, and an admin dashboard fed by hourly pings from live servers.",
   },
 ];
 
@@ -431,17 +431,71 @@ export const certifications = [
 // page and the resume only list employment.
 export const sideProjects = [
   {
-    title: "Lead Software Engineer",
+    title: "Co-Founder and Lead Software Engineer",
     company_name: "Illuminary Peak",
-    company_url: "https://illuminary-peak.vercel.app",
+    company_url: "https://www.illuminarypeak.com",
     job_type: "Freelance",
     location: "Philippines | Remote",
     icon: illuminaryPeakLogo,
     iconBg: "#FFFFFF",
     date: "Mar 2026 - Present",
+    summary:
+      "Illuminary Peak is a software and apps studio founded by my brother, Jay Harold Abejar, with me as co-founder. We design, engineer and launch our own products in-house, built for everyday work in the Philippines, and take on client projects from first idea to launch, with hosting for the apps we ship. The belief behind it is a simple one: innovation should not wait on infrastructure.",
+    // The studio's lineup. Mirrors the Projects page on the studio site.
+    products: [
+      {
+        name: "Confrig",
+        tag: "AI",
+        url: "https://confrig.com",
+        blurb:
+          "A multi-model AI workspace with chat, Notes and Design in one place, running Claude, Llama, Gemini and more from a single composer, priced in pesos.",
+      },
+      {
+        name: "ZygoWork",
+        tag: "SaaS",
+        url: "https://www.zygowork.com",
+        blurb:
+          "Attendance, leave, scheduling, payroll and BIR compliance for Philippine SMEs. Free for up to 25 employees.",
+      },
+      {
+        name: "StatVibe",
+        tag: "Beta",
+        url: "https://www.illuminarypeak.com/projects",
+        blurb:
+          "A business app with real-time analytics, a business calculator, an idea and project hub, and an AI workspace.",
+      },
+      {
+        name: "MIXED",
+        tag: "Mobile",
+        url: "https://www.illuminarypeak.com/projects",
+        blurb:
+          "A shopping app built only around clothes: browse, mix and match outfits, and check out in seconds.",
+      },
+      {
+        name: "LOCOMENU",
+        tag: "Mobile",
+        url: "https://www.illuminarypeak.com/projects",
+        blurb:
+          "Every menu from every nearby food store in one place, with dishes and prices before you walk in.",
+      },
+    ],
     points: [
+      "Lead the engineering side of the studio. ZygoWork, our HR and payroll SaaS, started as our founder's business idea, and I am the only engineer who built it, from the architecture up to production.",
       "Build modern web applications on the MERN stack, structured so they can grow with the product instead of being rewritten later.",
+      "Built the studio's own website in React, Vite and Tailwind CSS: the product lineup, the founders and mission pages, and a contact form that delivers project inquiries straight to the studio inbox.",
       "Use Microsoft Copilot, Claude Pro, and Cursor as part of an agentic workflow, which lets a small team move quickly without skipping code review.",
+    ],
+    stack: [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Vercel",
+    ],
+    links: [
+      { label: "illuminarypeak.com", url: "https://www.illuminarypeak.com" },
     ],
   },
   {
@@ -453,11 +507,32 @@ export const sideProjects = [
     icon: zygowork,
     iconBg: "#FFFFFF",
     date: "Jul 2026 - Present",
+    summary:
+      "ZygoWork is workforce operations software for small and medium-sized businesses in the Philippines: scheduling, attendance, leave, approvals, payroll and BIR compliance in one place, for the four people who touch every timesheet, the employee, the manager, the accountant and the admin. Companies anywhere can sign up and run it in their own timezone. The business idea comes from Illuminary Peak's founder, my brother. I am the only engineer on it: I built the whole product from scratch, shipped 1.0 in August 2026, and have taken it to 1.23 since.",
     points: [
-      "Designed the system architecture from scratch and carried it all the way through to deployment.",
-      "Shipped a secure application with full SAST and DAST coverage, checked against OWASP standards.",
-      "Work directly with the client to understand what they need, own the product decisions, and keep a working relationship that lasts beyond a single release.",
+      "Built it alone, from scratch: designed the architecture on the MERN stack and carried it through to production: a React and Vite PWA that installs on Windows, macOS, Android and iOS, an Express 5 API on Node.js, and MongoDB through Mongoose, deployed on Vercel.",
+      "Made it multi-tenant: sign-in and billing live in one shared database, while a company can keep its attendance and payroll records in its own MongoDB database, checked and pinged before it is saved, with existing records migrated across.",
+      "Built the parts that are easy to get wrong: overtime, undertime and night differential worked out from logged hours, a payroll run the accountant signs off, BIR-ready filings, and a check that flags payroll mistakes before they are paid.",
+      "Took subscriptions through PayPal Orders v2, with verified webhooks, replay protection and PDF invoices, plus a separate admin control plane with its own API, database and signing keys, so the customer-facing API can never mint an admin session.",
+      "Shipped it secure against OWASP standards: SAST reviews, a Python DAST scanner run against production that came back clean on the API, and a CI gate that fails on any high or critical dependency advisory. Over 450 integration assertions run on every push.",
+      "Work directly with the founder to turn the business ideas into features, own the technical decisions, and keep a working relationship that lasts beyond a single release.",
     ],
+    stack: [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "PWA",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Mongoose",
+      "Zod",
+      "PayPal API",
+      "Cloudinary",
+      "Vercel",
+      "GitHub Actions",
+    ],
+    links: [{ label: "zygowork.com", url: "https://www.zygowork.com" }],
   },
   {
     title: "Independent Developer",
@@ -469,7 +544,7 @@ export const sideProjects = [
     iconBg: "#FFFFFF",
     date: "Sep 2020 - Present",
     summary:
-      "JHProjects is where I publish what I build outside of client work. Most of it is Minecraft server plugins, released on SpigotMC under the name JayMar921, plus a JavaScript graphics library on npm. It started in 2020 as a lockdown experiment while I was teaching myself Java, went quiet in 2023 when work took over, and came back in late 2025 when I found my old to-do files still sitting in the repo. It is a one-person operation, not a company.",
+      "JHProjects is where I publish what I build outside of client work, and jhprojects.dev is the site that documents, sells and supports it. Most of it is Minecraft server plugins, some free and some paid, released on SpigotMC under the name JayMar921, plus a JavaScript graphics library on npm, a couple of Bedrock addons and a few games. Every project has its own page with its documentation, release history, downloads and a bug report form. It started in 2020 as a lockdown experiment while I was teaching myself Java, went quiet in 2023 when work took over, and came back in late 2025 when I found my old to-do files still sitting in the repo. It is a one-person operation, not a company.",
     // What is actually on the shelf. Mirrors the cards on jhprojects.dev.
     products: [
       {
@@ -516,10 +591,11 @@ export const sideProjects = [
       },
     ],
     points: [
-      "Built the site and its API myself: React and Vite on the front, an Express API that runs as a Vercel function, and MongoDB behind it. One HTML entry per plugin page so link previews work without JavaScript.",
+      "Built the site and its API myself on the MERN stack: React and Vite on the front, an Express API on Node.js that runs as a Vercel function, and MongoDB behind it. One HTML entry per plugin page so link previews work without JavaScript.",
       "Sell premium builds directly through PayPal checkout. Buyers get an account, and downloads are checked against ownership and streamed through the API, so a storage link is never handed out.",
       "Every running copy of the plugins reports in once an hour. An admin dashboard shows live servers, players and versions in the wild, and the pings expire on their own after 90 days.",
       "Kept analytics privacy minded: visitor IPs are only ever stored as a salted hash, bots are left out of the counts, and Do Not Track is respected.",
+      "Bug reports from a plugin page and messages from the contact form are saved to MongoDB and emailed to me through Nodemailer, so support runs from one inbox. Buyers can review the premium plugins on their pages.",
       "Test every idea on a real server before it gets a listing. Most features come from requests by server owners and players, and paid plugins get free updates for as long as they are maintained.",
     ],
     stack: [
@@ -528,6 +604,7 @@ export const sideProjects = [
       "React",
       "Vite",
       "Tailwind CSS",
+      "Node.js",
       "Express",
       "MongoDB",
       "Vercel",
@@ -535,6 +612,7 @@ export const sideProjects = [
     ],
     links: [
       { label: "jhprojects.dev", url: "https://www.jhprojects.dev" },
+      { label: "About", url: "https://www.jhprojects.dev/about" },
       {
         label: "SpigotMC",
         url: "https://www.spigotmc.org/resources/authors/jaymar921.1073076/",
