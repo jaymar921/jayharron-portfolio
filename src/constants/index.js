@@ -535,10 +535,10 @@ export const sideProjects = [
     links: [{ label: "zygowork.com", url: "https://www.zygowork.com" }],
   },
   {
-    title: "Independent Developer",
+    title: "Founder & Plugin Developer",
     company_name: "JHProjects",
     company_url: "https://www.jhprojects.dev",
-    job_type: "Personal",
+    job_type: "Self-employed",
     location: "Philippines | Remote",
     icon: jhProjectsLogo,
     iconBg: "#FFFFFF",
@@ -576,6 +576,20 @@ export const sideProjects = [
           "Server-wide fishing contests on water and lava, with a live HUD, 100 fish in six tiers, and a market.",
       },
       {
+        name: "MCHeli Rework",
+        tag: "Mod",
+        url: "https://www.jhprojects.dev/mcheli-rework",
+        blurb:
+          "The classic helicopter mod rebuilt for modern Minecraft, running on Forge, NeoForge and Fabric.",
+      },
+      {
+        name: "Epic Lairs",
+        tag: "Soon",
+        url: "https://www.jhprojects.dev/epic-lairs",
+        blurb:
+          "Dungeons and lairs to fight through, the next premium plugin to join the catalog.",
+      },
+      {
         name: "Kumandra's Economy",
         tag: "Free",
         url: "https://www.jhprojects.dev/kumandras-economy",
@@ -591,6 +605,10 @@ export const sideProjects = [
       },
     ],
     points: [
+      "Build and maintain a catalog of Minecraft plugins and mods under the JHProjects brand, handling design, development, releases and updates solo.",
+      "Released Custom Enchantments 3 (RPG enchantments), Epic Mobs Rework (custom mobs and bosses), Farm Tales, Fish Tales, Epic Lairs (dungeons) and Kumandra's Economy (server economy).",
+      "Rebuilt MCHeli Rework for modern Minecraft across Forge, NeoForge and Fabric.",
+      "Run a free and premium model: every premium plugin ships with a free Lite build to try first.",
       "Built the site and its API myself on the MERN stack: React and Vite on the front, an Express API on Node.js that runs as a Vercel function, and MongoDB behind it. One HTML entry per plugin page so link previews work without JavaScript.",
       "Sell premium builds directly through PayPal checkout. Buyers get an account, and downloads are checked against ownership and streamed through the API, so a storage link is never handed out.",
       "Every running copy of the plugins reports in once an hour. An admin dashboard shows live servers, players and versions in the wild, and the pings expire on their own after 90 days.",
@@ -601,6 +619,9 @@ export const sideProjects = [
     stack: [
       "Java",
       "Spigot API",
+      "Forge",
+      "NeoForge",
+      "Fabric",
       "React",
       "Vite",
       "Tailwind CSS",
